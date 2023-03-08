@@ -3,6 +3,7 @@ package br.com.borgestirabassi.remotebooks.controllers.exceptions
 import br.com.borgestirabassi.remotebooks.controllers.exceptions.dto.ErrorFieldMessage
 import br.com.borgestirabassi.remotebooks.controllers.exceptions.dto.StandardError
 import br.com.borgestirabassi.remotebooks.controllers.exceptions.dto.ValidationStandardError
+import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -50,4 +51,18 @@ class ResourceExceptionHandler {
         validException.bindingResult.fieldErrors.map { error ->
             ErrorFieldMessage(error.field, error.defaultMessage.toString())
         }
+
+    @ExceptionHandler(ServiceException::class)
+    fun handlerServiceException(
+        serviceException: ServiceException,
+        request: HttpServletRequest?,
+    ): ResponseEntity<StandardError> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            StandardError(
+                HttpStatus.BAD_REQUEST.value(),
+                serviceException.message!!,
+                System.currentTimeMillis(),
+            ),
+        )
+    }
 }

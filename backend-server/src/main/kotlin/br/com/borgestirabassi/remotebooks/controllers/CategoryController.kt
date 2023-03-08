@@ -1,8 +1,10 @@
 package br.com.borgestirabassi.remotebooks.controllers
 
 import br.com.borgestirabassi.remotebooks.dto.CategoryDto
+import br.com.borgestirabassi.remotebooks.services.CategoryService
 import jakarta.validation.Valid
 import lombok.extern.log4j.Log4j2
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,6 +20,9 @@ import java.net.URI
 @RestController
 @RequestMapping("/category")
 class CategoryController {
+
+    @Autowired
+    private lateinit var categoryService: CategoryService
 
     companion object {
 
@@ -36,10 +41,9 @@ class CategoryController {
         @Valid
         @RequestBody
         categoryDto: CategoryDto,
-    ): ResponseEntity<String> {
-        // TODO: chamar o Service para salvar a categoria.
+    ): ResponseEntity<Void> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(PATH_ID)
-            .buildAndExpand(null).toUri()
+            .buildAndExpand(categoryService.insertCategory(categoryDto)).toUri()
 
         return ResponseEntity.created(uri).build()
     }
