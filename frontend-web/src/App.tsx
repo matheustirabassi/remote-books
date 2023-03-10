@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
-import HomeRoutes from "Routes";
+import Routes from "Routes";
 import remoteBooksTheme from "theme";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
 			<ThemeProvider theme={remoteBooksTheme}>
 					<CssBaseline />
-          <HomeRoutes />
+          <Routes />
 			</ThemeProvider>
     </div>
   );

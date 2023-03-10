@@ -11,7 +11,7 @@ export default createTheme({
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#FFFFFF",
+      main: "#F4D6CC",
       dark: "#9e9e9d",
       contrastText: "#FFFFFF",
     },
@@ -57,5 +57,28 @@ export default createTheme({
     },
 
     fontWeightRegular: 400,
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          position: "static",
+        },
+        colorPrimary: {
+          backgroundColor: "transparent",
+        }
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontSize: 40,
+          color: "#4A5859",
+          marginTop: 3,
+          marginBottom: 3
+        }
+      }
+    }
   },
 })

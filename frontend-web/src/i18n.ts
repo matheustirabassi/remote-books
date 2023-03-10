@@ -7,12 +7,20 @@ import { initReactI18next } from "react-i18next"
 const resources = {
   pt: {
     translation: {
-      "REGISTER": "Cadastrar"
+      "REGISTER": "Cadastrar",
+      "BOOK": "Livro",
+      "AUTHOR": "Autor",
+      "COLLECTION": "Coleção",
+      "CATEGORY": "Categoria"
     }
   },
   en: {
     translation: {
-      "REGISTER": "Register"
+      "REGISTER": "Register",
+      "BOOK": "Book",
+      "AUTHOR": "Author",
+      "COLLECTION": "Collection",
+      "CATEGORY": "Category"
     }
   }
 }

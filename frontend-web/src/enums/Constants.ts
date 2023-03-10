@@ -1,6 +1,10 @@
-/** 
- * As constantes do sistema 
+/**
+ * As constantes do sistema
  */
 export enum LanguageConstants {
-  REGISTER = "REGISTER"
+  REGISTER = "REGISTER",
+  BOOK = "BOOK",
+  COLLECTION = "COLLECTION",
+  AUTHOR = "AUTHOR",
+  CATEGORY = "CATEGORY"
 }

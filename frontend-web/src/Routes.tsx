@@ -1,18 +1,33 @@
+import { Header } from "presentation/components/Header"
 import HomeView from "presentation/view/Home/HomeView"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import RegisterView from "presentation/view/Register/RegisterView"
+import { BrowserRouter, Route, Routes as ReactRoutes } from "react-router-dom"
 
+/**
+ * As rotas do sistema
+ */
 export const ROUTES = {
-	HOME: "/",
+
+  /**
+   * Rota para tela principal
+   */
+  HOME: "/",
+
+  /** Rota pra tela de cadastro*/
+  REGISTER: "/register",
 }
 
-const HomeRoutes = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route index element={<HomeView />} />
-			</Routes>
-		</BrowserRouter>
-	)
+/** As rotas para o sistema */
+const Routes = () => {
+  return (
+    <BrowserRouter>
+      <Header />
+      <ReactRoutes>
+        <Route index element={<HomeView />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterView />} />
+      </ReactRoutes>
+    </BrowserRouter>
+  )
 }
 
-export default HomeRoutes
+export default Routes

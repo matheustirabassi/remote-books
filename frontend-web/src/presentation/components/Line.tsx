@@ -1,3 +1,5 @@
+
+/** Componente que cria uma linha horizontal na tela toda */
 export const Line = () => {
   return (
     <div
