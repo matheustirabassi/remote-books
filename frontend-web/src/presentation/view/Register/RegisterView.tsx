@@ -1,8 +1,6 @@
 import { AppBar, Tab, Tabs, Typography } from "@mui/material"
-import { width } from "@mui/system"
 
 import { LanguageConstants } from "enums/Constants"
-import { SnackbarProvider } from "notistack"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -36,6 +34,13 @@ export default function RegisterView() {
    */
   const [tabPosition, setTabPosition] = useState(0)
 
+  const [tabsVariantType, setTabsVariantType] = useState <"fullWidth" | "standard" | "scrollable" |
+   undefined>(getVariantType(window.innerWidth))
+
+  window.addEventListener("resize", () => {
+    setTabsVariantType(getVariantType(window.innerWidth))
+  })
+
   return (
     <>
       <AppBar>
@@ -44,7 +49,7 @@ export default function RegisterView() {
           onChange={(_, index) => {
             setTabPosition(index)
           }}
-          variant={getVariantType()}
+          variant={tabsVariantType}
           scrollButtons
           allowScrollButtonsMobile
           textColor={"secondary"}
@@ -63,7 +68,7 @@ export default function RegisterView() {
         </Tabs>
       </AppBar>
 
-      <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition} >
+      <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition}>
         <TabPanel value={tabPosition} index={INDEX_BOOK_TAB}>
           <Typography>Livro</Typography>
         </TabPanel>
@@ -76,7 +81,7 @@ export default function RegisterView() {
           <Typography>Coleção</Typography>
         </TabPanel>
 
-        <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB} >
+        <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB}>
           <CategoryView />
         </TabPanel>
       </SwipeableViews>
@@ -88,10 +93,10 @@ export default function RegisterView() {
    *
    * @returns Caso mobile `scrollable`, caso contrário `fullWidth`.
    */
-  function getVariantType(): "fullWidth" | "standard" | "scrollable" | undefined {
-    const { innerWidth: width } = window
-
-    return width < MOBILE_MAX_WIDTH ? "scrollable" : "fullWidth"
+  function getVariantType(
+    windowWidth: Number
+  ): "fullWidth" | "standard" | "scrollable" | undefined {
+    return windowWidth < MOBILE_MAX_WIDTH ? "scrollable" : "fullWidth"
   }
 
   /**
