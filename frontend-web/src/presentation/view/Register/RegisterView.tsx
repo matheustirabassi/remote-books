@@ -1,10 +1,13 @@
 import { AppBar, Tab, Tabs, Typography } from "@mui/material"
+import { width } from "@mui/system"
 
 import { LanguageConstants } from "enums/Constants"
+import { SnackbarProvider } from "notistack"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import SwipeableViews from "react-swipeable-views"
+import CategoryView from "./Category/CategoryView"
 
 /**
  * A tela de cadastro.
@@ -12,14 +15,6 @@ import SwipeableViews from "react-swipeable-views"
  * @returns Os componentes da tela de cadastro.
  */
 export default function RegisterView() {
-
-  const { t } = useTranslation()
-
-  /**
-   * inicia o observer para a posição na tabela com 0,
-   */
-  const [tabPosition, setTabPosition] = useState(0)
-
   /** A index do livro na guia */
   const INDEX_BOOK_TAB = 0
 
@@ -32,6 +27,15 @@ export default function RegisterView() {
   /**A index da categoria na guia */
   const INDEX_CATEGORY_TAB = 3
 
+  const MOBILE_MAX_WIDTH = 600
+
+  const { t } = useTranslation()
+
+  /**
+   * inicia o observer para a posição na tabela com 0,
+   */
+  const [tabPosition, setTabPosition] = useState(0)
+
   return (
     <>
       <AppBar>
@@ -40,13 +44,15 @@ export default function RegisterView() {
           onChange={(_, index) => {
             setTabPosition(index)
           }}
-          variant="fullWidth"
-          textColor="secondary"
-          indicatorColor="secondary"
+          variant={getVariantType()}
+          scrollButtons
+          allowScrollButtonsMobile
+          textColor={"secondary"}
+          indicatorColor={"secondary"}
         >
-          <Tab label={t(LanguageConstants.BOOK)} {...setTabIdProperty(INDEX_BOOK_TAB)}/>
+          <Tab label={t(LanguageConstants.BOOK)} {...setTabIdProperty(INDEX_BOOK_TAB)} />
 
-          <Tab label={t(LanguageConstants.AUTHOR)} {...setTabIdProperty(INDEX_AUTHOR_TAB)}/>
+          <Tab label={t(LanguageConstants.AUTHOR)} {...setTabIdProperty(INDEX_AUTHOR_TAB)} />
 
           <Tab
             label={t(LanguageConstants.COLLECTION)}
@@ -57,7 +63,7 @@ export default function RegisterView() {
         </Tabs>
       </AppBar>
 
-      <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition}>
+      <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition} >
         <TabPanel value={tabPosition} index={INDEX_BOOK_TAB}>
           <Typography>Livro</Typography>
         </TabPanel>
@@ -70,23 +76,34 @@ export default function RegisterView() {
           <Typography>Coleção</Typography>
         </TabPanel>
 
-        <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB}>
-          <Typography>Categoria</Typography>
+        <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB} >
+          <CategoryView />
         </TabPanel>
       </SwipeableViews>
     </>
   )
-}
 
-/**
- * Define o identificador da guia
- *
- * @param index A posição da guia na tela.
- * @returns A propriedade `id` configurada.
- */
-function setTabIdProperty(index: Number) {
-  return {
-    id: `action-tab-${index}`,
-    "aria-controls": `action-tabpanel-${index}`,
+  /**
+   * Obtém o variante para as guias, dependendo do tamanho da tela.
+   *
+   * @returns Caso mobile `scrollable`, caso contrário `fullWidth`.
+   */
+  function getVariantType(): "fullWidth" | "standard" | "scrollable" | undefined {
+    const { innerWidth: width } = window
+
+    return width < MOBILE_MAX_WIDTH ? "scrollable" : "fullWidth"
+  }
+
+  /**
+   * Define o identificador da guia
+   *
+   * @param index A posição da guia na tela.
+   * @returns A propriedade `id` configurada.
+   */
+  function setTabIdProperty(index: Number) {
+    return {
+      id: `action-tab-${index}`,
+      "aria-controls": `action-tabpanel-${index}`,
+    }
   }
 }

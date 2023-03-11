@@ -18,6 +18,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-swipeable-views": "^0.13.1",
     "i18next": "^22.4.11",
+    "notistack": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",

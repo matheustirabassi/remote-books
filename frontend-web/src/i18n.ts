@@ -11,7 +11,12 @@ const resources = {
       "BOOK": "Livro",
       "AUTHOR": "Autor",
       "COLLECTION": "Coleção",
-      "CATEGORY": "Categoria"
+      "CATEGORY": "Categoria",
+      "NAME": "Nome",
+      "CATEGORY_NAME_DESCRIPTION": "O nome da categoria",
+      "SAVE": "Salvar",
+      "INVALID_FIELD": "Campo inválido",
+      "CATEGORY_SAVED": "Categoria salva!"
     }
   },
   en: {
@@ -20,7 +25,12 @@ const resources = {
       "BOOK": "Book",
       "AUTHOR": "Author",
       "COLLECTION": "Collection",
-      "CATEGORY": "Category"
+      "CATEGORY": "Category",
+      "NAME": "Name",
+      "CATEGORY_NAME_DESCRIPTION": "The category name",
+      "SAVE": "Save",
+      "INVALID_FIELD": "Invalid field",
+      "CATEGORY_SAVED": "Categoria saved!"
     }
   }
 }
