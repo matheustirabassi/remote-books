@@ -1,0 +1,1 @@
+web: java -jar build/libs/remote-books-0.1.0.jar
