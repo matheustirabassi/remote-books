@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "@emotion/react"
+import { CssBaseline } from "@mui/material"
+import { SnackbarProvider } from "notistack"
+import Routes from "Routes"
+import remoteBooksTheme from "theme"
 
 function App() {
+  const MILLISECONDS_TO_HIDE = 2000
+  const MAX_SNACK = 2
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={remoteBooksTheme}>
+        <CssBaseline />
+        <Routes />
+        <SnackbarProvider maxSnack={MAX_SNACK} autoHideDuration={MILLISECONDS_TO_HIDE} />
+      </ThemeProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

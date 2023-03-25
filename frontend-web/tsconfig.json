@@ -23,5 +23,5 @@
   },
   "include": [
     "src"
-  ]
+, "test/helper", "src/tests"  ]
 }

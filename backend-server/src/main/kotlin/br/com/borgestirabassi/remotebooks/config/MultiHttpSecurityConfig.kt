@@ -27,15 +27,15 @@ class MultiHttpSecurityConfig {
          * Os endpoints públicos
          */
         private val PUBLIC_MATCHERS = arrayOf(
-            "/**",
-            "/h2-console/**",
+            "/*",
+            "/h2-console",
         )
 
         /**
          * Os endpoints públicos que usam o método POST
          */
         private val PUBLIC_MATCHERS_POST = arrayOf(
-            "/**",
+            "/category",
         )
     }
 
