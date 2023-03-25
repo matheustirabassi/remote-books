@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const Api = axios.create({
-  baseURL: "http://matheustir.ddns.net:8081",
+  baseURL: "http://localhost:8080",
 })
 
 export { Api }

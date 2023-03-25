@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material"
+import { Children } from 'react';
 
 /** As propriedades do painel */
-export interface TabPanelProps {
+interface TabPanelProps {
   /** O index da guia */
   index: Number
 
@@ -21,7 +22,7 @@ export interface TabPanelProps {
  * @param params Os parâmetros que podem ser recebidos em uma guia.
  * @returns A
  */
-export const TabPanel = ({ index, value, dir, children }: TabPanelProps) => {
+export const TabPanel: React.FC<TabPanelProps> = ({ index, value, dir, children }) => {
   return (
       <Typography
         component="div"

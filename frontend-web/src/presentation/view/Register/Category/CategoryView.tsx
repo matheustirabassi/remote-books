@@ -2,9 +2,9 @@ import { Button, Grid, TextField } from "@mui/material"
 import Typography from "@mui/material/Typography"
 import { LanguageConstants } from "enums/Constants"
 import { enqueueSnackbar } from "notistack"
+import { LoadingState } from "presentation/components/States/LoadingState"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { ThreeDots } from "react-loader-spinner"
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "Routes"
 import CategoryViewModel from "./CategoryViewModel"
@@ -16,7 +16,7 @@ export default function CategoryView() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    viewModel.validate()
+    viewModel.validateName()
   }, [viewModel.name])
 
   useEffect(() => {
@@ -24,9 +24,11 @@ export default function CategoryView() {
   }, [viewModel.categoryWasSaved])
 
   useEffect(() => {
-    if (viewModel.errorMessage !== "") {
-      enqueueSnackbar(t(viewModel.errorMessage), { variant: "error" })
+    if (viewModel.errorMessage.isEmpty()) {
+      return
     }
+
+    enqueueSnackbar(t(viewModel.errorMessage), { variant: "error" })
   }, [viewModel.errorMessage])
 
   /**
@@ -41,17 +43,13 @@ export default function CategoryView() {
     navigate(ROUTES.HOME)
   }
 
-  function hiddenIfIsLoading() {
-    return viewModel.isLoading ? "hidden" : "visible"
-  }
-
   return (
     <>
-      <Grid container direction={"row"} justifyContent={"center"}>
-        <ThreeDots visible={viewModel.isLoading} color="black" />
+      <Grid container direction={"row"} justifyContent={"center"} id="loadingView">
+        <LoadingState />
       </Grid>
 
-      <Grid container visibility={hiddenIfIsLoading()}>
+      <Grid container id="contentView">
         <Grid container direction={"column"} item mt={2}>
           <TextField
             label={t(LanguageConstants.NAME)}

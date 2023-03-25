@@ -1,9 +1,9 @@
 import { CategoryApi } from "data/api/CategoryApi"
 import { CategoryDto } from "data/dto/CategoryDto"
-import { ErrorState } from "data/types/ErrorState"
 import { StandardError } from "data/types/StandardError"
-import { LanguageConstants, RegexConstants } from "enums/Constants"
-import { enqueueSnackbar } from "notistack"
+import { ViewState } from "data/types/ViewState"
+import { States } from "data/types/enums/ViewStateEnum"
+import { LanguageConstants } from "enums/Constants"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -16,7 +16,7 @@ export default function CategoryViewModel() {
 
   const [categoryWasSaved, setCategoryWasSaved] = useState<boolean>(false)
 
-  const [isLoading, setLoadingState] = useState(false)
+  const [viewState, setViewState] = useState<ViewState>(new ViewState())
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
@@ -28,14 +28,8 @@ export default function CategoryViewModel() {
     setErrorMessage("")
   }
 
-  function validate() {
-    return validateName()
-
-    return true
-  }
-
   function validateName() {
-    if (!name.match(RegexConstants.NAME_REGEX)) {
+    if (!name.isName()) {
       setNameHasError(true)
       setNameErrorText(t(LanguageConstants.INVALID_FIELD).toString())
 
@@ -44,18 +38,21 @@ export default function CategoryViewModel() {
 
     setNameErrorText("")
     setNameHasError(false)
-    
+
     return true
   }
 
   function saveCategory() {
-    if (!validate()) {
+    if (!validateName()) {
       return
     }
 
-    setLoadingState(true)
+    viewState.setViewState(States.LoadingState)
 
-    const newCategory = new CategoryDto(name)
+    createCategory(new CategoryDto(name))
+  }
+
+  function createCategory(newCategory: CategoryDto) {
     CategoryApi.createCategory(newCategory)
       .then((response) => {
         console.log(response)
@@ -71,7 +68,7 @@ export default function CategoryViewModel() {
         setErrorMessage(standardError.message)
       })
       .finally(() => {
-        setLoadingState(false)
+        viewState.setViewState(States.ContentState)
       })
   }
 
@@ -79,12 +76,12 @@ export default function CategoryViewModel() {
     name,
     onSetName,
     nameHasError,
-    validate,
+    validateName,
     nameErrorText,
     saveCategory,
     categoryWasSaved,
     setCategoryWasSaved,
-    isLoading,
+    viewState,
     errorMessage,
   }
 }

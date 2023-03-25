@@ -17,6 +17,7 @@ const resources = {
       "SAVE": "Salvar",
       "INVALID_FIELD": "Campo inválido",
       "CATEGORY_SAVED": "Categoria salva!",
+      "SAVED_CONTENT": "Conteúdo salvo!",
       "CATEGORY_NAME_ALREADY_EXISTS": "O nome da categoria já existe."
     }
   },
@@ -31,7 +32,8 @@ const resources = {
       "CATEGORY_NAME_DESCRIPTION": "The category name",
       "SAVE": "Save",
       "INVALID_FIELD": "Invalid field",
-      "CATEGORY_SAVED": "Categoria saved!",
+      "CATEGORY_SAVED": "Category saved!",
+      "SAVED_CONTENT": "Saved content!",
       "CATEGORY_NAME_ALREADY_EXISTS": "The category name already exists."
     }
   }

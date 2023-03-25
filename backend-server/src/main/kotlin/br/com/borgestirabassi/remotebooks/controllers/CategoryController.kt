@@ -26,7 +26,7 @@ class CategoryController {
 
     companion object {
 
-        /** ‘String’ que representa um path usando o id como parâmetr */
+        /** ‘String’ que representa um path usando o `id` como parâmetro */
         private const val PATH_ID = "/{id}"
     }
 
