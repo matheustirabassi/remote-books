@@ -2,8 +2,8 @@ import { CategoryApi } from "data/api/CategoryApi"
 import { CategoryDto } from "data/dto/CategoryDto"
 import { StandardError } from "data/types/StandardError"
 import { ViewState } from "data/types/ViewState"
-import { States } from "data/types/enums/ViewStateEnum"
 import { LanguageConstants } from "enums/Constants"
+import { States } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -16,7 +16,7 @@ export default function CategoryViewModel() {
 
   const [categoryWasSaved, setCategoryWasSaved] = useState<boolean>(false)
 
-  const [viewState, setViewState] = useState<ViewState>(new ViewState())
+  const [viewState] = useState<ViewState>(new ViewState())
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
@@ -60,6 +60,13 @@ export default function CategoryViewModel() {
         setCategoryWasSaved(true)
       })
       .catch((error) => {
+        if (error.response === undefined) {
+          const codeResponse: string = t(error.code)
+          setErrorMessage(codeResponse)
+
+          return
+        }
+
         const responseData = error.response.data
 
         const standardError = responseData as StandardError

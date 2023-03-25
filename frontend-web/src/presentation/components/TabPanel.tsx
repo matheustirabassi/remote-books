@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material"
-import { Children } from 'react';
+import { Box, Typography } from "@mui/material";
 
 /** As propriedades do painel */
 interface TabPanelProps {

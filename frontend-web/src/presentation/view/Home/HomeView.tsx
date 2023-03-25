@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material"
-import { Header } from "presentation/components/Header"
 
 /** A tela principal do site */
 export default function HomeView() {

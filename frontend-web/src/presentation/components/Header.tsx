@@ -1,7 +1,6 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material"
+import { Button, Stack, Typography } from "@mui/material"
 import { ReactComponent as IconBook } from "assets/images/icons/logo.svg"
 import { LanguageConstants } from "enums/Constants"
-import { enqueueSnackbar, SnackbarProvider } from "notistack"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { ROUTES } from "Routes"

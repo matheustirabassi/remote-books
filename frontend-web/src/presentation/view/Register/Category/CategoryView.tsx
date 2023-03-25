@@ -45,12 +45,19 @@ export default function CategoryView() {
 
   return (
     <>
-      <Grid container direction={"row"} justifyContent={"center"} id="loadingView">
+      <Grid
+        container
+        direction={"column"}
+        justifyContent={"center"}
+        alignItems={"end"}
+        alignContent={"center"}
+        id="loadingView"
+      >
         <LoadingState />
       </Grid>
 
       <Grid container id="contentView">
-        <Grid container direction={"column"} item mt={2}>
+        <Grid container item mt={2} alignContent={"start"}>
           <TextField
             label={t(LanguageConstants.NAME)}
             name="category_name"
@@ -62,7 +69,14 @@ export default function CategoryView() {
           />
         </Grid>
 
-        <Grid container direction={"row"} justifyContent={"center"} mt={2}>
+        <Grid
+          container
+          justifyContent={"center"}
+          alignItems={"center"}
+          alignContent={"end"}
+          mt={2}
+          height={"50vh"}
+        >
           <Button
             variant="contained"
             style={{ width: 300, height: 50 }}
