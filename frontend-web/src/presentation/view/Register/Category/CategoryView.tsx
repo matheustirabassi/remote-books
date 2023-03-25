@@ -17,11 +17,11 @@ export default function CategoryView() {
 
   useEffect(() => {
     viewModel.validateName()
-  }, [viewModel.name])
+  })
 
   useEffect(() => {
     showSnackbarAndNavigate()
-  }, [viewModel.categoryWasSaved])
+  })
 
   useEffect(() => {
     if (viewModel.errorMessage.isEmpty()) {
@@ -29,7 +29,7 @@ export default function CategoryView() {
     }
 
     enqueueSnackbar(t(viewModel.errorMessage), { variant: "error" })
-  }, [viewModel.errorMessage])
+  })
 
   /**
    * Mostra a snackbar de sucesso e navega para tela inicial
@@ -57,7 +57,7 @@ export default function CategoryView() {
       </Grid>
 
       <Grid container id="contentView">
-        <Grid container item mt={2} alignContent={"start"}>
+        <Grid container item mt={2} direction={"row"} alignContent={"left"}>
           <TextField
             label={t(LanguageConstants.NAME)}
             name="category_name"
@@ -71,11 +71,11 @@ export default function CategoryView() {
 
         <Grid
           container
-          justifyContent={"center"}
+          direction={"column"}
+          justifyContent={"end"}
           alignItems={"center"}
-          alignContent={"end"}
-          mt={2}
-          height={"50vh"}
+          alignContent={"center"}
+          height={"45vh"}
         >
           <Button
             variant="contained"
