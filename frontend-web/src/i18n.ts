@@ -18,7 +18,8 @@ const resources = {
       "INVALID_FIELD": "Campo inválido",
       "CATEGORY_SAVED": "Categoria salva!",
       "SAVED_CONTENT": "Conteúdo salvo!",
-      "CATEGORY_NAME_ALREADY_EXISTS": "O nome da categoria já existe."
+      "CATEGORY_NAME_ALREADY_EXISTS": "O nome da categoria já existe.",
+      "ERR_NETWORK": "Erro de conexão com o servidor"
     }
   },
   en: {
@@ -34,7 +35,8 @@ const resources = {
       "INVALID_FIELD": "Invalid field",
       "CATEGORY_SAVED": "Category saved!",
       "SAVED_CONTENT": "Saved content!",
-      "CATEGORY_NAME_ALREADY_EXISTS": "The category name already exists."
+      "CATEGORY_NAME_ALREADY_EXISTS": "The category name already exists.",
+      "ERR_NETWORK": "Connection error with server"
     }
   }
 }

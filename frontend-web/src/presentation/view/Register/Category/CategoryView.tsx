@@ -17,11 +17,11 @@ export default function CategoryView() {
 
   useEffect(() => {
     viewModel.validateName()
-  }, [viewModel.name])
+  })
 
   useEffect(() => {
     showSnackbarAndNavigate()
-  }, [viewModel.categoryWasSaved])
+  })
 
   useEffect(() => {
     if (viewModel.errorMessage.isEmpty()) {
@@ -29,7 +29,7 @@ export default function CategoryView() {
     }
 
     enqueueSnackbar(t(viewModel.errorMessage), { variant: "error" })
-  }, [viewModel.errorMessage])
+  })
 
   /**
    * Mostra a snackbar de sucesso e navega para tela inicial
@@ -45,12 +45,19 @@ export default function CategoryView() {
 
   return (
     <>
-      <Grid container direction={"row"} justifyContent={"center"} id="loadingView">
+      <Grid
+        container
+        direction={"column"}
+        justifyContent={"center"}
+        alignItems={"end"}
+        alignContent={"center"}
+        id="loadingView"
+      >
         <LoadingState />
       </Grid>
 
       <Grid container id="contentView">
-        <Grid container direction={"column"} item mt={2}>
+        <Grid container item mt={2} direction={"row"} alignContent={"left"}>
           <TextField
             label={t(LanguageConstants.NAME)}
             name="category_name"
@@ -62,7 +69,14 @@ export default function CategoryView() {
           />
         </Grid>
 
-        <Grid container direction={"row"} justifyContent={"center"} mt={2}>
+        <Grid
+          container
+          direction={"column"}
+          justifyContent={"end"}
+          alignItems={"center"}
+          alignContent={"center"}
+          height={"45vh"}
+        >
           <Button
             variant="contained"
             style={{ width: 300, height: 50 }}

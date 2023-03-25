@@ -1,4 +1,4 @@
-import { States } from "./enums/ViewStateEnum"
+import { States } from "../../enums/ViewStateEnum"
 
 /**
  * Classe que lida com estados da tela.
@@ -6,9 +6,9 @@ import { States } from "./enums/ViewStateEnum"
 export class ViewState {
   private state: States = States.ContentState
 
-  private VIEW_VISIBLE = "visible"
+  private VIEW_VISIBLE = ""
 
-  private VIEW_INVISIBLE = "hidden"
+  private VIEW_INVISIBLE = "none"
 
   /** Cria o objeto no estado de conteúdo */
   constructor() {
@@ -32,18 +32,18 @@ export class ViewState {
     const errorView: HTMLElement | null = document.getElementById("errorView")
     const emptyView: HTMLElement | null = document.getElementById("emptyView")
 
-    this.setViewVisibility(contentView, States.ContentState)
-    this.setViewVisibility(loadingView, States.LoadingState)
-    this.setViewVisibility(errorView, States.ErrorState)
-    this.setViewVisibility(emptyView, States.EmptyState)
+    this.setViewDisplay(contentView, States.ContentState)
+    this.setViewDisplay(loadingView, States.LoadingState)
+    this.setViewDisplay(errorView, States.ErrorState)
+    this.setViewDisplay(emptyView, States.EmptyState)
   }
 
-  private setViewVisibility(view: HTMLElement | null, state: States) {
+  private setViewDisplay(view: HTMLElement | null, state: States) {
     if (view === null) {
       return
     }
 
-    view.style.visibility =
+    view.style.display =
       this.state === state ? this.VIEW_VISIBLE : this.VIEW_INVISIBLE
   }
 }

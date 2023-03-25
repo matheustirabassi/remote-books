@@ -13,6 +13,7 @@ export const LanguageConstants = {
   INVALID_FIELD: "INVALID_FIELD",
   CATEGORY_SAVED: "CATEGORY_SAVED",
   SAVED_CONTENT: "SAVED_CONTENT",
+  ERR_NETWORK: "ERR_NETWORK"
 }
 
 export const RegexConstants = {

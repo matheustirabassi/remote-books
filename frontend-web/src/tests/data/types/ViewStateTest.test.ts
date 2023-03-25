@@ -1,6 +1,6 @@
 // region isEmpty tests
 
-import { States } from "data/types/enums/ViewStateEnum"
+import { States } from "enums/ViewStateEnum"
 import { ViewState } from "data/types/ViewState"
 
 let viewState: ViewState
