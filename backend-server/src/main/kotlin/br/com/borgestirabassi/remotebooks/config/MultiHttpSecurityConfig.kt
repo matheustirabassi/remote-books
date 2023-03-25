@@ -36,6 +36,7 @@ class MultiHttpSecurityConfig {
          */
         private val PUBLIC_MATCHERS_POST = arrayOf(
             "/category",
+            "/collection",
         )
     }
 
