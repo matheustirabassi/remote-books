@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import SwipeableViews from "react-swipeable-views"
 import CategoryView from "./Category/CategoryView"
+import CollectionView from "./Collection/CollectionView"
 
 /**
  * A tela de cadastro.
@@ -78,7 +79,7 @@ export default function RegisterView() {
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_COLLECTION_TAB}>
-          <Typography>Coleção</Typography>
+        <CollectionView />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB}>
