@@ -19,7 +19,8 @@ const resources = {
       "CATEGORY_SAVED": "Categoria salva!",
       "SAVED_CONTENT": "Conteúdo salvo!",
       "CATEGORY_NAME_ALREADY_EXISTS": "O nome da categoria já existe.",
-      "ERR_NETWORK": "Erro de conexão com o servidor"
+      "ERR_NETWORK": "Erro de conexão com o servidor",
+      "COLLECTION_NAME_ALREADY_EXISTS": "O nome da coleção já existe"
     }
   },
   en: {
@@ -36,7 +37,8 @@ const resources = {
       "CATEGORY_SAVED": "Category saved!",
       "SAVED_CONTENT": "Saved content!",
       "CATEGORY_NAME_ALREADY_EXISTS": "The category name already exists.",
-      "ERR_NETWORK": "Connection error with server"
+      "ERR_NETWORK": "Connection error with server",
+      "COLLECTION_NAME_ALREADY_EXISTS": "The collection name already exists."
     }
   }
 }

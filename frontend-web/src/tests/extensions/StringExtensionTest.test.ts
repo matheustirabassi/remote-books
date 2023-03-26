@@ -1,6 +1,6 @@
 // region isEmpty tests
 
-test("Dado que o texto é nulo ou vazio, retorna verdadeiro", () => {
+test("Dado que o texto é vazio, retorna verdadeiro", () => {
   expect("".isEmpty()).toEqual(true)
   expect(" ".isEmpty()).toEqual(true)
 })
