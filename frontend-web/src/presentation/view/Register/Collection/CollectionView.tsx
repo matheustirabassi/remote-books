@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "Routes"
-import CategoryViewModel from "./CategoryViewModel"
+import CategoryViewModel from "./CollectionViewModel"
 
 export default function CategoryView() {
   const { t } = useTranslation()
@@ -60,7 +60,7 @@ export default function CategoryView() {
         <Grid container item mt={2} direction={"row"} alignContent={"left"}>
           <TextField
             label={t(LanguageConstants.NAME)}
-            name="category_name"
+            name="collection_name"
             style={{ width: 300 }}
             value={viewModel.name}
             error={viewModel.nameHasError}
@@ -80,7 +80,7 @@ export default function CategoryView() {
           <Button
             variant="contained"
             style={{ width: 300, height: 50 }}
-            onClick={viewModel.saveCategory}
+            onClick={viewModel.saveCollection}
           >
             <Typography>{t(LanguageConstants.SAVE)}</Typography>
           </Button>
