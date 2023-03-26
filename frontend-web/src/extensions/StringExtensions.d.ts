@@ -20,8 +20,8 @@ declare global {
 }
 
 // eslint-disable-next-line no-extend-native
-String.prototype.isEmpty = function (this: string): boolean {
-  return this === "" || this.trim().length < 1
+String.prototype.isEmpty = function (this: string | undefined | null): boolean {
+  return this === undefined || this === null || this === "" || this.trim().length < 1
 }
 
 // eslint-disable-next-line no-extend-native
