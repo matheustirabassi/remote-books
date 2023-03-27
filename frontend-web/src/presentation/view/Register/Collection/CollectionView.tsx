@@ -7,15 +7,19 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "Routes"
-import CategoryViewModel from "./CollectionViewModel"
+import CollectionViewModel from "./CollectionViewModel"
 
 export default function CategoryView() {
   const { t } = useTranslation()
 
-  const viewModel = CategoryViewModel()
+  const viewModel = CollectionViewModel()
   const navigate = useNavigate()
 
   useEffect(() => {
+    if(viewModel.name.isEmpty()) {
+      return
+    }
+
     viewModel.validateName()
   })
 
@@ -35,7 +39,7 @@ export default function CategoryView() {
    * Mostra a snackbar de sucesso e navega para tela inicial
    */
   function showSnackbarAndNavigate() {
-    if (!viewModel.categoryWasSaved) {
+    if (!viewModel.collectionWasSaved) {
       return
     }
 

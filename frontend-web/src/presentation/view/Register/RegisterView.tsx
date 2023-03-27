@@ -5,6 +5,7 @@ import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import SwipeableViews from "react-swipeable-views"
+import AuthorView from "./Author/AuthorView"
 import CategoryView from "./Category/CategoryView"
 import CollectionView from "./Collection/CollectionView"
 
@@ -35,8 +36,9 @@ export default function RegisterView() {
    */
   const [tabPosition, setTabPosition] = useState(0)
 
-  const [tabsVariantType, setTabsVariantType] = useState <"fullWidth" | "standard" | "scrollable" |
-   undefined>(getVariantType(window.innerWidth))
+  const [tabsVariantType, setTabsVariantType] = useState<
+    "fullWidth" | "standard" | "scrollable" | undefined
+  >(getVariantType(window.innerWidth))
 
   window.addEventListener("resize", () => {
     setTabsVariantType(getVariantType(window.innerWidth))
@@ -75,11 +77,11 @@ export default function RegisterView() {
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_AUTHOR_TAB}>
-          <Typography>Autor</Typography>
+          <AuthorView />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_COLLECTION_TAB}>
-        <CollectionView />
+          <CollectionView />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB}>
@@ -95,7 +97,7 @@ export default function RegisterView() {
    * @returns Caso mobile `scrollable`, caso contrário `fullWidth`.
    */
   function getVariantType(
-    windowWidth: Number
+    windowWidth: number
   ): "fullWidth" | "standard" | "scrollable" | undefined {
     return windowWidth < MOBILE_MAX_WIDTH ? "scrollable" : "fullWidth"
   }

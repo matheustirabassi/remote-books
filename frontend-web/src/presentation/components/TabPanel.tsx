@@ -3,10 +3,10 @@ import { Box, Typography } from "@mui/material";
 /** As propriedades do painel */
 interface TabPanelProps {
   /** O index da guia */
-  index: Number
+  index: number
 
   /** O valor da guia */
-  value: Number
+  value: number
 
   /** A direção */
   dir?: string

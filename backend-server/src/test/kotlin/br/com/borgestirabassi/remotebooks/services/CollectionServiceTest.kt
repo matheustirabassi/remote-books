@@ -24,8 +24,8 @@ class CollectionServiceTest : BaseUnitTest() {
     private lateinit var collectionRepository: CollectionRepository
 
     @Test
-    @DisplayName("Dado que o nome da categoria já existe, lança um erro de serviço")
-    fun insertCategoryTest_CategoryNameAlreadyExists_ServiceException() {
+    @DisplayName("Dado que o nome da coleção já existe, lança um erro de serviço")
+    fun insertCollectionTest_CollectionNameAlreadyExists_ServiceException() {
         Mockito.`when`(collectionRepository.findByName(Mockito.anyString())).thenReturn(
             Optional.of(Collection(name = "Coleção")),
         )
@@ -38,8 +38,8 @@ class CollectionServiceTest : BaseUnitTest() {
     }
 
     @Test
-    @DisplayName("Dado que o `ìd` da categoria é nulo após salvar, lança um erro de serviço")
-    fun insertCategoryTest_CategoryIdIsNull_ServiceException() {
+    @DisplayName("Dado que o `ìd` da coleção é nulo após salvar, lança um erro de serviço")
+    fun insertCollectionTest_CollectionIdIsNull_ServiceException() {
         Mockito.`when`(collectionRepository.saveAndFlush(ArgumentMatchers.any(Collection::class.java)))
             .thenReturn(
             Collection(name = "Coleção"),

@@ -16,11 +16,11 @@ class CollectionService {
     private lateinit var collectionService: CollectionRepository
 
     /**
-     * Adiciona uma nova categoria no sistema.
+     * Adiciona uma nova coleção no sistema.
      *
-     * @param collectionDto O Dto de categoria.
+     * @param collectionDto O Dto da coleção.
      *
-     * @return O identificador da nova categoria criada.
+     * @return O identificador com a nova coleção criada.
      */
     @Transactional
     fun insertCollection(collectionDto: CollectionDto): Long {
@@ -36,7 +36,7 @@ class CollectionService {
     }
 
     /**
-     * Verifica se o nome da categoria não existe, caso exista, lança um erro de serviço.
+     * Verifica se o nome da coleção não existe, caso exista, lança um erro de serviço.
      */
     private fun verifyIfCategoryNameNotExists(collectionDto: CollectionDto) {
         collectionService.findByName(collectionDto.name).ifPresent {
