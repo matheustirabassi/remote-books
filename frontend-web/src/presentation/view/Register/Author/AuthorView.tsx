@@ -57,7 +57,7 @@ export default function CategoryView() {
     navigate(ROUTES.HOME)
   }
 
-  function showName(): boolean {
+  function nameHasError(): boolean {
     if (viewModel.nameErrorText === undefined) {
       return false
     }
@@ -74,6 +74,7 @@ export default function CategoryView() {
         alignItems={"end"}
         alignContent={"center"}
         id="loadingView"
+        style={{display:"none"}}
       >
         <LoadingState />
       </Grid>
@@ -85,7 +86,7 @@ export default function CategoryView() {
             name="author_name"
             style={{ width: 300 }}
             value={viewModel.name}
-            error={showName()}
+            error={nameHasError()}
             helperText={viewModel.nameErrorText}
             onChange={viewModel.onSetName}
           />

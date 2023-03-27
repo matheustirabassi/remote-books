@@ -16,7 +16,7 @@ export default function CollectionViewModel() {
 
   const [collectionWasSaved, setCollectionWasSaved] = useState<boolean>(false)
 
-  const [viewState] = useState<ViewState>(new ViewState())
+  const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 

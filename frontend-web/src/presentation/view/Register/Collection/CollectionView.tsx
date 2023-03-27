@@ -56,6 +56,7 @@ export default function CategoryView() {
         alignItems={"end"}
         alignContent={"center"}
         id="loadingView"
+        style={{display:"none"}}
       >
         <LoadingState />
       </Grid>
