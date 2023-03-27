@@ -11,8 +11,8 @@ export class ViewState {
   private VIEW_INVISIBLE = "none"
 
   /** Cria o objeto no estado de conteúdo */
-  constructor() {
-    this.setViewState(States.ContentState)
+  constructor(states : States) {
+    this.setViewState(states)
   }
 
   getState() {
