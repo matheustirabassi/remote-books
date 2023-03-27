@@ -1,4 +1,4 @@
-import { CategoryApi } from "data/api/CategoryApi"
+import { CollectionApi } from "data/api/CollectionApi"
 import { CollectionDto } from "data/dto/CollectionDto"
 import { StandardError } from "data/types/StandardError"
 import { ViewState } from "data/types/ViewState"
@@ -7,14 +7,14 @@ import { States } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-export default function CategoryViewModel() {
+export default function CollectionViewModel() {
   const { t } = useTranslation()
 
   const [name, setName] = useState<string>("")
   const [nameHasError, setNameHasError] = useState<boolean>(false)
   const [nameErrorText, setNameErrorText] = useState<string>("")
 
-  const [categoryWasSaved, setCollectionWasSaved] = useState<boolean>(false)
+  const [collectionWasSaved, setCollectionWasSaved] = useState<boolean>(false)
 
   const [viewState] = useState<ViewState>(new ViewState())
 
@@ -53,7 +53,7 @@ export default function CategoryViewModel() {
   }
 
   function createCollection(newCollection: CollectionDto) {
-    CategoryApi.createCollection(newCollection)
+    CollectionApi.create(newCollection)
       .then((response) => {
         console.log(response)
 
@@ -86,7 +86,7 @@ export default function CategoryViewModel() {
     validateName,
     nameErrorText,
     saveCollection,
-    categoryWasSaved,
+    collectionWasSaved,
     setCollectionWasSaved,
     viewState,
     errorMessage,

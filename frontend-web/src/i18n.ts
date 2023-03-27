@@ -20,7 +20,10 @@ const resources = {
       "SAVED_CONTENT": "Conteúdo salvo!",
       "CATEGORY_NAME_ALREADY_EXISTS": "O nome da categoria já existe.",
       "ERR_NETWORK": "Erro de conexão com o servidor",
-      "COLLECTION_NAME_ALREADY_EXISTS": "O nome da coleção já existe"
+      "COLLECTION_NAME_ALREADY_EXISTS": "O nome da coleção já existe",
+      "DATE_OF_BIRTH": "Data de nascimento",
+      "VALIDATION_ERROR": "Erro de validação",
+      "AUTHOR_NAME_REQUIRED": "O nome do autor é obrigatório"
     }
   },
   en: {
@@ -38,7 +41,10 @@ const resources = {
       "SAVED_CONTENT": "Saved content!",
       "CATEGORY_NAME_ALREADY_EXISTS": "The category name already exists.",
       "ERR_NETWORK": "Connection error with server",
-      "COLLECTION_NAME_ALREADY_EXISTS": "The collection name already exists."
+      "COLLECTION_NAME_ALREADY_EXISTS": "The collection name already exists.",
+      "DATE_OF_BIRTH": "Date of birth",
+      "VALIDATION_ERROR": "Validation error",
+      "AUTHOR_NAME_REQUIRED": "The author name is required"
     }
   }
 }

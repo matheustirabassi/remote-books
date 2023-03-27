@@ -3,6 +3,7 @@ import { RegexConstants } from "enums/Constants"
 
 declare global {
   interface String {
+
     /**
      * Verifica se o texto é vazio.
      *

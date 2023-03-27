@@ -53,7 +53,7 @@ export default function CategoryViewModel() {
   }
 
   function createCategory(newCategory: CategoryDto) {
-    CategoryApi.createCategory(newCategory)
+    CategoryApi.create(newCategory)
       .then((response) => {
         console.log(response)
 
