@@ -26,6 +26,6 @@ data class Author(
     @Column(name = "NAME")
     val name: String,
 
-    @Column(name = "DATEOFBIRTH")
+    @Column(name = "DATE_OF_BIRTH")
     val dateOfBirth: Date,
 )
