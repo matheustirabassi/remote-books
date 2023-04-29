@@ -32,7 +32,7 @@ data class Book(
     val title: String,
 
     @Column(name = "SINOPSE", length = 3000)
-    val sinopse: String,
+    val sinopse: String?,
 
     @Column(name = "IMAGE_LINK", length = 5000)
     val imageLink: String,
@@ -40,4 +40,8 @@ data class Book(
     @Column(name = "REGISTRATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     val registrationDate: Date,
+
+    @Column(name = "RELEASE_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    val releaseDate: Date,
 )

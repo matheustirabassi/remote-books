@@ -9,4 +9,11 @@ object ErrorMessages {
     const val COLLECTION_NAME_ALREADY_EXISTS = "COLLECTION_NAME_ALREADY_EXISTS"
     const val AUTHOR_NAME_REQUIRED = "AUTHOR_NAME_REQUIRED"
     const val AUTHOR_DATE_OF_BIRTH_REQUIRED = "AUTHOR_DATE_OF_BIRTH_REQUIRED"
+    const val BOOK_TITLE_REQUIRED = "BOOK_TITLE_REQUIRED"
+    const val BOOK_IMAGE_LINK_REQUIRED = "BOOK_IMAGE_LINK_REQUIRED"
+}
+
+object Strings {
+    /** Representa um path usando o `id` como parâmetro */
+   const val PATH_ID = "/{id}"
 }

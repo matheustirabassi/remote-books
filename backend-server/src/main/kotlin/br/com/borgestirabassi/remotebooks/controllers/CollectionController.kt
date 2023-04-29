@@ -2,6 +2,7 @@ package br.com.borgestirabassi.remotebooks.controllers
 
 import br.com.borgestirabassi.remotebooks.dto.CollectionDto
 import br.com.borgestirabassi.remotebooks.services.CollectionService
+import br.com.borgestirabassi.remotebooks.utils.Strings
 import jakarta.validation.Valid
 import lombok.extern.log4j.Log4j2
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,12 +25,6 @@ class CollectionController {
     @Autowired
     private lateinit var collectionService: CollectionService
 
-    companion object {
-
-        /** ‘String’ que representa um path usando o `id` como parâmetro */
-        private const val PATH_ID = "/{id}"
-    }
-
     /**
      * Insere uma nova coleção no sistema.
      *
@@ -42,7 +37,7 @@ class CollectionController {
         @RequestBody
         collectionDto: CollectionDto,
     ): ResponseEntity<Void> {
-        val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(PATH_ID)
+        val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(collectionService.insertCollection(collectionDto)).toUri()
 
         return ResponseEntity.created(uri).build()
