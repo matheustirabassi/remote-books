@@ -25,6 +25,8 @@ class BookControllerTest {
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
+    // region insertBook tests
+
     @Test
     @DisplayName("Dado que os dados são válidos, retorna cabeçalho com a localização do recurso")
     fun insertBookTest_AllValid_ReturnHeaderWithId() {
@@ -36,8 +38,9 @@ class BookControllerTest {
                         BookDto("Abacate", "Abacaxi", "http://localhost:8080/imagem.png", Date()),
                     ),
                 ),
-        ).andExpect(status().isCreated)
-            .andExpect(header().string("Location", "http://localhost/book/123"))
+        )
+            .andExpect(status().isCreated)
+            .andExpect(header().string("Location", "http://localhost/book/1"))
     }
 
     @Test
@@ -78,4 +81,6 @@ class BookControllerTest {
             ),
         )
     }
+
+    // endregion
 }

@@ -1,9 +1,11 @@
 package br.com.borgestirabassi.remotebooks.controllers
 
 import br.com.borgestirabassi.remotebooks.dto.BookDto
+import br.com.borgestirabassi.remotebooks.services.BookService
 import br.com.borgestirabassi.remotebooks.utils.Strings
 import jakarta.validation.Valid
 import lombok.extern.log4j.Log4j2
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,6 +22,9 @@ import java.net.URI
 @RequestMapping("/book")
 class BookController {
 
+    @Autowired
+    private lateinit var bookService: BookService
+
     /**
      * Insere um novo livro no sistema.
      *
@@ -32,9 +37,8 @@ class BookController {
         @RequestBody
         bookDto: BookDto,
     ): ResponseEntity<Void> {
-        // TODO: Mudar para o Service.
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
-            .buildAndExpand("123").toUri()
+            .buildAndExpand(bookService.insertBook(bookDto)).toUri()
 
         return ResponseEntity.created(uri).build()
     }
