@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
@@ -26,7 +27,7 @@ class BookControllerTest {
     private lateinit var objectMapper: ObjectMapper
 
     // region insertBook tests
-
+    @Sql("/scripts/insert-author.sql")
     @Test
     @DisplayName("Dado que os dados são válidos, retorna cabeçalho com a localização do recurso")
     fun insertBookTest_AllValid_ReturnHeaderWithId() {
@@ -35,7 +36,13 @@ class BookControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("Abacate", "Abacaxi", "http://localhost:8080/imagem.png", Date()),
+                        BookDto(
+                            "Abacate",
+                            "Abacaxi",
+                            "http://localhost:8080/imagem.png",
+                            Date(),
+                            1L,
+                        ),
                     ),
                 ),
         )
@@ -51,7 +58,7 @@ class BookControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", Date()),
+                        BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", Date(), 1L),
                     ),
                 ),
         ).andExpect(status().isBadRequest).andExpect(
@@ -70,14 +77,34 @@ class BookControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("Abacate", "Sinopse", "", Date()),
+                        BookDto("Abacate", "Sinopse", "", Date(), 1L),
                     ),
                 ),
         ).andExpect(status().isBadRequest).andExpect(
             content().json(
                 "{\"statusCode\":400,\"message\":\"VALIDATION_ERROR\"," +
                         "\"errors\":[{\"fieldName\":\"imageLink\",\"message\":" +
-                        "\"BOOK_IMAGE_LINK_REQUIRED\"}]}",
+                        "\"IMAGE_LINK_REQUIRED\"}]}",
+            ),
+        )
+    }
+
+    @Test
+    @DisplayName("Dado que o identificador do autor é nulo, retorna erro de validation")
+    fun insertBookTest_AuthorIdIsNull_ReturnValidationError() {
+        mockMvc.perform(
+            post("/book")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsString(
+                        BookDto("Abacate", "Sinopse", "link", Date(), 0L),
+                    ),
+                ),
+        ).andExpect(status().isBadRequest).andExpect(
+            content().json(
+                "{\"statusCode\":400,\"message\":\"VALIDATION_ERROR\"," +
+                        "\"errors\":[{\"fieldName\":\"authorId\",\"message\":" +
+                        "\"AUTHOR_ID_REQUIRED\"}]}",
             ),
         )
     }

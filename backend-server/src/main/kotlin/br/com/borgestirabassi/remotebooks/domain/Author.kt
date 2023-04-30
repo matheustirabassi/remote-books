@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.Date
 
@@ -13,6 +14,8 @@ import java.util.Date
  *
  * @property id O identificador da categoria.
  * @property name O nome da categoria
+ * @property dateOfBirth A data de nascimento.
+ * @property books Os livros do autor.
  */
 @Entity
 @Table(name = "AUTHOR")
@@ -21,11 +24,14 @@ data class Author(
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @Column(name = "NAME")
     val name: String,
 
     @Column(name = "DATE_OF_BIRTH")
     val dateOfBirth: Date,
+
+    @OneToMany(mappedBy = "author")
+    var books: List<Book> = ArrayList(),
 )

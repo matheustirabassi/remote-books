@@ -1,8 +1,10 @@
 package br.com.borgestirabassi.remotebooks.services
 
 import br.com.borgestirabassi.remotebooks.base.BaseUnitTest
+import br.com.borgestirabassi.remotebooks.domain.Author
 import br.com.borgestirabassi.remotebooks.domain.Book
 import br.com.borgestirabassi.remotebooks.dto.BookDto
+import br.com.borgestirabassi.remotebooks.repositories.AuthorRepository
 import br.com.borgestirabassi.remotebooks.repositories.BookRepository
 import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -24,6 +27,9 @@ class BookServiceTest : BaseUnitTest() {
     @Mock
     private lateinit var bookRepository: BookRepository
 
+    @Mock
+    private lateinit var authorRepository: AuthorRepository
+
     // region insertBook tests
 
     @Test
@@ -36,6 +42,15 @@ class BookServiceTest : BaseUnitTest() {
             book
         }
 
+        `when`(authorRepository.getReferenceById(anyLong())).thenReturn(
+            Author(
+                id = 1L,
+                name = "Roman Cook",
+                dateOfBirth = Date(),
+                books = emptyList(),
+            ),
+        )
+
         assertEquals(
             1L,
             service.insertBook(
@@ -44,6 +59,7 @@ class BookServiceTest : BaseUnitTest() {
                     sinopse = null,
                     imageLink = "",
                     releaseDate = Date(),
+                    1L,
                 ),
             ),
         )
@@ -52,6 +68,15 @@ class BookServiceTest : BaseUnitTest() {
     @Test
     @DisplayName("Dado que o livro não foi criado, lança uma exceção de serviço")
     fun insertBookTest_BookDoNotCreated_ServiceException() {
+        `when`(authorRepository.getReferenceById(anyLong())).thenReturn(
+            Author(
+                id = 1L,
+                name = "Roman Cook",
+                dateOfBirth = Date(),
+                books = emptyList(),
+            ),
+        )
+
         val exception = assertThrows<ServiceException> {
             service.insertBook(
                 BookDto(
@@ -59,6 +84,7 @@ class BookServiceTest : BaseUnitTest() {
                     sinopse = null,
                     imageLink = "",
                     releaseDate = Date(),
+                    authorId = 1L,
                 ),
             )
         }
