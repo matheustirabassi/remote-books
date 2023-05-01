@@ -23,7 +23,11 @@ const resources = {
       "COLLECTION_NAME_ALREADY_EXISTS": "O nome da coleção já existe",
       "DATE_OF_BIRTH": "Data de nascimento",
       "VALIDATION_ERROR": "Erro de validação",
-      "AUTHOR_NAME_REQUIRED": "O nome do autor é obrigatório"
+      "AUTHOR_NAME_REQUIRED": "O nome do autor é obrigatório",
+      "TITLE": "Título",
+      "SYNOPSIS": "Sinopse",
+      "RELEASE_DATE" :"Data de lançamento",
+      "LINK": "Link"
     }
   },
   en: {
@@ -44,7 +48,11 @@ const resources = {
       "COLLECTION_NAME_ALREADY_EXISTS": "The collection name already exists.",
       "DATE_OF_BIRTH": "Date of birth",
       "VALIDATION_ERROR": "Validation error",
-      "AUTHOR_NAME_REQUIRED": "The author name is required"
+      "AUTHOR_NAME_REQUIRED": "The author name is required",
+      "TITLE": "Title",
+      "SYNOPSIS": "Sinopsis",
+      "RELEASE_DATE" :"Release date",
+      "LINK": "Link"
     }
   }
 }

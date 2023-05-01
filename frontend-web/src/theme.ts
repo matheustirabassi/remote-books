@@ -85,15 +85,7 @@ const remoteBooksTheme =  createTheme({
     MuiMenu: {
 			styleOverrides: {
 				list: {
-					backgroundColor: "#FFB703",
-				},
-			},
-		},
-
-		MuiMenuItem: {
-			styleOverrides: {
-				root: {
-					backgroundColor: "#023047",
+					backgroundColor: "#F4B860",
 				},
 			},
 		},

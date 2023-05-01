@@ -106,7 +106,7 @@ export default function CategoryView() {
           justifyContent={"end"}
           alignItems={"center"}
           alignContent={"center"}
-          height={"45vh"}
+          mt={2}
         >
           <Button
             variant="contained"
