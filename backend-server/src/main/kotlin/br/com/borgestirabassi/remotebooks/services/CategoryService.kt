@@ -45,4 +45,12 @@ class CategoryService {
             )
         }
     }
+
+    fun getCategories(): List<CategoryDto> {
+        return mapToDto(categoryRepository.findAll())
+    }
+
+    private fun mapToDto(categories: List<Category>): List<CategoryDto> {
+        return categories.map { category -> CategoryDto(id = category.id, name = category.name) }
+    }
 }

@@ -26,7 +26,7 @@ class AuthorService {
     fun insertAuthor(authorDto: AuthorDto): Long {
         val newAuthor = Author(
             name = authorDto.name,
-            dateOfBirth = authorDto.dateOfBirth,
+            dateOfBirth = authorDto.dateOfBirth!!,
         )
 
         authorRepository.saveAndFlush(newAuthor)
@@ -34,5 +34,13 @@ class AuthorService {
         return newAuthor.id ?: throw ServiceException(
             ErrorMessages.UNEXPECTED_ERROR,
         )
+    }
+
+    fun getAuthors(): List<AuthorDto> {
+        return mapToDto(authorRepository.findAll())
+    }
+
+    private fun mapToDto(authors: List<Author>): List<AuthorDto> {
+        return authors.map { author -> AuthorDto(id = author.id, name = author.name) }
     }
 }
