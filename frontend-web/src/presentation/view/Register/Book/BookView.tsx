@@ -52,7 +52,7 @@ export default function BookView() {
 
   return (
     <>
-      <Grid container direction={"row"} id="loadingView" style={{ display: "none" }}>
+      <Grid container direction="row" id="loadingView" style={{ display: "none" }}>
         <LoadingState />
       </Grid>
 
@@ -61,8 +61,8 @@ export default function BookView() {
           container
           direction="column"
           alignContent="flex-start"
-          alignItems={"flex-start"}
-          justifyContent={"flex-start"}
+          alignItems="flex-start"
+          justifyContent="flex-start"
           spacing={2}
         >
           <Grid item mt={2} xs={6} md={6}>
@@ -186,7 +186,7 @@ export default function BookView() {
           </Grid>
         </Grid>
 
-        <Grid container item justifyContent={"center"} mt={2}>
+        <Grid container item justifyContent="center" mt={2}>
           <Grid item>
             <Button variant="contained" style={{ width: 300, height: 50 }} onClick={viewModel.save}>
               <Typography>{t(LanguageConstants.SAVE)}</Typography>
