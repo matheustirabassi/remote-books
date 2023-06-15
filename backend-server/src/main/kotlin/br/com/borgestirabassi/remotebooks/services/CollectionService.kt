@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class CollectionService {
 
     @Autowired
-    private lateinit var collectionService: CollectionRepository
+    private lateinit var collectionRepository: CollectionRepository
 
     /**
      * Adiciona uma nova coleção no sistema.
@@ -28,7 +28,7 @@ class CollectionService {
 
         val newCollection = Collection(name = collectionDto.name)
 
-        collectionService.saveAndFlush(newCollection)
+        collectionRepository.saveAndFlush(newCollection)
 
         return newCollection.id ?: throw ServiceException(
             ErrorMessages.UNEXPECTED_ERROR,
@@ -39,9 +39,22 @@ class CollectionService {
      * Verifica se o nome da coleção não existe, caso exista, lança um erro de serviço.
      */
     private fun verifyIfCategoryNameNotExists(collectionDto: CollectionDto) {
-        collectionService.findByName(collectionDto.name).ifPresent {
+        collectionRepository.findByName(collectionDto.name).ifPresent {
             throw ServiceException(
                 ErrorMessages.COLLECTION_NAME_ALREADY_EXISTS,
+            )
+        }
+    }
+
+    fun getCollections(): List<CollectionDto> {
+        return mapToDto(collectionRepository.findAll())
+    }
+
+    private fun mapToDto(collections: List<Collection>): List<CollectionDto> {
+        return collections.map { collection ->
+            CollectionDto(
+                id = collection.id,
+                name = collection.name,
             )
         }
     }

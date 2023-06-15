@@ -4,12 +4,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import java.text.SimpleDateFormat
 
 class StringExtensionsTest {
-    private val yearFormatter = SimpleDateFormat("yyyy-MM-dd")
-    private val standardDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:SS")
-
     @Test
     @DisplayName("Dado que o texto é nulo, retorna uma data nula")
     fun parseToDateTest_StringIsNull_ReturnNullDate() {

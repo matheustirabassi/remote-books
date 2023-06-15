@@ -8,6 +8,7 @@ import SwipeableViews from "react-swipeable-views"
 import AuthorView from "./Author/AuthorView"
 import CategoryView from "./Category/CategoryView"
 import CollectionView from "./Collection/CollectionView"
+import BookView from "./Book/BookView"
 
 /**
  * A tela de cadastro.
@@ -73,7 +74,7 @@ export default function RegisterView() {
 
       <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition}>
         <TabPanel value={tabPosition} index={INDEX_BOOK_TAB}>
-          <Typography>Livro</Typography>
+          <BookView />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_AUTHOR_TAB}>

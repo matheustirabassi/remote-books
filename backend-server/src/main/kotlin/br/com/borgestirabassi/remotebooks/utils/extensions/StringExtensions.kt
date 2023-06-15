@@ -4,10 +4,10 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 
-private val yearFormatter = SimpleDateFormat("yyyy-MM-dd")
+val yearFormatter = SimpleDateFormat("yyyy-MM-dd")
 private const val YEAR_FORMAT_LENGTH = 10
 
-private val standardDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:SS")
+val standardDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:SS")
 private const val STANDARD_DATE_FORMAT_LENGTH = 19
 
 /**

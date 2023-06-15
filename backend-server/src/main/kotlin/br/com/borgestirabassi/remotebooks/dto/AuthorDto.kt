@@ -9,12 +9,14 @@ import java.util.Date
 /**
  * Dto usado para inserir um novo autor.
  *
+ * @property id O identificador do autor.
  * @property name O nome do autor.
  * @property dateOfBirth A data de nascimento.
  */
 data class AuthorDto(
+    val id: Long? = null,
     @field:NotBlank(message = ErrorMessages.AUTHOR_NAME_REQUIRED)
     val name: String,
     @field:NotNull(message = ErrorMessages.AUTHOR_DATE_OF_BIRTH_REQUIRED)
-    val dateOfBirth: Date,
+    val dateOfBirth: Date? = null,
 ) : Serializable

@@ -7,6 +7,12 @@ const create = async (category: CategoryDto) => {
   return Api.post(CATEGORY_ENDPOINT, category)
 }
 
+const getAll = async() => {
+  return Api.get(CATEGORY_ENDPOINT)
+}
+
+
 export const CategoryApi = {
-  create
+  create,
+  getAll
 }
