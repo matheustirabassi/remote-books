@@ -6,11 +6,16 @@ import { AuthorDto } from "data/dto/AuthorDto"
 import { BookDto } from "data/dto/BookDto"
 import { CategoryDto } from "data/dto/CategoryDto"
 import { CollectionDto } from "data/dto/CollectionDto"
+import { ErrorFieldMessage } from "data/types/ErrorFieldMessage"
+import { ValidationStandardError } from "data/types/ValidationStandardError"
 import { ViewState } from "data/types/ViewState"
 import { States } from "enums/ViewStateEnum"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 export default function BookViewModel() {
+  const { t } = useTranslation()
+
   const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
 
   const [authors, setAuthors] = useState<AuthorDto[]>([])
@@ -34,6 +39,8 @@ export default function BookViewModel() {
   const [imageLink, setImageLink] = useState<string>("")
 
   const [bookWasSaved, setBookWasSaved] = useState<boolean>(false)
+
+  const [errors, setErrors] = useState<ErrorFieldMessage[]>([])
 
   function getAllAuthors() {
     viewState.setViewState(States.LoadingState)
@@ -91,8 +98,20 @@ export default function BookViewModel() {
       .then((response) => {
         setBookWasSaved(true)
       })
-      .catch((error) => {})
-      .finally(() => {
+      .catch((error) => {
+        if (error.response === undefined) {
+          const codeResponse: string = t(error.code)
+          setErrors([new ErrorFieldMessage("", codeResponse)])
+
+          return
+        }
+
+        const standardError = error.response.data as ValidationStandardError
+
+        console.error(standardError)
+
+        setErrors(standardError.errors)
+      }).finally(() => {
         viewState.setViewState(States.ContentState)
       })
   }
@@ -124,6 +143,7 @@ export default function BookViewModel() {
     setImageLink,
     releaseDate,
     setReleaseDate,
-    bookWasSaved
+    bookWasSaved,
+    errors
   }
 }

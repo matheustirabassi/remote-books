@@ -5,8 +5,8 @@ import Routes from "Routes"
 import remoteBooksTheme from "theme"
 
 function App() {
-  const MILLISECONDS_TO_HIDE = 2000
-  const MAX_SNACK = 2
+  const MILLISECONDS_TO_HIDE = 4000
+  const MAX_SNACK = 3
 
   return (
     <div className="App">

@@ -27,7 +27,10 @@ const resources = {
       "TITLE": "Título",
       "SYNOPSIS": "Sinopse",
       "RELEASE_DATE" :"Data de lançamento",
-      "LINK": "Link"
+      "LINK": "Link",
+      "BOOK_TITLE_REQUIRED": "O nome do livro é obrigatório",
+      "IMAGE_LINK_REQUIRED": "O link para a imagem é obrigatório",
+      "AUTHOR_ID_REQUIRED" : "O autor é obrigatório"
     }
   },
   en: {
@@ -52,7 +55,10 @@ const resources = {
       "TITLE": "Title",
       "SYNOPSIS": "Sinopsis",
       "RELEASE_DATE" :"Release date",
-      "LINK": "Link"
+      "LINK": "Link",
+      "BOOK_TITLE_REQUIRED": "Book name is required",
+      "IMAGE_LINK_REQUIRED": "Image link is required",
+      "AUTHOR_ID_REQUIRED" : "Author is required"
     }
   }
 }

@@ -41,6 +41,14 @@ export default function BookView() {
     showSnackbarAndNavigate()
   })
 
+  useEffect(() => {
+    if (viewModel.errors.length === 0) {
+      return
+    }
+
+    viewModel.errors.forEach((error) => enqueueSnackbar(t(error.message), { variant: "error" }))
+  })
+
   function showSnackbarAndNavigate() {
     if (!viewModel.bookWasSaved) {
       return
