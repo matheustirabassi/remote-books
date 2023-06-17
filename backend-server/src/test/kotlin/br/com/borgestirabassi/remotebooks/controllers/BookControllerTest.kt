@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
@@ -105,6 +106,39 @@ class BookControllerTest {
                 "{\"statusCode\":400,\"message\":\"VALIDATION_ERROR\"," +
                         "\"errors\":[{\"fieldName\":\"authorId\",\"message\":" +
                         "\"AUTHOR_ID_REQUIRED\"}]}",
+            ),
+        )
+    }
+
+    // endregion
+
+    // region findAllBooks tests
+
+    @Test
+    @DisplayName("Dado que foi buscado todos os livros, retorna todos os livros")
+    fun findAllBooksTest_AllBooksSearched_ReturnAllBooks() {
+        mockMvc.perform(
+            get("/book")
+                .contentType(MediaType.APPLICATION_JSON),
+        ).andExpect(status().isOk).andExpect(
+            content().json(
+                "{\"content\":" +
+                        "[{\"title\":\"Title1\",\"sinopse\":\"Sinopse1\"," +
+                        "\"imageLink\":\"link1\"," +
+                        "\"releaseDate\":\"2023-06-17T03:00:00.000+00:00\"," +
+                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}," +
+                        "{\"title\":\"Title2\",\"sinopse\":\"Sinopse2\"," +
+                        "\"imageLink\":\"link2\"," +
+                        "\"releaseDate\":\"2023-06-18T03:00:00.000+00:00\"," +
+                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}," +
+                        "{\"title\":\"Title3\",\"sinopse\":\"Sinopse3\"," +
+                        "\"imageLink\":\"link3\"," +
+                        "\"releaseDate\":\"2023-06-19T03:00:00.000+00:00\"," +
+                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}]," +
+                        "\"pageable\":\"INSTANCE\",\"last\":true,\"totalPages\":1," +
+                        "\"totalElements\":3,\"size\":3,\"number\":0,\"sort\":{\"empty\":true," +
+                        "\"unsorted\":true,\"sorted\":false},\"first\":true," +
+                        "\"numberOfElements\":3,\"empty\":false}",
             ),
         )
     }
