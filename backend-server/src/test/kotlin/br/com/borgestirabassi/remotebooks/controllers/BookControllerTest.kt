@@ -1,12 +1,11 @@
 package br.com.borgestirabassi.remotebooks.controllers
 
+import br.com.borgestirabassi.remotebooks.base.BaseIntegrationTest
 import br.com.borgestirabassi.remotebooks.dto.BookDto
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.web.servlet.MockMvc
@@ -17,9 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.Date
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class BookControllerTest {
+class BookControllerTest : BaseIntegrationTest() {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -42,7 +39,7 @@ class BookControllerTest {
                             "Abacaxi",
                             "http://localhost:8080/imagem.png",
                             Date(),
-                            1L,
+                            150,
                         ),
                     ),
                 ),
@@ -115,32 +112,29 @@ class BookControllerTest {
     // region findAllBooks tests
 
     @Test
+    @Sql("/scripts/insert-book.sql")
     @DisplayName("Dado que foi buscado todos os livros, retorna todos os livros")
     fun findAllBooksTest_AllBooksSearched_ReturnAllBooks() {
         mockMvc.perform(
-            get("/book")
-                .contentType(MediaType.APPLICATION_JSON),
-        ).andExpect(status().isOk).andExpect(
-            content().json(
-                "{\"content\":" +
-                        "[{\"title\":\"Title1\",\"sinopse\":\"Sinopse1\"," +
-                        "\"imageLink\":\"link1\"," +
-                        "\"releaseDate\":\"2023-06-17T03:00:00.000+00:00\"," +
-                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}," +
-                        "{\"title\":\"Title2\",\"sinopse\":\"Sinopse2\"," +
-                        "\"imageLink\":\"link2\"," +
-                        "\"releaseDate\":\"2023-06-18T03:00:00.000+00:00\"," +
-                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}," +
-                        "{\"title\":\"Title3\",\"sinopse\":\"Sinopse3\"," +
-                        "\"imageLink\":\"link3\"," +
-                        "\"releaseDate\":\"2023-06-19T03:00:00.000+00:00\"," +
-                        "\"authorId\":0,\"categoryId\":0,\"collectionId\":0}]," +
-                        "\"pageable\":\"INSTANCE\",\"last\":true,\"totalPages\":1," +
-                        "\"totalElements\":3,\"size\":3,\"number\":0,\"sort\":{\"empty\":true," +
-                        "\"unsorted\":true,\"sorted\":false},\"first\":true," +
-                        "\"numberOfElements\":3,\"empty\":false}",
-            ),
-        )
+            get("/book").contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"),
+        ).andExpect(status().isOk).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(
+                content().json(
+                    "{\"content\":[" +
+                            "{\"title\":\"A revolucao dos bichos: Um conto de fadas\"," +
+                            "\"sinopse\":\"Verdadeiro classico moderno\",\"imageLink\":" +
+                            "\"https://m.media-amazon.com/images/I/71FMCr5Z9rL.jpg\"," +
+                            "\"releaseDate\":\"2020-06-17T18:43:00.000+00:00\",\"authorId\":600," +
+                            "\"categoryId\":600,\"collectionId\":600}],\"pageable\":{\"sort\":{" +
+                            "\"empty\":true,\"sorted\":false,\"unsorted\":true},\"offset\":0," +
+                            "\"pageSize\":20,\"pageNumber\":0,\"unpaged\":false,\"paged\":true}," +
+                            "\"last\":true,\"totalPages\":1,\"totalElements\":1,\"size\":20," +
+                            "\"number\":0,\"sort\":{\"empty\":true,\"sorted\":false," +
+                            "\"unsorted\":true},\"first\":true,\"numberOfElements\":1," +
+                            "\"empty\":false}",
+                ),
+            )
     }
 
     // endregion

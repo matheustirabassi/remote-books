@@ -10,6 +10,8 @@ import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.Date
 
@@ -80,4 +82,9 @@ class BookService {
         registrationDate = Date(),
         author = authorRepository.getReferenceById(bookDto.authorId),
     )
+
+    /** Busca os livros de forma paginada e mapeia para BookDto */
+    fun findAllBooks(pageable: Pageable): Page<BookDto> {
+        return bookRepository.findAll(pageable).map { BookDto(it) }
+    }
 }
