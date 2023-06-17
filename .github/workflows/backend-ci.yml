@@ -26,10 +26,10 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'oracle'
 
       - name: Grant Permissions to gradlew
         run: chmod +x gradlew
 
       - name: Test
-        run: ./gradlew test
+        run: ./gradlew clean build check --info --stacktrace
