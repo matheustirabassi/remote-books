@@ -129,7 +129,7 @@ export default function BookView() {
                   label={t(LanguageConstants.AUTHOR)}
                   onChange={(e) => viewModel.setAuthorSelected(e.target.value as number)}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem>None</MenuItem>
 
                   {viewModel.authors.map((author) => (
                     <MenuItem value={author.id} key={author.id}>
@@ -153,7 +153,7 @@ export default function BookView() {
                     viewModel.setCategorySelected(event.target.value as number)
                   }}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem>None</MenuItem>
 
                   {viewModel.categories.map((category) => (
                     <MenuItem value={category.id} key={category.id}>

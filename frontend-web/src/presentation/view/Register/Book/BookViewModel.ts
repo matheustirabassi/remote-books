@@ -24,11 +24,11 @@ export default function BookViewModel() {
 
   const [categories, setCategories] = useState<CategoryDto[]>([])
 
-  const [categorySelected, setCategorySelected] = useState<number>(0)
+  const [categorySelected, setCategorySelected] = useState<number>()
 
   const [collections, setCollections] = useState<CollectionDto[]>([])
 
-  const [collectionSelected, setCollectionSelected] = useState<number>(0)
+  const [collectionSelected, setCollectionSelected] = useState<number>()
 
   const [title, setTitle] = useState<string>("")
 
