@@ -1,6 +1,13 @@
 import { Theme } from "@emotion/react"
-import { Card, CardActionArea, CardContent, CardMedia, SxProps, Typography } from "@mui/material"
-import Routes, { ROUTES } from "Routes"
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  SxProps,
+  Typography
+} from "@mui/material"
+import { ROUTES } from "Routes"
 import { Link } from "react-router-dom"
 
 /** As propriedades do componente */
@@ -22,23 +29,25 @@ export const BookCard: React.FC<BookCardProps> = ({
   imageLink,
   title,
   author,
-  sx = { maxWidth: 180 },
+  sx = { background: "none", textAlign: "start", maxWidth: 180},
 }) => {
+  const maxCardTextLength = 15
+
   return (
-    <Link to={ROUTES.REGISTER}>
-      <Card sx={sx}>
-        <CardActionArea>
-          <CardMedia component="img" image={imageLink} />
+    <Card sx={sx}>
+      <CardActionArea >
+        <Link to={ROUTES.REGISTER}>
+          <CardMedia component="img" image={imageLink}/>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
+            <Typography gutterBottom variant="h5">
+              {title.limitChars(maxCardTextLength)}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {author}
+              {author.limitChars(maxCardTextLength)}
             </Typography>
           </CardContent>
-        </CardActionArea>
-      </Card>
-    </Link>
+        </Link>
+      </CardActionArea>
+    </Card>
   )
 }

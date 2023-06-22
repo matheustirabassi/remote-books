@@ -60,7 +60,7 @@ export default function BookView() {
 
   return (
     <>
-      <Grid container direction="row" id="loadingView" style={{ display: "none" }}>
+      <Grid container direction="row" id="loadingView" style={{ display: "Selecione" }}>
         <LoadingState />
       </Grid>
 
@@ -73,7 +73,7 @@ export default function BookView() {
           justifyContent="flex-start"
           spacing={2}
         >
-          <Grid item mt={2} xs={6} md={6}>
+          <Grid container xs={6}>
             <Grid item>
               <TextField
                 label={t(LanguageConstants.TITLE)}
@@ -85,7 +85,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item mt={2}>
+            <Grid item xs={12}>
               <TextField
                 label={t(LanguageConstants.SYNOPSIS)}
                 name="synopsis"
@@ -96,7 +96,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item mt={2}>
+            <Grid item xs={12}>
               <BasicDatePicker
                 label={t(LanguageConstants.RELEASE_DATE)}
                 sx={{ maxWidth: "210px" }}
@@ -105,7 +105,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item mt={2}>
+            <Grid item xs={12}>
               <TextField
                 label={t(LanguageConstants.LINK)}
                 name="link"
@@ -117,8 +117,8 @@ export default function BookView() {
             </Grid>
           </Grid>
 
-          <Grid item mt={2} xs={6} md={6}>
-            <Grid item xs={2}>
+          <Grid container xs={6}>
+            <Grid item xs={12}>
               <FormControl sx={{ minWidth: 120 }} required>
                 <InputLabel id="inputLabelAuthorId">{t(LanguageConstants.AUTHOR)}</InputLabel>
 
@@ -129,7 +129,7 @@ export default function BookView() {
                   label={t(LanguageConstants.AUTHOR)}
                   onChange={(e) => viewModel.setAuthorSelected(e.target.value as number)}
                 >
-                  <MenuItem>None</MenuItem>
+                  <MenuItem>Selecione</MenuItem>
 
                   {viewModel.authors.map((author) => (
                     <MenuItem value={author.id} key={author.id}>
@@ -140,7 +140,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={2} mt={2}>
+            <Grid item xs={12}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.CATEGORY)}</InputLabel>
 
@@ -153,7 +153,7 @@ export default function BookView() {
                     viewModel.setCategorySelected(event.target.value as number)
                   }}
                 >
-                  <MenuItem>None</MenuItem>
+                  <MenuItem>Selecione</MenuItem>
 
                   {viewModel.categories.map((category) => (
                     <MenuItem value={category.id} key={category.id}>
@@ -165,7 +165,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={2} mt={2}>
+            <Grid item xs={12}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">
                   {t(LanguageConstants.COLLECTION)}
@@ -180,7 +180,7 @@ export default function BookView() {
                     viewModel.setCollectionSelected(event.target.value as number)
                   }}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem>Selecione</MenuItem>
 
                   {viewModel.collections.map((collection) => (
                     <MenuItem value={collection.id} key={collection.id}>
@@ -194,7 +194,7 @@ export default function BookView() {
           </Grid>
         </Grid>
 
-        <Grid container item justifyContent="center" mt={2}>
+        <Grid container item justifyContent="center">
           <Grid item>
             <Button variant="contained" style={{ width: 300, height: 50 }} onClick={viewModel.save}>
               <Typography>{t(LanguageConstants.SAVE)}</Typography>

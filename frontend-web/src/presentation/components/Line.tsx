@@ -4,7 +4,6 @@ export const Line = () => {
   return (
     <div
       style={{
-        alignContent: "center",
         background: "#32373B",
         opacity: "0.2",
         height: "2px",
