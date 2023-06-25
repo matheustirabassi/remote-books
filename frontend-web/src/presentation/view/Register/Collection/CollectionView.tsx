@@ -16,7 +16,7 @@ export default function CategoryView() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(viewModel.name.isEmpty()) {
+    if (viewModel.name.isEmpty()) {
       return
     }
 
@@ -49,16 +49,10 @@ export default function CategoryView() {
 
   return (
     <>
-      <Grid
-        container
-        direction={"column"}
-        justifyContent={"center"}
-        alignItems={"end"}
-        alignContent={"center"}
-        id="loadingView"
-        style={{display:"none"}}
-      >
-        <LoadingState />
+      <Grid container id="loadingView" justifyContent="center" style={{ display: "none" }}>
+        <Grid item>
+          <LoadingState />
+        </Grid>
       </Grid>
 
       <Grid container id="contentView">
@@ -76,10 +70,7 @@ export default function CategoryView() {
 
         <Grid
           container
-          direction={"column"}
-          justifyContent={"end"}
-          alignItems={"center"}
-          alignContent={"center"}
+          alignContent={"left"}
           mt={2}
         >
           <Button

@@ -1,12 +1,4 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField
-} from "@mui/material"
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import Typography from "@mui/material/Typography"
 import { LanguageConstants } from "enums/Constants"
 import { BasicDatePicker } from "presentation/components/BasicDatePicker"
@@ -36,7 +28,7 @@ export default function BookView() {
   useEffect(() => {
     viewModel.getAllCollections()
   }, [undefined])
-  
+
   useEffect(() => {
     showSnackbarAndNavigate()
   })
@@ -60,8 +52,15 @@ export default function BookView() {
 
   return (
     <>
-      <Grid container direction="row" id="loadingView" style={{ display: "Selecione" }}>
-        <LoadingState />
+      <Grid
+        container
+        id="loadingView"
+        justifyContent="center"
+        style={{ display: "none" }}
+      >
+        <Grid item>
+          <LoadingState />
+        </Grid>
       </Grid>
 
       <Grid container id="contentView">
@@ -72,6 +71,8 @@ export default function BookView() {
           alignItems="flex-start"
           justifyContent="flex-start"
           spacing={2}
+          mt={2}
+          ml={2}
         >
           <Grid container xs={6}>
             <Grid item>
@@ -85,7 +86,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} mt={2}>
               <TextField
                 label={t(LanguageConstants.SYNOPSIS)}
                 name="synopsis"
@@ -96,7 +97,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} mt={2}>
               <BasicDatePicker
                 label={t(LanguageConstants.RELEASE_DATE)}
                 sx={{ maxWidth: "210px" }}
@@ -105,7 +106,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} mt={2}>
               <TextField
                 label={t(LanguageConstants.LINK)}
                 name="link"
@@ -118,7 +119,7 @@ export default function BookView() {
           </Grid>
 
           <Grid container xs={6}>
-            <Grid item xs={12}>
+            <Grid item xs={12} ml={2}>
               <FormControl sx={{ minWidth: 120 }} required>
                 <InputLabel id="inputLabelAuthorId">{t(LanguageConstants.AUTHOR)}</InputLabel>
 
@@ -140,7 +141,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} ml={2}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.CATEGORY)}</InputLabel>
 
@@ -165,7 +166,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} ml={2}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">
                   {t(LanguageConstants.COLLECTION)}

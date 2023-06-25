@@ -1,94 +1,51 @@
-import { CollectionApi } from "data/api/CollectionApi"
-import { CollectionDto } from "data/dto/CollectionDto"
-import { StandardError } from "data/types/StandardError"
+import { BookApi } from "data/api/BookApi"
+import { CategoryApi } from "data/api/CategoryApi"
+import { BookPage } from "data/dto/BookPage"
 import { ViewState } from "data/types/ViewState"
-import { LanguageConstants } from "enums/Constants"
 import { States } from "enums/ViewStateEnum"
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 export default function HomeViewModel() {
   const { t } = useTranslation()
 
-  const [name, setName] = useState<string>("")
-  const [nameHasError, setNameHasError] = useState<boolean>(false)
-  const [nameErrorText, setNameErrorText] = useState<string>("")
-
-  const [collectionWasSaved, setCollectionWasSaved] = useState<boolean>(false)
-
   const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  function onSetName(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const nameText: string = event.target.value
+	const [pageNumber, setPageNumber] = useState(0)
 
-    setName(nameText)
-
-    setErrorMessage("")
-  }
-
-  function validateName() {
-    if (!name.isName()) {
-      setNameHasError(true)
-      setNameErrorText(t(LanguageConstants.INVALID_FIELD).toString())
-
-      return false
-    }
-
-    setNameErrorText("")
-    setNameHasError(false)
-
-    return true
-  }
-
-  function saveCollection() {
-    if (!validateName()) {
-      return
-    }
-
+	const [page, setPage] = useState<BookPage>({
+		content: [],
+		last: true,
+		totalPages: 0,
+		totalElements: 0,
+		size: 8,
+		number: 0,
+		first: true,
+		numberOfElements: 0,
+		empty: true,
+	})
+  
+  function getBooks() {
     viewState.setViewState(States.LoadingState)
 
-    createCollection(new CollectionDto(name))
-  }
-
-  function createCollection(newCollection: CollectionDto) {
-    CollectionApi.create(newCollection)
+    BookApi.findAll()
       .then((response) => {
-        console.log(response)
-
-        setCollectionWasSaved(true)
+        setPage(response.data)
       })
-      .catch((error) => {
-        if (error.response === undefined) {
-          const codeResponse: string = t(error.code)
-          setErrorMessage(codeResponse)
-
-          return
-        }
-
-        const responseData = error.response.data
-
-        const standardError = responseData as StandardError
-        console.error(standardError)
-
-        setErrorMessage(standardError.message)
-      })
+      .catch((error) => {})
       .finally(() => {
         viewState.setViewState(States.ContentState)
       })
   }
 
   return {
-    name,
-    onSetName,
-    nameHasError,
-    validateName,
-    nameErrorText,
-    saveCollection,
-    collectionWasSaved,
-    setCollectionWasSaved,
     viewState,
     errorMessage,
+    page,
+    pageNumber,
+    setPageNumber,
+    getBooks
   }
 }
