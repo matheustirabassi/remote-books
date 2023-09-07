@@ -9,9 +9,9 @@ import br.com.borgestirabassi.remotebooks.repositories.CollectionRepository
 import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
 import jakarta.transaction.Transactional
+import java.util.Date
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.Date
 
 @Service
 class BookService {
@@ -78,6 +78,6 @@ class BookService {
         imageLink = bookDto.imageLink,
         releaseDate = bookDto.releaseDate,
         registrationDate = Date(),
-        author = authorRepository.getReferenceById(bookDto.authorId),
+        author = authorRepository.getReferenceById(bookDto.authorId!!),
     )
 }
