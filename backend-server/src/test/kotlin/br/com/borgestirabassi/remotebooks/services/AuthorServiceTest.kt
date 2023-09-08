@@ -10,6 +10,7 @@ import br.com.borgestirabassi.remotebooks.utils.extensions.parseToDate
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.ArgumentMatchers.any
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -24,14 +25,14 @@ class AuthorServiceTest : BaseUnitTest() {
     private lateinit var authorRepository: AuthorRepository
 
     @Test
-    @DisplayName("Dado que o `ìd` da categoria é nulo após salvar, lança um erro de serviço")
+    @DisplayName("Dado que o autor é salvo, quando o `ìd` é nulo, então lança um erro de serviço")
     fun insertAuthorTest_CategoryIdIsNull_ServiceException() {
         `when`(authorRepository.saveAndFlush(any()))
             .thenReturn(
                 Author(name = "Francisco", dateOfBirth = "2023-03-26".parseToDate()!!),
             )
 
-        val exception = org.junit.jupiter.api.assertThrows<ServiceException> {
+        val exception = assertThrows<ServiceException> {
             authorService.insertAuthor(
                 AuthorDto(
                     name = "Francisco",
