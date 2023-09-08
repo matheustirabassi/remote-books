@@ -8,6 +8,7 @@ import br.com.borgestirabassi.remotebooks.repositories.AuthorRepository
 import br.com.borgestirabassi.remotebooks.repositories.BookRepository
 import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
+import java.util.Date
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -17,7 +18,6 @@ import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import java.util.Date
 
 class BookServiceTest : BaseUnitTest() {
 

@@ -49,21 +49,24 @@ class BookService {
 
         bookRepository.saveAndFlush(newBook)
 
-        if (null == newBook.id) {
+        if (newBook.id == null) {
             throw ServiceException(ErrorMessages.UNEXPECTED_ERROR)
         }
 
         return newBook.id!!
     }
 
-    private fun createBook(bookDto: BookDto) = Book(
-        title = bookDto.title,
-        sinopse = bookDto.sinopse,
-        imageLink = bookDto.imageLink,
-        releaseDate = bookDto.releaseDate,
-        registrationDate = Date(),
-        author = authorRepository.getReferenceById(bookDto.authorId!!),
-    )
+    private fun createBook(bookDto: BookDto): Book {
+        val selectedAuthor = authorRepository.getReferenceById(bookDto.authorId!!)
+        return Book(
+            title = bookDto.title,
+            sinopse = bookDto.sinopse,
+            imageLink = bookDto.imageLink,
+            releaseDate = bookDto.releaseDate,
+            registrationDate = Date(),
+            author = selectedAuthor,
+        )
+    }
 
     private fun saveCategory(
         newBook: Book,
