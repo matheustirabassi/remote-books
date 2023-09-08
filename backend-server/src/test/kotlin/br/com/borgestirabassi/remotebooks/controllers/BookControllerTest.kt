@@ -37,7 +37,7 @@ class BookControllerTest : BaseIntegrationTest() {
             "Abacaxi",
             "http://localhost:8080/imagem.png",
             Date(),
-            1L,
+            150L,
         )
 
         mockMvc.perform(
