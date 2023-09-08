@@ -4,7 +4,6 @@ import br.com.borgestirabassi.remotebooks.dto.CategoryDto
 import br.com.borgestirabassi.remotebooks.services.CategoryService
 import br.com.borgestirabassi.remotebooks.utils.Strings
 import jakarta.validation.Valid
-import lombok.extern.log4j.Log4j2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,7 +17,6 @@ import java.net.URI
 /**
  * Controlador para endpoint de categorias.
  */
-@Log4j2
 @RestController
 @RequestMapping("/category")
 class CategoryController {

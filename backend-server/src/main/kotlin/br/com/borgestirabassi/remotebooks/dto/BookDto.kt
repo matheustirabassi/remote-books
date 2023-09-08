@@ -2,8 +2,8 @@ package br.com.borgestirabassi.remotebooks.dto
 
 import br.com.borgestirabassi.remotebooks.domain.Book
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
-import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import java.io.Serializable
 import java.util.Date
 
@@ -25,8 +25,8 @@ data class BookDto(
     @field:NotBlank(message = ErrorMessages.IMAGE_LINK_REQUIRED)
     val imageLink: String,
     val releaseDate: Date,
-    @field:DecimalMin("1", message = ErrorMessages.AUTHOR_ID_REQUIRED)
-    val authorId: Long,
+    @field:NotNull(message = ErrorMessages.AUTHOR_ID_REQUIRED)
+    val authorId: Long?,
     val categoryId: Long? = null,
     val collectionId: Long? = null,
 ) : Serializable {

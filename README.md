@@ -1,7 +1,6 @@
 # remote-books
 Projeto que gerencia livros catalogados
 
-## Autores
+## Autor
 
 - Matheus Henrique Tirabassi
-- Gabrielle Lima Borges

@@ -31,5 +31,5 @@ jobs:
       - name: Grant Permissions to gradlew
         run: chmod +x gradlew
 
-      - name: Test
-        run: ./gradlew clean build check --info --stacktrace
+      - name: Run tests
+        run: ./gradlew clean build check

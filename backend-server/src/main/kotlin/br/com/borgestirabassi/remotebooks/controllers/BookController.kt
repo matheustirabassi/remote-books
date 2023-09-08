@@ -4,7 +4,6 @@ import br.com.borgestirabassi.remotebooks.dto.BookDto
 import br.com.borgestirabassi.remotebooks.services.BookService
 import br.com.borgestirabassi.remotebooks.utils.Strings
 import jakarta.validation.Valid
-import lombok.extern.log4j.Log4j2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -20,7 +19,6 @@ import java.net.URI
 /**
  * Controlador para endpoint de categorias.
  */
-@Log4j2
 @RestController
 @RequestMapping("/book")
 class BookController {

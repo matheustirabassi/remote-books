@@ -3,6 +3,7 @@ package br.com.borgestirabassi.remotebooks.controllers
 import br.com.borgestirabassi.remotebooks.base.BaseIntegrationTest
 import br.com.borgestirabassi.remotebooks.dto.BookDto
 import com.fasterxml.jackson.databind.ObjectMapper
+import java.util.Date
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import java.util.Date
 
 class BookControllerTest : BaseIntegrationTest() {
 
@@ -27,20 +27,25 @@ class BookControllerTest : BaseIntegrationTest() {
     // region insertBook tests
     @Sql("/scripts/insert-author.sql")
     @Test
-    @DisplayName("Dado que os dados são válidos, retorna cabeçalho com a localização do recurso")
+    @DisplayName(
+        "Dado que os dados são válidos, quando o livro é inserido, retorna cabeçalho com a localização do" +
+                " recurso",
+    )
     fun insertBookTest_AllValid_ReturnHeaderWithId() {
+        val bookDto = BookDto(
+            "Abacate",
+            "Abacaxi",
+            "http://localhost:8080/imagem.png",
+            Date(),
+            1L,
+        )
+
         mockMvc.perform(
             post("/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto(
-                            "Abacate",
-                            "Abacaxi",
-                            "http://localhost:8080/imagem.png",
-                            Date(),
-                            150,
-                        ),
+                        bookDto,
                     ),
                 ),
         )
@@ -49,14 +54,16 @@ class BookControllerTest : BaseIntegrationTest() {
     }
 
     @Test
-    @DisplayName("Dado que o título é vazio, retorna erro de validação")
+    @DisplayName("Dado que o título é vazio, quando é feito a tentativa de salvar, retorna erro de validação")
     fun insertBookTest_TitleIsEmpty_ReturnValidationError() {
+        val bookDto = BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", Date(), 1L)
+
         mockMvc.perform(
             post("/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", Date(), 1L),
+                        bookDto,
                     ),
                 ),
         ).andExpect(status().isBadRequest).andExpect(
@@ -68,14 +75,16 @@ class BookControllerTest : BaseIntegrationTest() {
     }
 
     @Test
-    @DisplayName("Dado que o link da imagem é vazio, retorna erro de validation")
+    @DisplayName("Dado que o link da imagem é vazio, quando é feito a tentativa de salvar, retorna erro de validação")
     fun insertBookTest_ImageLinkIsEmpty_ReturnValidationError() {
+        val bookDto = BookDto("Abacate", "Sinopse", "", Date(), 1L)
+
         mockMvc.perform(
             post("/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("Abacate", "Sinopse", "", Date(), 1L),
+                        bookDto,
                     ),
                 ),
         ).andExpect(status().isBadRequest).andExpect(
@@ -88,14 +97,19 @@ class BookControllerTest : BaseIntegrationTest() {
     }
 
     @Test
-    @DisplayName("Dado que o identificador do autor é nulo, retorna erro de validation")
+    @DisplayName(
+        "Dado que o identificador do autor é nulo, quando é feito a tentativa de salvar, retorna erro de " +
+                "validação",
+    )
     fun insertBookTest_AuthorIdIsNull_ReturnValidationError() {
+        val bookDto = BookDto("Abacate", "Sinopse", "link", Date(), null)
+
         mockMvc.perform(
             post("/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsString(
-                        BookDto("Abacate", "Sinopse", "link", Date(), 0L),
+                        bookDto,
                     ),
                 ),
         ).andExpect(status().isBadRequest).andExpect(

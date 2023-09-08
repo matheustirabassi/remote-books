@@ -31,9 +31,11 @@ class AuthorService {
 
         authorRepository.saveAndFlush(newAuthor)
 
-        return newAuthor.id ?: throw ServiceException(
-            ErrorMessages.UNEXPECTED_ERROR,
-        )
+        if (null == newAuthor.id) {
+            throw ServiceException(ErrorMessages.UNEXPECTED_ERROR)
+        }
+
+        return newAuthor.id!!
     }
 
     fun getAuthors(): List<AuthorDto> {
