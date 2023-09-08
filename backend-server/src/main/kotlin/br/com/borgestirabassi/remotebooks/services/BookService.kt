@@ -10,11 +10,15 @@ import br.com.borgestirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
 import jakarta.transaction.Transactional
 import java.util.Date
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class BookService {
+
+    private val log: Logger = LoggerFactory.getLogger(BookService::class.java)
 
     @Autowired
     private lateinit var bookRepository: BookRepository
@@ -45,39 +49,51 @@ class BookService {
 
         bookRepository.saveAndFlush(newBook)
 
-        return newBook.id ?: throw ServiceException(
-            ErrorMessages.UNEXPECTED_ERROR,
+        if (newBook.id == null) {
+            throw ServiceException(ErrorMessages.UNEXPECTED_ERROR)
+        }
+
+        return newBook.id!!
+    }
+
+    private fun createBook(bookDto: BookDto): Book {
+        val selectedAuthor = authorRepository.getReferenceById(bookDto.authorId!!)
+        return Book(
+            title = bookDto.title,
+            sinopse = bookDto.sinopse,
+            imageLink = bookDto.imageLink,
+            releaseDate = bookDto.releaseDate,
+            registrationDate = Date(),
+            author = selectedAuthor,
         )
     }
 
     private fun saveCategory(
         newBook: Book,
-        categoryId: Long?,
+        selectedCategoryId: Long?,
     ) {
-        if (categoryId == null) {
+        if (selectedCategoryId == null) {
+            log.warn("Não foi possível salvar a categoria com o livro: $newBook")
+
             return
         }
 
-        newBook.category = categoryRepository.getReferenceById(categoryId)
+        val categorySelected = categoryRepository.getReferenceById(selectedCategoryId)
+        newBook.category = categorySelected
     }
 
     private fun saveCollection(
         newBook: Book,
-        collectionId: Long?,
+        selectedCollectionId: Long?,
     ) {
-        if (collectionId == null) {
+        if (selectedCollectionId == null) {
+            log.warn("Não foi possível salvar a coleção com o livro: $newBook")
+
             return
         }
 
-        newBook.collection = collectionRepository.getReferenceById(collectionId)
+        val collectionSelected = collectionRepository.getReferenceById(selectedCollectionId)
+        newBook.collection = collectionSelected
     }
 
-    private fun createBook(bookDto: BookDto) = Book(
-        title = bookDto.title,
-        sinopse = bookDto.sinopse,
-        imageLink = bookDto.imageLink,
-        releaseDate = bookDto.releaseDate,
-        registrationDate = Date(),
-        author = authorRepository.getReferenceById(bookDto.authorId!!),
-    )
 }

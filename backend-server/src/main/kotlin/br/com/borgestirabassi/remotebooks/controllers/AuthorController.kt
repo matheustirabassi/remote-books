@@ -4,7 +4,6 @@ import br.com.borgestirabassi.remotebooks.dto.AuthorDto
 import br.com.borgestirabassi.remotebooks.services.AuthorService
 import br.com.borgestirabassi.remotebooks.utils.Strings
 import jakarta.validation.Valid
-import lombok.extern.log4j.Log4j2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,7 +17,6 @@ import java.net.URI
 /**
  * Controlador para endpoint de categorias.
  */
-@Log4j2
 @RestController
 @RequestMapping("/author")
 class AuthorController {
