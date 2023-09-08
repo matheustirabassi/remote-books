@@ -9,6 +9,7 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
+  # Usa o ChatGPT para revisar o Pull Request
   GPT-CODE-REVIEW:
     runs-on: ubuntu-latest
     steps:
@@ -16,3 +17,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LANGUAGE: Portuguese (Brazilian)
+          MODEL: gpt-3.5-turbo # https://platform.openai.com/docs/models https://openai.com/pricing#language-models
