@@ -4,16 +4,16 @@ export class BookDto {
   imageLink: string
   releaseDate: Date
   authorId: number
-  categoryId: number
-  collectionId: number
+  categoryId?: number
+  collectionId?: number
 
   constructor(
     title: string,
     imageLink: string,
     releaseDate: Date,
     authorId: number,
-    categoryId: number,
-    collectionId: number,
+    categoryId?: number,
+    collectionId?: number,
     sinopse?: string
   ) {
     this.title = title

@@ -1,37 +1,48 @@
-import { Button, Stack, Typography } from "@mui/material"
-import { ReactComponent as IconBook } from "assets/images/icons/logo.svg"
-import { LanguageConstants } from "enums/Constants"
-import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { Button, Stack } from "@mui/material"
 import { ROUTES } from "Routes"
+import { ReactComponent as IconAddBook } from "assets/images/icons/add-book.svg"
+import { ReactComponent as IconBook } from "assets/images/icons/logo.svg"
+import { Link } from "react-router-dom"
 import { Line } from "./Line"
+
+interface HeaderProps {
+  /** Flag que indica se está na página de cadastro */
+  isRegister?: boolean
+}
 
 /**
  * O cabeçalho do site
  * @returns Os elementos do cabeçalho
  */
-export const Header = () => {
-  const { t } = useTranslation()
-
+export const Header: React.FC<HeaderProps> = ({isRegister = false}) => {
   return (
     <>
-      <Stack direction={"row"} justifyContent={"space-between"} alignItems="center">
+      <Stack direction="row" justifyContent="space-around" alignItems="center">
         <Link to={ROUTES.HOME}>
           <Button>
             <IconBook />
           </Button>
         </Link>
+        
+        {showIfIsRegister()}
 
-        <Link to={ROUTES.REGISTER}>
-          <Button fullWidth sx={{ minHeight: "150px" }}>
-            <Typography fontSize={40} marginRight={3} fontWeight={"bold"}>
-              {t(LanguageConstants.REGISTER)}
-            </Typography>
-          </Button>
-        </Link>
-      </Stack>
+        </Stack>
 
       <Line />
     </>
   )
+
+  function showIfIsRegister() {
+    if (isRegister) {
+      return
+    }
+
+    return (
+      <Link to={ROUTES.REGISTER}>
+      <Button>
+        <IconAddBook />
+      </Button>
+    </Link>
+    )
+  }
 }

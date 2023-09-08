@@ -1,4 +1,4 @@
-import { AppBar, Tab, Tabs, Typography } from "@mui/material"
+import { AppBar, Tab, Tabs } from "@mui/material"
 
 import { LanguageConstants } from "enums/Constants"
 import { TabPanel } from "presentation/components/TabPanel"
@@ -6,9 +6,10 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import SwipeableViews from "react-swipeable-views"
 import AuthorView from "./Author/AuthorView"
+import BookView from "./Book/BookView"
 import CategoryView from "./Category/CategoryView"
 import CollectionView from "./Collection/CollectionView"
-import BookView from "./Book/BookView"
+import { Header } from "presentation/components/Header"
 
 /**
  * A tela de cadastro.
@@ -47,6 +48,7 @@ export default function RegisterView() {
 
   return (
     <>
+      <Header isRegister/>
       <AppBar>
         <Tabs
           value={tabPosition}

@@ -1,5 +1,6 @@
 package br.com.borgestirabassi.remotebooks.dto
 
+import br.com.borgestirabassi.remotebooks.domain.Book
 import br.com.borgestirabassi.remotebooks.utils.ErrorMessages
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
@@ -28,4 +29,14 @@ data class BookDto(
     val authorId: Long?,
     val categoryId: Long? = null,
     val collectionId: Long? = null,
-) : Serializable
+) : Serializable {
+    constructor(book: Book) : this(
+        title = book.title,
+        sinopse = book.sinopse,
+        imageLink = book.imageLink,
+        releaseDate = book.releaseDate,
+        authorId = book.author.id!!,
+        categoryId = book.category?.id,
+        collectionId = book.collection?.id,
+    )
+}

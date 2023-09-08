@@ -17,6 +17,8 @@ declare global {
      * @returns `true` caso seja um nome, `false` caso contrário.
      */
     isName: () => boolean
+
+    limitChars: (maxLength: number) => string
   }
 }
 
@@ -28,4 +30,17 @@ String.prototype.isEmpty = function (this: string | undefined | null): boolean {
 // eslint-disable-next-line no-extend-native
 String.prototype.isName = function (this: string): boolean {
   return this.match(RegexConstants.NAME_REGEX) !== null
+}
+
+// eslint-disable-next-line no-extend-native
+String.prototype.limitChars = function (this: string, maxLength: number): boolean {
+  if (this === undefined) {
+    return ""
+  }
+
+  if (this.length <= maxLength) {
+    return this
+  }
+
+  return this.substring(0, maxLength).concat("...")
 }
