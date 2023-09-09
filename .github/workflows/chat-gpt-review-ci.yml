@@ -19,4 +19,3 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Portuguese (Brazilian)
           MODEL: gpt-3.5-turbo # https://platform.openai.com/docs/models https://openai.com/pricing#language-models
-          PROMPT: 'Please check considering clean code principles, readability, max line length (120) and any confusion or irregularities in the following code diff:'
