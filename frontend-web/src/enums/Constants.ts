@@ -18,7 +18,8 @@ export const LanguageConstants = {
   TITLE: "TITLE",
   SYNOPSIS: "SYNOPSIS",
   RELEASE_DATE: "RELEASE_DATE",
-  LINK: "LINK"
+  LINK: "LINK",
+  SELECT: "SELECT"
 }
 
 export const RegexConstants = {

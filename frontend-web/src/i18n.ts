@@ -30,7 +30,8 @@ const resources = {
       "LINK": "Link",
       "BOOK_TITLE_REQUIRED": "O nome do livro é obrigatório",
       "IMAGE_LINK_REQUIRED": "O link para a imagem é obrigatório",
-      "AUTHOR_ID_REQUIRED" : "O autor é obrigatório"
+      "AUTHOR_ID_REQUIRED" : "O autor é obrigatório",
+      "SELECT": "Selecione"
     }
   },
   en: {
@@ -58,7 +59,8 @@ const resources = {
       "LINK": "Link",
       "BOOK_TITLE_REQUIRED": "Book name is required",
       "IMAGE_LINK_REQUIRED": "Image link is required",
-      "AUTHOR_ID_REQUIRED" : "Author is required"
+      "AUTHOR_ID_REQUIRED" : "Author is required",
+      "SELECT": "Select"
     }
   }
 }

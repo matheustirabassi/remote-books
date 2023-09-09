@@ -1,26 +1,15 @@
 import { Grid } from "@mui/material"
 import { BookCard } from "presentation/components/BookCard"
 import { Header } from "presentation/components/Header"
-import HomeViewModel from "./HomeViewMode"
-import { useNavigate } from "react-router-dom"
-import { useTranslation } from "react-i18next"
 import { LoadingState } from "presentation/components/States/LoadingState"
-import { BookPage } from "data/dto/BookPage"
-import { useEffect, useState } from "react"
-import { CategoryApi } from "data/api/CategoryApi"
-import { States } from "enums/ViewStateEnum"
+import { HomeViewModel } from "./HomeViewModel"
+
+interface HomeViewProps {
+  viewModel: HomeViewModel
+}
 
 /** A tela principal do site */
-export default function HomeView() {
-  const { t } = useTranslation()
-
-  const viewModel = HomeViewModel()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    viewModel.getBooks()
-  }, [viewModel.pageNumber])
-
+export default function HomeView({ viewModel }: HomeViewProps) {
   return (
     <>
       <Header />
@@ -42,12 +31,8 @@ export default function HomeView() {
         marginTop={1}
       >
         {viewModel.page.content.map((book) => (
-          <Grid item md={3}>
-            <BookCard
-              imageLink={book.imageLink}
-              title={book.title}
-              author={book.authorId.toString()}
-            />
+          <Grid item md={3} key={book.id}>
+            <BookCard imageLink={book.imageLink} title={book.title} author={book.authorName!!} />
           </Grid>
         ))}
       </Grid>

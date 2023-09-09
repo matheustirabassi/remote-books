@@ -1,18 +1,22 @@
+import { AxiosResponse } from "axios"
 import { BookDto } from "data/dto/BookDto"
 import { Api } from "./config/AxiosConfig"
-import { BookPage } from "data/dto/BookPage"
 
 const BOOK_ENDPOINT = "/book"
 
-const create = async (book: BookDto) => {
-  return Api.post(BOOK_ENDPOINT, book)
+export interface BookApi {
+  create(book: BookDto): Promise<AxiosResponse<any, any>>;
+  findAll(): Promise<AxiosResponse<any, any>>
 }
 
-const findAll = async () => {
-  return (await Api.get(BOOK_ENDPOINT))
-}
+export function BookApiImpl() {
+  return {
+    create(book: BookDto) {
+      return Api.post(BOOK_ENDPOINT, book)
+    },
 
-export const BookApi = {
-  create,
-  findAll
+    findAll() {
+      return Api.get(BOOK_ENDPOINT)
+    },
+  }
 }

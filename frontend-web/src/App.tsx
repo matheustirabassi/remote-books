@@ -13,8 +13,8 @@ function App() {
       <ThemeProvider theme={remoteBooksTheme}>
         <CssBaseline />
         <Routes />
-        <SnackbarProvider maxSnack={MAX_SNACK} autoHideDuration={MILLISECONDS_TO_HIDE} />
       </ThemeProvider>
+      <SnackbarProvider maxSnack={MAX_SNACK} autoHideDuration={MILLISECONDS_TO_HIDE} />
     </div>
   )
 }

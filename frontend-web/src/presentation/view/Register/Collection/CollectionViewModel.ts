@@ -3,7 +3,7 @@ import { CollectionDto } from "data/dto/CollectionDto"
 import { StandardError } from "data/types/StandardError"
 import { ViewState } from "data/types/ViewState"
 import { LanguageConstants } from "enums/Constants"
-import { States } from "enums/ViewStateEnum"
+import { State } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -16,7 +16,7 @@ export default function CollectionViewModel() {
 
   const [collectionWasSaved, setCollectionWasSaved] = useState<boolean>(false)
 
-  const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
+  const [viewState] = useState<ViewState>(new ViewState())
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
@@ -47,7 +47,7 @@ export default function CollectionViewModel() {
       return
     }
 
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
     createCollection(new CollectionDto(name))
   }
@@ -75,7 +75,7 @@ export default function CollectionViewModel() {
         setErrorMessage(standardError.message)
       })
       .finally(() => {
-        viewState.setViewState(States.ContentState)
+        viewState.setViewState(State.ContentState)
       })
   }
 

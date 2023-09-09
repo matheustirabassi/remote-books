@@ -1,19 +1,14 @@
-import { States } from "../../enums/ViewStateEnum"
+import { State } from "../../enums/ViewStateEnum"
 
 /**
  * Classe que lida com estados da tela.
  */
 export class ViewState {
-  private state: States = States.ContentState
+  private state: State = State.LoadingState
 
   private VIEW_VISIBLE = ""
 
   private VIEW_INVISIBLE = "none"
-
-  /** Cria o objeto no estado de conteúdo */
-  constructor(states : States) {
-    this.setViewState(states)
-  }
 
   getState() {
     return this.state
@@ -24,7 +19,7 @@ export class ViewState {
    * 
    * @param newState O novo estado da tela
    */
-  setViewState(newState: States) {
+  setViewState(newState: State) {
     this.state = newState
 
     const contentView: HTMLElement | null = document.getElementById("contentView")
@@ -32,13 +27,13 @@ export class ViewState {
     const errorView: HTMLElement | null = document.getElementById("errorView")
     const emptyView: HTMLElement | null = document.getElementById("emptyView")
 
-    this.setViewDisplay(contentView, States.ContentState)
-    this.setViewDisplay(loadingView, States.LoadingState)
-    this.setViewDisplay(errorView, States.ErrorState)
-    this.setViewDisplay(emptyView, States.EmptyState)
+    this.setViewDisplay(contentView, State.ContentState)
+    this.setViewDisplay(loadingView, State.LoadingState)
+    this.setViewDisplay(errorView, State.ErrorState)
+    this.setViewDisplay(emptyView, State.EmptyState)
   }
 
-  private setViewDisplay(view: HTMLElement | null, state: States) {
+  private setViewDisplay(view: HTMLElement | null, state: State) {
     if (view === null) {
       return
     }

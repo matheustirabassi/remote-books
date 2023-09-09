@@ -34,4 +34,8 @@ data class Author(
 
     @OneToMany(mappedBy = "author")
     var books: List<Book> = ArrayList(),
-)
+) {
+    override fun toString(): String {
+        return "Author [id=$id, name=$name, dateOfBirth=$dateOfBirth]"
+    }
+}

@@ -3,61 +3,18 @@ import Typography from "@mui/material/Typography"
 import { LanguageConstants } from "enums/Constants"
 import { BasicDatePicker } from "presentation/components/BasicDatePicker"
 import { LoadingState } from "presentation/components/States/LoadingState"
-import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import BookViewModel from "./BookViewModel"
-import { useNavigate } from "react-router-dom"
-import { enqueueSnackbar } from "notistack"
-import { ROUTES } from "Routes"
+import { BookViewModel } from "./BookViewModel"
+interface BookViewProps {
+  viewModel: BookViewModel
+}
 
-export default function BookView() {
+export default function BookView({ viewModel }: BookViewProps) {
   const { t } = useTranslation()
-
-  const viewModel = BookViewModel()
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    viewModel.getAllAuthors()
-  }, [undefined])
-
-  useEffect(() => {
-    viewModel.getAllCategories()
-  }, [undefined])
-
-  useEffect(() => {
-    viewModel.getAllCollections()
-  }, [undefined])
-
-  useEffect(() => {
-    showSnackbarAndNavigate()
-  })
-
-  useEffect(() => {
-    if (viewModel.errors.length === 0) {
-      return
-    }
-
-    viewModel.errors.forEach((error) => enqueueSnackbar(t(error.message), { variant: "error" }))
-  })
-
-  function showSnackbarAndNavigate() {
-    if (!viewModel.bookWasSaved) {
-      return
-    }
-
-    enqueueSnackbar(t(LanguageConstants.SAVED_CONTENT), { variant: "success" })
-    navigate(ROUTES.HOME)
-  }
 
   return (
     <>
-      <Grid
-        container
-        id="loadingView"
-        justifyContent="center"
-        style={{ display: "none" }}
-      >
+      <Grid container id="loadingView" justifyContent="center" style={{ display: "none" }}>
         <Grid item>
           <LoadingState />
         </Grid>
@@ -74,7 +31,7 @@ export default function BookView() {
           mt={2}
           ml={2}
         >
-          <Grid container xs={6}>
+          <Grid item xs={6}>
             <Grid item>
               <TextField
                 label={t(LanguageConstants.TITLE)}
@@ -97,7 +54,7 @@ export default function BookView() {
               />
             </Grid>
 
-            <Grid item xs={12} mt={2}>
+            <Grid item xs={12} mt={1}>
               <BasicDatePicker
                 label={t(LanguageConstants.RELEASE_DATE)}
                 sx={{ maxWidth: "210px" }}
@@ -118,7 +75,7 @@ export default function BookView() {
             </Grid>
           </Grid>
 
-          <Grid container xs={6}>
+          <Grid item xs={6}>
             <Grid item xs={12} ml={2}>
               <FormControl sx={{ minWidth: 120 }} required>
                 <InputLabel id="inputLabelAuthorId">{t(LanguageConstants.AUTHOR)}</InputLabel>
@@ -130,7 +87,7 @@ export default function BookView() {
                   label={t(LanguageConstants.AUTHOR)}
                   onChange={(e) => viewModel.setAuthorSelected(e.target.value as number)}
                 >
-                  <MenuItem>Selecione</MenuItem>
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
 
                   {viewModel.authors.map((author) => (
                     <MenuItem value={author.id} key={author.id}>
@@ -141,7 +98,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12} ml={2}>
+            <Grid item xs={12} ml={2} mt={2}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.CATEGORY)}</InputLabel>
 
@@ -154,7 +111,7 @@ export default function BookView() {
                     viewModel.setCategorySelected(event.target.value as number)
                   }}
                 >
-                  <MenuItem>Selecione</MenuItem>
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
 
                   {viewModel.categories.map((category) => (
                     <MenuItem value={category.id} key={category.id}>
@@ -166,7 +123,7 @@ export default function BookView() {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12} ml={2}>
+            <Grid item xs={12} ml={2} mt={2}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="inputLabelCollectionId">
                   {t(LanguageConstants.COLLECTION)}
@@ -181,7 +138,7 @@ export default function BookView() {
                     viewModel.setCollectionSelected(event.target.value as number)
                   }}
                 >
-                  <MenuItem>Selecione</MenuItem>
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
 
                   {viewModel.collections.map((collection) => (
                     <MenuItem value={collection.id} key={collection.id}>
