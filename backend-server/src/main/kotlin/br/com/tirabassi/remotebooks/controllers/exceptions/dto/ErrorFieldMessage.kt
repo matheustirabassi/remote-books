@@ -10,5 +10,5 @@ import java.io.Serializable
  */
 class ErrorFieldMessage(
     val fieldName: String,
-    val message: String,
+    val message: String
 ) : Serializable

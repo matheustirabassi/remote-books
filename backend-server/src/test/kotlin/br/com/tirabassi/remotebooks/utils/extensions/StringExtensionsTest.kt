@@ -35,7 +35,7 @@ class StringExtensionsTest {
     fun parseToDateTest_StringDateIsStandardFormat_ParseToDate() {
         assertEquals(
             standardDateFormat.parse("2023-26-03 14:51:00"),
-            "2023-26-03 14:51:00".parseToDate(),
+            "2023-26-03 14:51:00".parseToDate()
         )
     }
 }

@@ -34,7 +34,7 @@ class CategoryController {
     fun insertCategory(
         @Valid
         @RequestBody
-        categoryDto: CategoryDto,
+        categoryDto: CategoryDto
     ): ResponseEntity<Void> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(categoryService.insertCategory(categoryDto)).toUri()

@@ -28,5 +28,5 @@ data class Category(
     val name: String,
 
     @OneToMany(mappedBy = "category")
-    var books: List<Book> = ArrayList(),
+    var books: List<Book> = ArrayList()
 )

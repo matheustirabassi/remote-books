@@ -16,5 +16,5 @@ object ErrorMessages {
 
 object Strings {
     /** Representa um path usando o `id` como parâmetro */
-   const val PATH_ID = "/{id}"
+    const val PATH_ID = "/{id}"
 }

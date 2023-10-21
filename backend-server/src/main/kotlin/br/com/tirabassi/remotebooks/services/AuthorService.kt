@@ -26,7 +26,7 @@ class AuthorService {
     fun insertAuthor(authorDto: AuthorDto): Long {
         val newAuthor = Author(
             name = authorDto.name,
-            dateOfBirth = authorDto.dateOfBirth!!,
+            dateOfBirth = authorDto.dateOfBirth!!
         )
 
         authorRepository.saveAndFlush(newAuthor)

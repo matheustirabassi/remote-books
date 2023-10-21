@@ -13,5 +13,5 @@ import java.io.Serializable
 data class CollectionDto(
     val id: Long? = null,
     @field:NotBlank(message = ErrorMessages.COLLECTION_NAME_REQUIRED)
-    val name: String,
+    val name: String
 ) : Serializable

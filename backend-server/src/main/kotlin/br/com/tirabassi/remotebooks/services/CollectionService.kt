@@ -31,7 +31,7 @@ class CollectionService {
         collectionRepository.saveAndFlush(newCollection)
 
         return newCollection.id ?: throw ServiceException(
-            ErrorMessages.UNEXPECTED_ERROR,
+            ErrorMessages.UNEXPECTED_ERROR
         )
     }
 
@@ -41,7 +41,7 @@ class CollectionService {
     private fun verifyIfCategoryNameNotExists(collectionDto: CollectionDto) {
         collectionRepository.findByName(collectionDto.name).ifPresent {
             throw ServiceException(
-                ErrorMessages.COLLECTION_NAME_ALREADY_EXISTS,
+                ErrorMessages.COLLECTION_NAME_ALREADY_EXISTS
             )
         }
     }
@@ -54,7 +54,7 @@ class CollectionService {
         return collections.map { collection ->
             CollectionDto(
                 id = collection.id,
-                name = collection.name,
+                name = collection.name
             )
         }
     }

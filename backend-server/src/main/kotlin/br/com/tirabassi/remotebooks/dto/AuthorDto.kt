@@ -18,5 +18,5 @@ data class AuthorDto(
     @field:NotBlank(message = ErrorMessages.AUTHOR_NAME_REQUIRED)
     val name: String,
     @field:NotNull(message = ErrorMessages.AUTHOR_DATE_OF_BIRTH_REQUIRED)
-    val dateOfBirth: Date? = null,
+    val dateOfBirth: Date? = null
 ) : Serializable

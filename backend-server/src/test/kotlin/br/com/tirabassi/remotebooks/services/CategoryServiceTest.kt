@@ -29,7 +29,7 @@ class CategoryServiceTest : BaseUnitTest() {
     @DisplayName("Dado que o nome da categoria já existe, lança um erro de serviço")
     fun insertCategoryTest_CategoryNameAlreadyExists_ServiceException() {
         `when`(categoryRepository.findByName(anyString())).thenReturn(
-            Optional.of(Category(name = "Romance")),
+            Optional.of(Category(name = "Romance"))
         )
 
         val exception = assertThrows<ServiceException> {
@@ -43,7 +43,7 @@ class CategoryServiceTest : BaseUnitTest() {
     @DisplayName("Dado que o `ìd` da categoria é nulo após salvar, lança um erro de serviço")
     fun insertCategoryTest_CategoryIdIsNull_ServiceException() {
         `when`(categoryRepository.saveAndFlush(any(Category::class.java))).thenReturn(
-            Category(name = "Romance"),
+            Category(name = "Romance")
         )
 
         val exception = assertThrows<ServiceException> {

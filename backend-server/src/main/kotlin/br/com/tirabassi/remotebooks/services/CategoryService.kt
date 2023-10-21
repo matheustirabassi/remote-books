@@ -31,7 +31,7 @@ class CategoryService {
         categoryRepository.saveAndFlush(newCategory)
 
         return newCategory.id ?: throw ServiceException(
-            ErrorMessages.UNEXPECTED_ERROR,
+            ErrorMessages.UNEXPECTED_ERROR
         )
     }
 
@@ -41,7 +41,7 @@ class CategoryService {
     private fun verifyIfCategoryNameNotExists(categoryDto: CategoryDto) {
         categoryRepository.findByName(categoryDto.name).ifPresent {
             throw ServiceException(
-                ErrorMessages.CATEGORY_NAME_ALREADY_EXISTS,
+                ErrorMessages.CATEGORY_NAME_ALREADY_EXISTS
             )
         }
     }

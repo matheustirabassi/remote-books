@@ -9,13 +9,13 @@ import br.com.tirabassi.remotebooks.repositories.CollectionRepository
 import br.com.tirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import jakarta.transaction.Transactional
-import java.util.Date
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.util.Date
 
 @Service
 class BookService {
@@ -66,13 +66,13 @@ class BookService {
             imageLink = bookDto.imageLink,
             releaseDate = bookDto.releaseDate,
             registrationDate = Date(),
-            author = selectedAuthor,
+            author = selectedAuthor
         )
     }
 
     private fun saveCategory(
         newBook: Book,
-        selectedCategoryId: Long?,
+        selectedCategoryId: Long?
     ) {
         if (selectedCategoryId == null) {
             log.warn("Não foi possível salvar a categoria com o livro: $newBook")
@@ -86,7 +86,7 @@ class BookService {
 
     private fun saveCollection(
         newBook: Book,
-        selectedCollectionId: Long?,
+        selectedCollectionId: Long?
     ) {
         if (selectedCollectionId == null) {
             log.warn("Não foi possível salvar a coleção com o livro: $newBook")

@@ -11,7 +11,6 @@ import br.com.tirabassi.remotebooks.repositories.BookRepository
 import br.com.tirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import br.com.tirabassi.remotebooks.utils.extensions.parseToDate
-import java.util.Date
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -23,6 +22,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
+import java.util.Date
 
 class BookServiceTest : BaseUnitTest() {
 
@@ -52,8 +52,8 @@ class BookServiceTest : BaseUnitTest() {
                 id = 1L,
                 name = "Roman Cook",
                 dateOfBirth = Date(),
-                books = emptyList(),
-            ),
+                books = emptyList()
+            )
         )
 
         val currentBookId = service.insertBook(
@@ -62,28 +62,30 @@ class BookServiceTest : BaseUnitTest() {
                 sinopse = null,
                 imageLink = "",
                 releaseDate = Date(),
-                1L,
-            ),
+                1L
+            )
         )
 
         val expectedBookId = 1L
         assertEquals(
             expectedBookId,
-            currentBookId,
+            currentBookId
         )
     }
 
     @Test
-    @DisplayName("Dado que o livro não foi criado, quando o identificador do livro é nulo, então lança um erro " +
-            "inesperado")
+    @DisplayName(
+        "Dado que o livro não foi criado, quando o identificador do livro é nulo, então lança um erro " +
+            "inesperado"
+    )
     fun insertBookTest_BookDoNotCreated_ServiceException() {
         `when`(authorRepository.getReferenceById(anyLong())).thenReturn(
             Author(
                 id = 1L,
                 name = "Roman Cook",
                 dateOfBirth = Date(),
-                books = emptyList(),
-            ),
+                books = emptyList()
+            )
         )
 
         val exception = assertThrows<ServiceException> {
@@ -93,8 +95,8 @@ class BookServiceTest : BaseUnitTest() {
                     sinopse = null,
                     imageLink = "",
                     releaseDate = Date(),
-                    authorId = 1L,
-                ),
+                    authorId = 1L
+                )
             )
         }
 
@@ -119,14 +121,14 @@ class BookServiceTest : BaseUnitTest() {
                 id = 1L,
                 name = "Marsha Blair",
                 dateOfBirth = "2020-06-14".parseToDate()!!,
-                books = listOf(),
+                books = listOf()
             ),
             category = Category(1L, name = "", books = listOf()),
             collection = Collection(
                 id = null,
                 name = "Kennith Dunlap",
-                books = listOf(),
-            ),
+                books = listOf()
+            )
         )
 
         `when`(bookRepository.findAll(any(Pageable::class.java))).thenReturn(PageImpl(listOf(book)))
