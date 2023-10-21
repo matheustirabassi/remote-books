@@ -37,7 +37,7 @@ class BookController {
         @Valid
         @RequestBody
         bookDto: BookDto
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<Unit> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(bookService.insertBook(bookDto)).toUri()
 

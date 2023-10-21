@@ -35,7 +35,7 @@ class CollectionController {
         @Valid
         @RequestBody
         collectionDto: CollectionDto
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<Unit> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(collectionService.insertCollection(collectionDto)).toUri()
 
