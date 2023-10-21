@@ -1,3 +1,4 @@
+import DI from "di/ioc"
 import HomeView from "presentation/view/Home/HomeView"
 import RegisterView from "presentation/view/Register/RegisterView"
 import { BrowserRouter, Routes as ReactRoutes, Route } from "react-router-dom"
@@ -20,7 +21,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <ReactRoutes>
-        <Route index element={<HomeView />} />
+        <Route index element={<HomeView viewModel={DI.resolve("HomeViewModel")} />} />
         <Route path={ROUTES.REGISTER} element={<RegisterView />} />
       </ReactRoutes>
     </BrowserRouter>

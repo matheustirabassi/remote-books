@@ -27,10 +27,14 @@ data class BookDto(
     val releaseDate: Date,
     @field:NotNull(message = ErrorMessages.AUTHOR_ID_REQUIRED)
     val authorId: Long?,
+    val id: Long? = null,
+    val authorName: String? = null,
     val categoryId: Long? = null,
     val collectionId: Long? = null,
 ) : Serializable {
     constructor(book: Book) : this(
+        id = book.id,
+        authorName = book.author.name,
         title = book.title,
         sinopse = book.sinopse,
         imageLink = book.imageLink,

@@ -3,7 +3,7 @@ import { AuthorDto } from "data/dto/AuthorDto"
 import { ValidationStandardError } from "data/types/ValidationStandardError"
 import { ViewState } from "data/types/ViewState"
 import { LanguageConstants } from "enums/Constants"
-import { States } from "enums/ViewStateEnum"
+import { State } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -18,7 +18,7 @@ export default function AuthorViewModel() {
 
   const [authorWasSaved, setAuthorWasSaved] = useState<boolean>(false)
 
-  const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
+  const [viewState] = useState<ViewState>(new ViewState())
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
@@ -37,7 +37,7 @@ export default function AuthorViewModel() {
       return
     }
 
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
     createAuthor(new AuthorDto(name, dateOfBirth!!))
   }
@@ -110,7 +110,7 @@ export default function AuthorViewModel() {
         setErrorMessage(errorText)
       })
       .finally(() => {
-        viewState.setViewState(States.ContentState)
+        viewState.setViewState(State.ContentState)
       })
   }
 

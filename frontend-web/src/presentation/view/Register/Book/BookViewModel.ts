@@ -1,3 +1,4 @@
+import { ROUTES } from "Routes"
 import { AuthorApi } from "data/api/AuthorApi"
 import { BookApi } from "data/api/BookApi"
 import { CategoryApi } from "data/api/CategoryApi"
@@ -9,18 +10,62 @@ import { CollectionDto } from "data/dto/CollectionDto"
 import { ErrorFieldMessage } from "data/types/ErrorFieldMessage"
 import { ValidationStandardError } from "data/types/ValidationStandardError"
 import { ViewState } from "data/types/ViewState"
-import { States } from "enums/ViewStateEnum"
-import { useState } from "react"
+import { LanguageConstants } from "enums/Constants"
+import { State } from "enums/ViewStateEnum"
+import { enqueueSnackbar } from "notistack"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 
-export default function BookViewModel() {
+interface BookViewModelProps {
+  bookApi: BookApi
+}
+
+export interface BookViewModel {
+  viewState: ViewState
+  authors: AuthorDto[]
+
+  authorSelected: number | undefined
+  setAuthorSelected: Dispatch<SetStateAction<number | undefined>>
+
+  errors: ErrorFieldMessage[]
+  bookWasSaved: boolean
+
+  title: string
+  setTitle: Dispatch<SetStateAction<string>>
+
+  sinopse: string
+  setSinopse: Dispatch<SetStateAction<string>>
+
+  releaseDate: Date
+  setReleaseDate: Dispatch<SetStateAction<Date>>
+
+  imageLink: string
+  setImageLink: Dispatch<SetStateAction<string>>
+
+  categories: CategoryDto[]
+  setCategories: Dispatch<SetStateAction<CategoryDto[]>>
+  categorySelected: number | undefined
+  setCategorySelected: Dispatch<SetStateAction<number | undefined>>
+
+  collections: CollectionDto[]
+  setCollections: Dispatch<SetStateAction<CollectionDto[]>>
+  collectionSelected: number | undefined
+  setCollectionSelected: Dispatch<SetStateAction<number | undefined>>
+
+  save: () => void
+}
+
+export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
+  const navigate = useNavigate()
+
   const { t } = useTranslation()
 
-  const [viewState] = useState<ViewState>(new ViewState(States.ContentState))
+  const [viewState] = useState<ViewState>(new ViewState())
 
   const [authors, setAuthors] = useState<AuthorDto[]>([])
 
-  const [authorSelected, setAuthorSelected] = useState<number>(0)
+  const [authorSelected, setAuthorSelected] = useState<number>()
 
   const [categories, setCategories] = useState<CategoryDto[]>([])
 
@@ -42,8 +87,39 @@ export default function BookViewModel() {
 
   const [errors, setErrors] = useState<ErrorFieldMessage[]>([])
 
+  useEffect(() => {
+    if (errors.length === 0) {
+      return
+    }
+
+    errors.forEach((error) => enqueueSnackbar(t(error.message), { variant: "error" }))
+
+    setErrors([])
+  }, [errors])
+
+  useEffect(() => {
+    if (bookWasSaved === false) {
+      return
+    }
+
+    enqueueSnackbar(t(LanguageConstants.SAVED_CONTENT), { variant: "success" })
+    navigate(ROUTES.HOME)
+  }, [bookWasSaved])
+
+  useEffect(() => {
+    getAllAuthors()
+  }, [undefined])
+
+  useEffect(() => {
+    getAllCategories()
+  }, [undefined])
+
+  useEffect(() => {
+    getAllCollections()
+  }, [undefined])
+
   function getAllAuthors() {
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
     AuthorApi.getAll()
       .then((response) => {
@@ -51,12 +127,12 @@ export default function BookViewModel() {
       })
       .catch((error) => {})
       .finally(() => {
-        viewState.setViewState(States.ContentState)
+        viewState.setViewState(State.ContentState)
       })
   }
 
   function getAllCategories() {
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
     CategoryApi.getAll()
       .then((response) => {
@@ -64,12 +140,12 @@ export default function BookViewModel() {
       })
       .catch((error) => {})
       .finally(() => {
-        viewState.setViewState(States.ContentState)
+        viewState.setViewState(State.ContentState)
       })
   }
 
   function getAllCollections() {
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
     CollectionApi.getAll()
       .then((response) => {
@@ -77,24 +153,25 @@ export default function BookViewModel() {
       })
       .catch((error) => {})
       .finally(() => {
-        viewState.setViewState(States.ContentState)
+        viewState.setViewState(State.ContentState)
       })
   }
 
   function create() {
-    viewState.setViewState(States.LoadingState)
+    viewState.setViewState(State.LoadingState)
 
-    BookApi.create(
-      new BookDto(
-        title,
-        imageLink,
-        releaseDate,
-        authorSelected,
-        categorySelected,
-        collectionSelected,
-        sinopse
+    bookApi
+      .create(
+        new BookDto(
+          title,
+          imageLink,
+          releaseDate,
+          authorSelected!!,
+          categorySelected,
+          collectionSelected,
+          sinopse
+        )
       )
-    )
       .then((response) => {
         setBookWasSaved(true)
       })
@@ -111,8 +188,9 @@ export default function BookViewModel() {
         console.error(standardError)
 
         setErrors(standardError.errors)
-      }).finally(() => {
-        viewState.setViewState(States.ContentState)
+      })
+      .finally(() => {
+        viewState.setViewState(State.ContentState)
       })
   }
 
@@ -122,18 +200,17 @@ export default function BookViewModel() {
 
   return {
     authors,
-    getAllAuthors,
     viewState,
     authorSelected,
     setAuthorSelected,
     categories,
+    setCategories,
     categorySelected,
     setCategorySelected,
-    getAllCategories,
     collectionSelected,
     setCollectionSelected,
     collections,
-    getAllCollections,
+    setCollections,
     save,
     title,
     setTitle,
@@ -144,6 +221,6 @@ export default function BookViewModel() {
     releaseDate,
     setReleaseDate,
     bookWasSaved,
-    errors
+    errors,
   }
 }

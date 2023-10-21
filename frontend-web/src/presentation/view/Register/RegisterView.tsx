@@ -1,6 +1,8 @@
 import { AppBar, Tab, Tabs } from "@mui/material"
 
+import DI from "di/ioc"
 import { LanguageConstants } from "enums/Constants"
+import { Header } from "presentation/components/Header"
 import { TabPanel } from "presentation/components/TabPanel"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -9,7 +11,6 @@ import AuthorView from "./Author/AuthorView"
 import BookView from "./Book/BookView"
 import CategoryView from "./Category/CategoryView"
 import CollectionView from "./Collection/CollectionView"
-import { Header } from "presentation/components/Header"
 
 /**
  * A tela de cadastro.
@@ -48,7 +49,7 @@ export default function RegisterView() {
 
   return (
     <>
-      <Header isRegister/>
+      <Header isRegister />
       <AppBar>
         <Tabs
           value={tabPosition}
@@ -76,7 +77,7 @@ export default function RegisterView() {
 
       <SwipeableViews index={tabPosition} onChangeIndex={setTabPosition}>
         <TabPanel value={tabPosition} index={INDEX_BOOK_TAB}>
-          <BookView />
+          <BookView viewModel={DI.resolve("BookViewModel")} />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_AUTHOR_TAB}>
