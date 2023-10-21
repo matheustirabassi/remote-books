@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "br.com.tirabassi"
-version = "0.2.0"
+version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
