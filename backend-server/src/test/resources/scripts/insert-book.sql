@@ -7,7 +7,7 @@ VALUES (600, 'War');
 INSERT INTO COLLECTION(ID, NAME)
 VALUES (600, 'Strategy');
 
-INSERT INTO BOOK(ID, TITLE, SINOPSE, IMAGE_LINK, REGISTRATION_DATE, RELEASE_DATE, AUTHOR_ID, CATEGORY_ID, COLLECTION_ID)
+INSERT INTO BOOK(ID, TITLE, SINOPSE, IMAGE_LINK, REGISTRATION_DATE, RELEASE_DATE, ACCESS_LINK, AUTHOR_ID, CATEGORY_ID, COLLECTION_ID)
 VALUES (600, 'A revolucao dos bichos: Um conto de fadas', 'Verdadeiro classico moderno',
-'https://m.media-amazon.com/images/I/71FMCr5Z9rL.jpg', '2023-06-17 15:43:00', '2020-06-17 15:43:00',
+'https://m.media-amazon.com/images/I/71FMCr5Z9rL.jpg', '2023-06-17 15:43:00', '2020-06-17 15:43:00', 'https://chat.openai.com/',
  600, 600, 600);

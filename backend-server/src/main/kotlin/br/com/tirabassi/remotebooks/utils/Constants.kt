@@ -12,6 +12,7 @@ object ErrorMessages {
     const val BOOK_TITLE_REQUIRED = "BOOK_TITLE_REQUIRED"
     const val IMAGE_LINK_REQUIRED = "IMAGE_LINK_REQUIRED"
     const val AUTHOR_ID_REQUIRED = "AUTHOR_ID_REQUIRED"
+    const val BOOK_ACCESS_LINK_REQUIRED = "BOOK_ACCESS_LINK_REQUIRED"
 }
 
 object Strings {

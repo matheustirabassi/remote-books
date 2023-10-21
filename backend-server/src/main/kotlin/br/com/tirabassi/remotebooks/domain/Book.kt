@@ -50,6 +50,9 @@ data class Book(
     @Temporal(TemporalType.TIMESTAMP)
     val releaseDate: Date,
 
+    @Column(name = "ACCESS_LINK")
+    val accessLink: String,
+
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID")
     var author: Author,

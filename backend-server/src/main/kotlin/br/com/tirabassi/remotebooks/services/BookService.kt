@@ -41,13 +41,28 @@ class BookService {
      *
      * @return O identificador do novo livro criado.
      */
-    @Transactional
+    @Transactional(rollbackOn = [ServiceException::class, RuntimeException::class])
     fun insertBook(bookDto: BookDto): Long {
-        val newBook = createBook(bookDto)
+        val selectedAuthor = authorRepository.getReferenceById(bookDto.authorId!!)
+        val newBook = Book(
+            title = bookDto.title,
+            sinopse = bookDto.sinopse,
+            imageLink = bookDto.imageLink,
+            accessLink = bookDto.accessLink,
+            releaseDate = bookDto.releaseDate,
+            registrationDate = Date(),
+            author = selectedAuthor
+        )
 
-        saveCategory(newBook, bookDto.categoryId)
+        if (isCategorySelected(bookDto.categoryId)) {
+            val categorySelected = categoryRepository.getReferenceById(bookDto.categoryId!!)
+            newBook.category = categorySelected
+        }
 
-        saveCollection(newBook, bookDto.collectionId)
+        if (isCollectionSelected(bookDto.collectionId)) {
+            val collectionSelected = collectionRepository.getReferenceById(bookDto.collectionId!!)
+            newBook.collection = collectionSelected
+        }
 
         bookRepository.saveAndFlush(newBook)
 
@@ -58,45 +73,9 @@ class BookService {
         return newBook.id!!
     }
 
-    private fun createBook(bookDto: BookDto): Book {
-        val selectedAuthor = authorRepository.getReferenceById(bookDto.authorId!!)
-        return Book(
-            title = bookDto.title,
-            sinopse = bookDto.sinopse,
-            imageLink = bookDto.imageLink,
-            releaseDate = bookDto.releaseDate,
-            registrationDate = Date(),
-            author = selectedAuthor
-        )
-    }
+    private fun isCategorySelected(categoryId: Long?) = categoryId != null
 
-    private fun saveCategory(
-        newBook: Book,
-        selectedCategoryId: Long?
-    ) {
-        if (selectedCategoryId == null) {
-            log.warn("Não foi possível salvar a categoria com o livro: $newBook")
-
-            return
-        }
-
-        val categorySelected = categoryRepository.getReferenceById(selectedCategoryId)
-        newBook.category = categorySelected
-    }
-
-    private fun saveCollection(
-        newBook: Book,
-        selectedCollectionId: Long?
-    ) {
-        if (selectedCollectionId == null) {
-            log.warn("Não foi possível salvar a coleção com o livro: $newBook")
-
-            return
-        }
-
-        val collectionSelected = collectionRepository.getReferenceById(selectedCollectionId)
-        newBook.collection = collectionSelected
-    }
+    private fun isCollectionSelected(collectionId: Long?) = collectionId != null
 
     /** Busca os livros de forma paginada e mapeia para BookDto */
     fun findAllBooks(pageable: Pageable): Page<BookDto> {

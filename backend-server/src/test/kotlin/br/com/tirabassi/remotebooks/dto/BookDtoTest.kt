@@ -15,7 +15,7 @@ class BookDtoTest {
     @Test
     @DisplayName("Dado que o nome do livro está vazio, quando o dto é válidado, então lança uma exceção")
     fun newBookTest_BookTitleIsEmpty_ThrowValidationException() {
-        val bookDto = BookDto("", "Abacaxi", "Uva", Date(), 1L)
+        val bookDto = BookDto("", "Abacaxi", "Uva", "", Date(), 1L)
 
         val validateList = validator.validate(bookDto)
 
@@ -26,7 +26,7 @@ class BookDtoTest {
     @Test
     @DisplayName("Dado que o link da imagem está vazio, quando o dto é válido, então lança uma exceção")
     fun newBookTest_ImageLinkIsEmpty_ThrowValidationException() {
-        val bookDto = BookDto("Título", "sinopse", "", Date(), 1L)
+        val bookDto = BookDto("Título", "sinopse", "", "", Date(), 1L)
         val validateList = validator.validate(bookDto)
 
         assertEquals(1, validateList.size)
@@ -36,7 +36,7 @@ class BookDtoTest {
     @Test
     @DisplayName("Dado que o autor é nulo, quando o dto é validado, então lança uma exceção")
     fun newBookTest_AuthorIdIsNull_ThrowValidationException() {
-        val bookDto = BookDto("Título", "sinopse", "link", Date(), null)
+        val bookDto = BookDto("Título", "sinopse", "link", "", Date(), null)
 
         val validateList = validator.validate(bookDto)
 
@@ -47,7 +47,7 @@ class BookDtoTest {
     @Test
     @DisplayName("Dado que o dto é válido, quando o dto é validado, então a lista de validações é vazia")
     fun newBookTest_AllValid_ValidatorListIsEmpty() {
-        val bookDto = BookDto("Título", "sinopse", "link", Date(), 1L)
+        val bookDto = BookDto("Título", "sinopse", "link", "", Date(), 1L)
 
         assertTrue(validator.validate(bookDto).isEmpty())
     }
