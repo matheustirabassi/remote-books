@@ -34,7 +34,7 @@ class AuthorController {
     fun insertAuthor(
         @Valid
         @RequestBody
-        authorDto: AuthorDto,
+        authorDto: AuthorDto
     ): ResponseEntity<Void> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(authorService.insertAuthor(authorDto)).toUri()

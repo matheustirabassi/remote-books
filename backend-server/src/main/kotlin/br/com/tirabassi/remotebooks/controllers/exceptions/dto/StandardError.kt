@@ -12,5 +12,5 @@ import java.io.Serializable
 open class StandardError(
     val statusCode: Int,
     val message: String,
-    val timestamp: Long,
+    val timestamp: Long
 ) : Serializable

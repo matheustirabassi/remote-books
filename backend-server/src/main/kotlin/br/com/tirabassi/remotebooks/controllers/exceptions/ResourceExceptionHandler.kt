@@ -27,15 +27,15 @@ class ResourceExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handlerValidationException(
         exception: MethodArgumentNotValidException,
-        request: HttpServletRequest?,
+        request: HttpServletRequest?
     ): ResponseEntity<StandardError> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ValidationStandardError(
                 HttpStatus.BAD_REQUEST.value(),
                 VALIDATION_ERROR,
                 System.currentTimeMillis(),
-                mapArgumentNotValidExceptionToFieldMessage(exception),
-            ),
+                mapArgumentNotValidExceptionToFieldMessage(exception)
+            )
         )
     }
 
@@ -46,7 +46,7 @@ class ResourceExceptionHandler {
      * @return A lista contendo o nome do campo e o erro, caso ele seja inválido.
      */
     private fun mapArgumentNotValidExceptionToFieldMessage(
-        validException: MethodArgumentNotValidException,
+        validException: MethodArgumentNotValidException
     ) =
         validException.bindingResult.fieldErrors.map { error ->
             ErrorFieldMessage(error.field, error.defaultMessage.toString())
@@ -55,14 +55,14 @@ class ResourceExceptionHandler {
     @ExceptionHandler(ServiceException::class)
     fun handlerServiceException(
         serviceException: ServiceException,
-        request: HttpServletRequest?,
+        request: HttpServletRequest?
     ): ResponseEntity<StandardError> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             StandardError(
                 HttpStatus.BAD_REQUEST.value(),
                 serviceException.message!!,
-                System.currentTimeMillis(),
-            ),
+                System.currentTimeMillis()
+            )
         )
     }
 }

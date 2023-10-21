@@ -27,7 +27,7 @@ class CollectionServiceTest : BaseUnitTest() {
     @DisplayName("Dado que o nome da coleção já existe, lança um erro de serviço")
     fun insertCollectionTest_CollectionNameAlreadyExists_ServiceException() {
         Mockito.`when`(collectionRepository.findByName(Mockito.anyString())).thenReturn(
-            Optional.of(Collection(name = "Coleção")),
+            Optional.of(Collection(name = "Coleção"))
         )
 
         val exception = org.junit.jupiter.api.assertThrows<ServiceException> {
@@ -42,8 +42,8 @@ class CollectionServiceTest : BaseUnitTest() {
     fun insertCollectionTest_CollectionIdIsNull_ServiceException() {
         Mockito.`when`(collectionRepository.saveAndFlush(ArgumentMatchers.any(Collection::class.java)))
             .thenReturn(
-            Collection(name = "Coleção"),
-        )
+                Collection(name = "Coleção")
+            )
 
         val exception = org.junit.jupiter.api.assertThrows<ServiceException> {
             collectionService.insertCollection(CollectionDto(name = "Coleção"))

@@ -3,11 +3,11 @@ package br.com.tirabassi.remotebooks.dto
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import jakarta.validation.Validation
 import jakarta.validation.Validator
-import java.util.Date
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.util.Date
 
 class BookDtoTest {
     private val validator: Validator = Validation.buildDefaultValidatorFactory().validator

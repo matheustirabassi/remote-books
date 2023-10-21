@@ -28,7 +28,7 @@ class MultiHttpSecurityConfig {
          */
         private val PUBLIC_MATCHERS = arrayOf(
             "/*",
-            "/h2-console",
+            "/h2-console"
         )
 
         /**
@@ -37,7 +37,7 @@ class MultiHttpSecurityConfig {
         private val PUBLIC_MATCHERS_POST = arrayOf(
             "/category",
             "/collection",
-            "/author",
+            "/author"
         )
     }
 
@@ -83,7 +83,7 @@ class MultiHttpSecurityConfig {
             HttpMethod.GET.name(),
             HttpMethod.PUT.name(),
             HttpMethod.DELETE.name(),
-            HttpMethod.OPTIONS.name(),
+            HttpMethod.OPTIONS.name()
         )
 
         val source = UrlBasedCorsConfigurationSource()

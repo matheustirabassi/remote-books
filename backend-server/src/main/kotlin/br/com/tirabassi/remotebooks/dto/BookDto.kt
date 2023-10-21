@@ -30,7 +30,7 @@ data class BookDto(
     val id: Long? = null,
     val authorName: String? = null,
     val categoryId: Long? = null,
-    val collectionId: Long? = null,
+    val collectionId: Long? = null
 ) : Serializable {
     constructor(book: Book) : this(
         id = book.id,
@@ -41,6 +41,6 @@ data class BookDto(
         releaseDate = book.releaseDate,
         authorId = book.author.id!!,
         categoryId = book.category?.id,
-        collectionId = book.collection?.id,
+        collectionId = book.collection?.id
     )
 }

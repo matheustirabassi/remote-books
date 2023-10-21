@@ -60,6 +60,6 @@ data class Book(
 
     @ManyToOne
     @JoinColumn(name = "COLLECTION_ID")
-    var collection: Collection? = null,
+    var collection: Collection? = null
 
 )

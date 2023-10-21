@@ -36,7 +36,7 @@ class BookController {
     fun insertBook(
         @Valid
         @RequestBody
-        bookDto: BookDto,
+        bookDto: BookDto
     ): ResponseEntity<Void> {
         val uri: URI = ServletUriComponentsBuilder.fromCurrentRequest().path(Strings.PATH_ID)
             .buildAndExpand(bookService.insertBook(bookDto)).toUri()
@@ -47,6 +47,6 @@ class BookController {
     /** Retorna todos os livros de forma paginada */
     @GetMapping
     fun findAllBooks(pageable: Pageable): ResponseEntity<Page<BookDto>> {
-               return ResponseEntity.ok(bookService.findAllBooks(pageable))
+        return ResponseEntity.ok(bookService.findAllBooks(pageable))
     }
 }

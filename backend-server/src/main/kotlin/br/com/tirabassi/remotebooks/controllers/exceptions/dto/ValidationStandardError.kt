@@ -12,5 +12,5 @@ class ValidationStandardError(
     statusCode: Int,
     message: String,
     timestamp: Long,
-    val errors: List<ErrorFieldMessage>,
+    val errors: List<ErrorFieldMessage>
 ) : StandardError(statusCode, message, timestamp)

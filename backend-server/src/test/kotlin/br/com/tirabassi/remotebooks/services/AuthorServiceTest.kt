@@ -29,15 +29,15 @@ class AuthorServiceTest : BaseUnitTest() {
     fun insertAuthorTest_CategoryIdIsNull_ServiceException() {
         `when`(authorRepository.saveAndFlush(any()))
             .thenReturn(
-                Author(name = "Francisco", dateOfBirth = "2023-03-26".parseToDate()!!),
+                Author(name = "Francisco", dateOfBirth = "2023-03-26".parseToDate()!!)
             )
 
         val exception = assertThrows<ServiceException> {
             authorService.insertAuthor(
                 AuthorDto(
                     name = "Francisco",
-                    dateOfBirth = "2023-03-26".parseToDate()!!,
-                ),
+                    dateOfBirth = "2023-03-26".parseToDate()!!
+                )
             )
         }
 

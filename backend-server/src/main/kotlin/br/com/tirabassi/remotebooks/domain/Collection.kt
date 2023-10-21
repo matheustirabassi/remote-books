@@ -28,5 +28,5 @@ data class Collection(
     val name: String,
 
     @OneToMany(mappedBy = "collection")
-    var books: List<Book> = ArrayList(),
+    var books: List<Book> = ArrayList()
 )
