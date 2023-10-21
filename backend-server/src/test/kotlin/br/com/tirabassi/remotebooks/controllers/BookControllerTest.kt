@@ -36,6 +36,7 @@ class BookControllerTest : BaseIntegrationTest() {
             "Abacate",
             "Abacaxi",
             "http://localhost:8080/imagem.png",
+            "",
             Date(),
             150L
         )
@@ -56,7 +57,7 @@ class BookControllerTest : BaseIntegrationTest() {
     @Test
     @DisplayName("Dado que o título é vazio, quando é feito a tentativa de salvar, retorna erro de validação")
     fun insertBookTest_TitleIsEmpty_ReturnValidationError() {
-        val bookDto = BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", Date(), 1L)
+        val bookDto = BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", "", Date(), 1L)
 
         mockMvc.perform(
             post("/book")
@@ -77,7 +78,7 @@ class BookControllerTest : BaseIntegrationTest() {
     @Test
     @DisplayName("Dado que o link da imagem é vazio, quando é feito a tentativa de salvar, retorna erro de validação")
     fun insertBookTest_ImageLinkIsEmpty_ReturnValidationError() {
-        val bookDto = BookDto("Abacate", "Sinopse", "", Date(), 1L)
+        val bookDto = BookDto("Abacate", "Sinopse", "", "", Date(), 1L)
 
         mockMvc.perform(
             post("/book")
@@ -102,7 +103,7 @@ class BookControllerTest : BaseIntegrationTest() {
             "validação"
     )
     fun insertBookTest_AuthorIdIsNull_ReturnValidationError() {
-        val bookDto = BookDto("Abacate", "Sinopse", "link", Date(), null)
+        val bookDto = BookDto("Abacate", "Sinopse", "link", "", Date(), null)
 
         mockMvc.perform(
             post("/book")
@@ -139,6 +140,7 @@ class BookControllerTest : BaseIntegrationTest() {
                         "{\"title\":\"A revolucao dos bichos: Um conto de fadas\"," +
                         "\"sinopse\":\"Verdadeiro classico moderno\",\"imageLink\":" +
                         "\"https://m.media-amazon.com/images/I/71FMCr5Z9rL.jpg\"," +
+                        "\"accessLink\":\"https://chat.openai.com/\"," +
                         "\"releaseDate\":\"2020-06-17T18:43:00.000+00:00\",\"authorId\":600," +
                         "\"categoryId\":600,\"collectionId\":600}],\"pageable\":{\"sort\":{" +
                         "\"empty\":true,\"sorted\":false,\"unsorted\":true},\"offset\":0," +

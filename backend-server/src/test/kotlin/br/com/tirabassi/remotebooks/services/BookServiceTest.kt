@@ -12,6 +12,7 @@ import br.com.tirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import br.com.tirabassi.remotebooks.utils.extensions.parseToDate
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -35,6 +36,20 @@ class BookServiceTest : BaseUnitTest() {
     @Mock
     private lateinit var authorRepository: AuthorRepository
 
+    private lateinit var bookDto: BookDto
+
+    @BeforeEach
+    fun setUp() {
+        bookDto = BookDto(
+            title = "",
+            sinopse = null,
+            imageLink = "",
+            accessLink = "",
+            releaseDate = Date(),
+            1L
+        )
+    }
+
     // region insertBook tests
 
     @Test
@@ -56,15 +71,7 @@ class BookServiceTest : BaseUnitTest() {
             )
         )
 
-        val currentBookId = service.insertBook(
-            BookDto(
-                title = "",
-                sinopse = null,
-                imageLink = "",
-                releaseDate = Date(),
-                1L
-            )
-        )
+        val currentBookId = service.insertBook(bookDto)
 
         val expectedBookId = 1L
         assertEquals(
@@ -89,15 +96,7 @@ class BookServiceTest : BaseUnitTest() {
         )
 
         val exception = assertThrows<ServiceException> {
-            service.insertBook(
-                BookDto(
-                    title = "",
-                    sinopse = null,
-                    imageLink = "",
-                    releaseDate = Date(),
-                    authorId = 1L
-                )
-            )
+            service.insertBook(bookDto)
         }
 
         assertEquals(ErrorMessages.UNEXPECTED_ERROR, exception.message)
@@ -115,6 +114,7 @@ class BookServiceTest : BaseUnitTest() {
             title = "aliquip",
             sinopse = null,
             imageLink = "deterruisset",
+            accessLink = "",
             registrationDate = "2020-06-14".parseToDate()!!,
             releaseDate = "2020-06-14".parseToDate()!!,
             author = Author(

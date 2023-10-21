@@ -4,6 +4,7 @@ import br.com.tirabassi.remotebooks.domain.Book
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
+import org.hibernate.validator.constraints.Length
 import java.io.Serializable
 import java.util.Date
 
@@ -13,6 +14,7 @@ import java.util.Date
  * @property title O nome do livro.
  * @property sinopse O resumo do livro.
  * @property imageLink O link da imagem do livro.
+ * @property accessLink O link de acesso para o livro.
  * @property releaseDate A data de lançamento do livro.
  * @property authorId O identificador do autor.
  * @property categoryId O id da categoria.
@@ -24,6 +26,8 @@ data class BookDto(
     val sinopse: String?,
     @field:NotBlank(message = ErrorMessages.IMAGE_LINK_REQUIRED)
     val imageLink: String,
+    @field:Length(max = 2048, message = ErrorMessages.BOOK_ACCESS_LINK_REQUIRED)
+    val accessLink: String,
     val releaseDate: Date,
     @field:NotNull(message = ErrorMessages.AUTHOR_ID_REQUIRED)
     val authorId: Long?,
@@ -38,6 +42,7 @@ data class BookDto(
         title = book.title,
         sinopse = book.sinopse,
         imageLink = book.imageLink,
+        accessLink = book.accessLink,
         releaseDate = book.releaseDate,
         authorId = book.author.id!!,
         categoryId = book.category?.id,
