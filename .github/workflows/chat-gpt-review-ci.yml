@@ -18,4 +18,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Portuguese (Brazilian)
-          MODEL: gpt-3.5-turbo # https://platform.openai.com/docs/models https://openai.com/pricing#language-models
+          MODEL: gpt-4 # https://platform.openai.com/docs/models https://openai.com/pricing#language-models
+          PROMPT: "Por favor, no seguinte código, procure irregularidades, se houver algum bug cite o nome da classe ou arquivo com o método ou variável seguido da linha representado pelo L. Exemplo: MyClass#addClass#L15; Verifique se métodos precisam de testes unitários ou de integração, dê sugestões de boas práticas se baseando no Clean Code, caso exista possibilidade de usar arquitetura, estrutura ou organização melhor dê a sugestão seguido de um exemplo no código para diferença de código, revisando-o:"
