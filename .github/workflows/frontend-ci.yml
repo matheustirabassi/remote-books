@@ -25,20 +25,17 @@ jobs:
       - name: Check diff
         run: |
           if git diff --exit-code; then
-              echo "HAS_CHANGES=false" >>${GITHUB_ENV}
-          else
-              echo "HAS_CHANGES=true" >>${GITHUB_ENV}
+              echo "Não há diferenças no conteúdo do frontend."
+              exit 0
           fi
 
-          if [[ env.HAS_CHANGES == 'true' ]]; then
-            - name: Set Node.js 18.x
-              uses: actions/setup-node@v3
-              with:
-                node-version: 18.x
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
 
-            - name: Install the app
-              run: yarn install # will run `yarn test` command
+      - name: Install the app
+        run: yarn install # will run `yarn test` command
 
-            - name: Test the app
-              run: yarn test # will run `yarn test` command
-          fi
+      - name: Test the app
+        run: yarn test # will run `yarn test` command

@@ -10,7 +10,7 @@ plugins {
     kotlin("plugin.jpa") version "1.7.22"
 }
 
-group = "br.com.tirabassi"
+group = "br.com.tirabassia"
 version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 

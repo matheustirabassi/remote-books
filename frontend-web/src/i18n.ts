@@ -7,7 +7,7 @@ import { initReactI18next } from "react-i18next"
 const resources = {
   pt: {
     translation: {
-      "REGISTER": "Cadastraraaaa",
+      "REGISTER": "Cadastrar",
       "BOOK": "Livro",
       "AUTHOR": "Autor",
       "COLLECTION": "Coleção",
