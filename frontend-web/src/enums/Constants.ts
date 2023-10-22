@@ -19,7 +19,10 @@ export const LanguageConstants = {
   SYNOPSIS: "SYNOPSIS",
   RELEASE_DATE: "RELEASE_DATE",
   LINK: "LINK",
-  SELECT: "SELECT"
+  SELECT: "SELECT",
+  ACCESS_LINK: "ACCESS_LINK",
+  IMAGE_LINK: "IMAGE_LINK",
+  BOOK_ACCESS_LINK_REQUIRED: "BOOK_ACCESS_LINK_REQUIRED"
 }
 
 export const RegexConstants = {

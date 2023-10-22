@@ -55,31 +55,31 @@ export default function CategoryView() {
         </Grid>
       </Grid>
 
-      <Grid container id="contentView">
-        <Grid container item mt={2} direction={"row"} alignContent={"left"}>
-          <TextField
-            label={t(LanguageConstants.NAME)}
-            name="category_name"
-            style={{ width: 300 }}
-            value={viewModel.name}
-            error={viewModel.nameHasError}
-            helperText={viewModel.nameErrorText}
-            onChange={viewModel.onSetName}
-          />
+      <Grid container id="contentView" direction={"column"} alignItems={"center"}>
+        <Grid item xs={12} mt={2}>
+          <Grid item>
+            <TextField
+              label={t(LanguageConstants.NAME)}
+              sx={{ width: 300 }}
+              name="category_name"
+              value={viewModel.name}
+              error={viewModel.nameHasError}
+              helperText={viewModel.nameErrorText}
+              onChange={viewModel.onSetName}
+            />
+          </Grid>
         </Grid>
 
-        <Grid
-          container
-          alignContent={"left"}
-          mt={2}
-        >
-          <Button
-            variant="contained"
-            style={{ width: 300, height: 50 }}
-            onClick={viewModel.saveCategory}
-          >
-            <Typography>{t(LanguageConstants.SAVE)}</Typography>
-          </Button>
+        <Grid item xs={12} mt={2}>
+          <Grid item>
+            <Button
+              variant="contained"
+              sx={{ height: 50, width: 300 }}
+              onClick={viewModel.saveCategory}
+            >
+              <Typography>{t(LanguageConstants.SAVE)}</Typography>
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </>

@@ -24,125 +24,137 @@ export default function BookView({ viewModel }: BookViewProps) {
         container
         id="contentView"
         direction={"column"}
-        justifyContent={"center"}
         alignItems={"center"}
-        alignContent={"center"}
+        justifyContent={"center"}
       >
-        <Grid item xs={4}>
+        <Grid container item justifyContent={"inherit"} xs={4}>
           <Grid item>
-            <TextField
-              label={t(LanguageConstants.TITLE)}
-              name="title"
-              value={viewModel.title}
-              onChange={(event) => {
-                viewModel.setTitle(event.target.value)
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} mt={2}>
-            <TextField
-              label={t(LanguageConstants.SYNOPSIS)}
-              name="synopsis"
-              value={viewModel.sinopse}
-              onChange={(event) => {
-                viewModel.setSinopse(event.target.value)
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} mt={1}>
-            <BasicDatePicker
-              label={t(LanguageConstants.RELEASE_DATE)}
-              sx={{ maxWidth: "210px" }}
-              value={viewModel.releaseDate}
-              onChange={viewModel.setReleaseDate}
-            />
-          </Grid>
-
-          <Grid item xs={12} mt={2}>
-            <TextField
-              label={t(LanguageConstants.LINK)}
-              name="link"
-              value={viewModel.imageLink}
-              onChange={(event) => {
-                viewModel.setImageLink(event.target.value)
-              }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid item xs={4} mt={2}>
-          <Grid item xs={12} ml={2}>
-            <FormControl sx={{ minWidth: 120 }} required>
-              <InputLabel id="inputLabelAuthorId">{t(LanguageConstants.AUTHOR)}</InputLabel>
-
-              <Select
-                labelId="authorSelect"
-                id="authorSelectId"
-                value={viewModel.authorSelected}
-                label={t(LanguageConstants.AUTHOR)}
-                onChange={(e) => viewModel.setAuthorSelected(e.target.value as number)}
-              >
-                <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
-
-                {viewModel.authors.map((author) => (
-                  <MenuItem value={author.id} key={author.id}>
-                    {author.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12} ml={2} mt={2}>
-            <FormControl sx={{ minWidth: 120 }}>
-              <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.CATEGORY)}</InputLabel>
-
-              <Select
-                labelId="collectionSelect"
-                id="collectionSelectId"
-                value={viewModel.categorySelected}
-                label={t(LanguageConstants.CATEGORY)}
+            <Grid item xs={12}>
+              <TextField
+                label={t(LanguageConstants.TITLE)}
+                name="title"
+                value={viewModel.title}
                 onChange={(event) => {
-                  viewModel.setCategorySelected(event.target.value as number)
+                  viewModel.setTitle(event.target.value)
                 }}
-              >
-                <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
+              />
+            </Grid>
 
-                {viewModel.categories.map((category) => (
-                  <MenuItem value={category.id} key={category.id}>
-                    {" "}
-                    {category.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Grid item xs={12} mt={2}>
+              <TextField
+                label={t(LanguageConstants.SYNOPSIS)}
+                name="synopsis"
+                value={viewModel.sinopse}
+                onChange={(event) => {
+                  viewModel.setSinopse(event.target.value)
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} mt={1}>
+              <TextField
+                label={t(LanguageConstants.ACCESS_LINK)}
+                name="accessLink"
+                value={viewModel.accessLink}
+                onChange={(event) => {
+                  viewModel.setAccessLink(event.target.value)
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} mt={2}>
+              <TextField
+                label={t(LanguageConstants.IMAGE_LINK)}
+                name="imageLink"
+                value={viewModel.imageLink}
+                onChange={(event) => {
+                  viewModel.setImageLink(event.target.value)
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} mt={1}>
+              <BasicDatePicker
+                label={t(LanguageConstants.RELEASE_DATE)}
+                value={viewModel.releaseDate}
+                onChange={viewModel.setReleaseDate}
+              />
+            </Grid>
           </Grid>
 
-          <Grid item xs={12} ml={2} mt={2}>
-            <FormControl sx={{ minWidth: 120 }}>
-              <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.COLLECTION)}</InputLabel>
+          <Grid item>
+            <Grid item xs={12} ml={2}>
+              <FormControl required sx={{ minWidth: 120 }}>
+                <InputLabel id="inputLabelAuthorId">{t(LanguageConstants.AUTHOR)}</InputLabel>
+                <Select
+                  labelId="authorSelect"
+                  id="authorSelectId"
+                  value={viewModel.authorSelected}
+                  label={t(LanguageConstants.AUTHOR)}
+                  onChange={(e) => viewModel.setAuthorSelected(e.target.value as number)}
+                >
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
 
-              <Select
-                labelId="collectionSelect"
-                id="collectionSelectId"
-                value={viewModel.collectionSelected}
-                label={t(LanguageConstants.COLLECTION)}
-                onChange={(event) => {
-                  viewModel.setCollectionSelected(event.target.value as number)
-                }}
-              >
-                <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
+                  {viewModel.authors.map((author) => (
+                    <MenuItem value={author.id} key={author.id}>
+                      {author.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
-                {viewModel.collections.map((collection) => (
-                  <MenuItem value={collection.id} key={collection.id}>
-                    {" "}
-                    {collection.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Grid item xs={12} ml={2} mt={2}>
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel id="inputLabelCollectionId">{t(LanguageConstants.CATEGORY)}</InputLabel>
+
+                <Select
+                  labelId="collectionSelect"
+                  id="collectionSelectId"
+                  value={viewModel.categorySelected}
+                  label={t(LanguageConstants.CATEGORY)}
+                  onChange={(event) => {
+                    viewModel.setCategorySelected(event.target.value as number)
+                  }}
+                >
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
+
+                  {viewModel.categories.map((category) => (
+                    <MenuItem value={category.id} key={category.id}>
+                      {" "}
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12} ml={2} mt={2}>
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel id="inputLabelCollectionId">
+                  {t(LanguageConstants.COLLECTION)}
+                </InputLabel>
+
+                <Select
+                  labelId="collectionSelect"
+                  id="collectionSelectId"
+                  value={viewModel.collectionSelected}
+                  label={t(LanguageConstants.COLLECTION)}
+                  onChange={(event) => {
+                    viewModel.setCollectionSelected(event.target.value as number)
+                  }}
+                >
+                  <MenuItem>{t(LanguageConstants.SELECT)}</MenuItem>
+
+                  {viewModel.collections.map((collection) => (
+                    <MenuItem value={collection.id} key={collection.id}>
+                      {" "}
+                      {collection.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
 

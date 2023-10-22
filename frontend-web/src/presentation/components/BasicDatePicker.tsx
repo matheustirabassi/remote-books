@@ -25,7 +25,7 @@ interface BasicDatePickerProps {
 
 export const BasicDatePicker: React.FC<BasicDatePickerProps> = ({
   label,
-  sx,
+  sx = { maxWidth: "210px" },
   value,
   onChange,
   helperText,
@@ -34,7 +34,7 @@ export const BasicDatePicker: React.FC<BasicDatePickerProps> = ({
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
         <Box>
-          <DatePicker label={label} sx={sx} value={value} onChange={onChange} />
+          <DatePicker label={label} sx={sx} value={value} onChange={onChange} format="dd/MM/yyyy"/>
           <Typography fontSize={"caption"} color={"error"} marginLeft={1.75} marginTop={0.375}>
             {helperText}
           </Typography>

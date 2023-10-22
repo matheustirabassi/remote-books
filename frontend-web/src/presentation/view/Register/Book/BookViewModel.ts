@@ -40,6 +40,9 @@ export interface BookViewModel {
   releaseDate: Date
   setReleaseDate: Dispatch<SetStateAction<Date>>
 
+  accessLink: string
+  setAccessLink: Dispatch<SetStateAction<string>>
+
   imageLink: string
   setImageLink: Dispatch<SetStateAction<string>>
 
@@ -80,6 +83,8 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
   const [sinopse, setSinopse] = useState<string>("")
 
   const [releaseDate, setReleaseDate] = useState<Date>(new Date())
+
+  const [accessLink, setAccessLink] = useState<string>("")
 
   const [imageLink, setImageLink] = useState<string>("")
 
@@ -164,6 +169,7 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
       .create(
         new BookDto(
           title,
+          accessLink,
           imageLink,
           releaseDate,
           authorSelected!!,
@@ -222,5 +228,7 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
     setReleaseDate,
     bookWasSaved,
     errors,
+    accessLink,
+    setAccessLink
   }
 }
