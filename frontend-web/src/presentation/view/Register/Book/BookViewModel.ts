@@ -169,8 +169,8 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
       .create(
         new BookDto(
           title,
-          accessLink,
           imageLink,
+          accessLink,
           releaseDate,
           authorSelected!!,
           categorySelected,
