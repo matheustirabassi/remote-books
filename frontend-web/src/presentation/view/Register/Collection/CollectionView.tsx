@@ -56,11 +56,11 @@ export default function CategoryView() {
       </Grid>
 
       <Grid container id="contentView" direction={"column"} alignItems={"center"}>
-        <Grid item mt={2}>
+        <Grid item>
           <TextField
             label={t(LanguageConstants.NAME)}
             name="collection_name"
-            style={{ width: 300 }}
+            sx={{ width: 300 }}
             value={viewModel.name}
             error={viewModel.nameHasError}
             helperText={viewModel.nameErrorText}
@@ -71,7 +71,7 @@ export default function CategoryView() {
         <Grid item mt={2}>
           <Button
             variant="contained"
-            style={{ width: 300, height: 50 }}
+            sx={{ width: 300, height: 50 }}
             onClick={viewModel.saveCollection}
           >
             <Typography>{t(LanguageConstants.SAVE)}</Typography>
