@@ -73,8 +73,8 @@ export default function CategoryView() {
         </Grid>
       </Grid>
 
-      <Grid container id="contentView">
-        <Grid container item mt={2} direction={"column"} alignContent={"left"}>
+      <Grid container id="contentView" direction={"column"} alignItems={"center"}>
+        <Grid item mt={2}>
           <TextField
             label={t(LanguageConstants.NAME)}
             name="author_name"
@@ -94,11 +94,7 @@ export default function CategoryView() {
           />
         </Grid>
 
-        <Grid
-          container
-          alignContent={"left"}
-          mt={2}
-        >
+        <Grid item mt={2}>
           <Button
             variant="contained"
             style={{ width: 300, height: 50 }}

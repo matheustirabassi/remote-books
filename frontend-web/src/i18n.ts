@@ -31,7 +31,10 @@ const resources = {
       "BOOK_TITLE_REQUIRED": "O nome do livro é obrigatório",
       "IMAGE_LINK_REQUIRED": "O link para a imagem é obrigatório",
       "AUTHOR_ID_REQUIRED" : "O autor é obrigatório",
-      "SELECT": "Selecione"
+      "SELECT": "Selecione",
+      "ACCESS_LINK": "Link de acesso",
+      "IMAGE_LINK": "Link da imagem",
+      "BOOK_ACCESS_LINK_REQUIRED": "O link para o livro é obrigatório"
     }
   },
   en: {
@@ -60,7 +63,10 @@ const resources = {
       "BOOK_TITLE_REQUIRED": "Book name is required",
       "IMAGE_LINK_REQUIRED": "Image link is required",
       "AUTHOR_ID_REQUIRED" : "Author is required",
-      "SELECT": "Select"
+      "SELECT": "Select",
+      "ACCESS_LINK": "Access link",
+      "IMAGE_LINK": "Image link",
+      "BOOK_ACCESS_LINK_REQUIRED": "Access link to book is required"
     }
   }
 }
