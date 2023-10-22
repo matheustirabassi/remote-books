@@ -32,7 +32,7 @@ export default function HomeView({ viewModel }: HomeViewProps) {
       >
         {viewModel.page.content.map((book) => (
           <Grid item md={3} key={book.id}>
-            <BookCard imageLink={book.imageLink} title={book.title} author={book.authorName!!} />
+            <BookCard title={book.title} author={book.authorName!!} imageLink={book.imageLink} accessLink={book.accessLink} />
           </Grid>
         ))}
       </Grid>
