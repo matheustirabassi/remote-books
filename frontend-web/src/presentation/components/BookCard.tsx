@@ -12,8 +12,6 @@ import { Link } from "react-router-dom"
 
 /** As propriedades do componente */
 interface BookCardProps {
-  /** O link para a imagem */
-  imageLink: string
 
   /** O título do livro */
   title: string
@@ -21,14 +19,21 @@ interface BookCardProps {
   /** O autor do livro */
   author: string
 
+  /** O link para a imagem */
+  imageLink: string
+
+  /** O link para o livro */
+  accessLink: string
+
   /** O estilo para o componente */
   sx?: SxProps<Theme>
 }
 
 export const BookCard: React.FC<BookCardProps> = ({
-  imageLink,
   title,
   author,
+  imageLink,
+  accessLink,
   sx = { background: "none", textAlign: "start", maxWidth: 180},
 }) => {
   const maxCardTextLength = 15
@@ -36,7 +41,7 @@ export const BookCard: React.FC<BookCardProps> = ({
   return (
     <Card sx={sx}>
       <CardActionArea >
-        <Link to={ROUTES.REGISTER}>
+        <Link to={accessLink}>
           <CardMedia component="img" image={imageLink}/>
           <CardContent>
             <Typography gutterBottom variant="h5">
