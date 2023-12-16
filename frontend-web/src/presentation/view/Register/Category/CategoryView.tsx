@@ -56,7 +56,7 @@ export default function CategoryView() {
       </Grid>
 
       <Grid container id="contentView" direction={"column"} alignItems={"center"}>
-        <Grid item xs={12} mt={2}>
+        <Grid item xs={12}>
           <Grid item>
             <TextField
               label={t(LanguageConstants.NAME)}

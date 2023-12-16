@@ -25,7 +25,7 @@ interface BasicDatePickerProps {
 
 export const BasicDatePicker: React.FC<BasicDatePickerProps> = ({
   label,
-  sx = { maxWidth: "210px" },
+  sx = { width: "210px" },
   value,
   onChange,
   helperText,
