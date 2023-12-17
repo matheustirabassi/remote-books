@@ -3,16 +3,17 @@ import { Api } from "./config/AxiosConfig"
 
 const CATEGORY_ENDPOINT = "/category"
 
-const create = async (category: CategoryDto) => {
-  return Api.post(CATEGORY_ENDPOINT, category)
-}
+export function CategoryApi() {
+  const create = async (category: CategoryDto) => {
+    return Api.post(CATEGORY_ENDPOINT, category)
+  }
 
-const getAll = async() => {
-  return Api.get(CATEGORY_ENDPOINT)
-}
+  const getAll = async () => {
+    return Api.get(CATEGORY_ENDPOINT)
+  }
 
-
-export const CategoryApi = {
-  create,
-  getAll
+  return {
+    create,
+    getAll,
+  }
 }

@@ -7,7 +7,11 @@ import { State } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-export default function CategoryViewModel() {
+interface CategoryViewModelProps {
+  CategoryApi: ReturnType<typeof CategoryApi>
+}
+
+export default function CategoryViewModel({ CategoryApi: categoryApi }: CategoryViewModelProps) {
   const { t } = useTranslation()
 
   const [name, setName] = useState<string>("")
@@ -53,7 +57,8 @@ export default function CategoryViewModel() {
   }
 
   function createCategory(newCategory: CategoryDto) {
-    CategoryApi.create(newCategory)
+    categoryApi
+      .create(newCategory)
       .then((response) => {
         console.log(response)
 

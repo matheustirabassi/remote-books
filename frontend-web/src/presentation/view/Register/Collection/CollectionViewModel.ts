@@ -7,7 +7,13 @@ import { State } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-export default function CollectionViewModel() {
+interface CollectionViewModelProps {
+  CollectionApi: ReturnType<typeof CollectionApi>
+}
+
+export default function CollectionViewModel({
+  CollectionApi: collectionApi,
+}: CollectionViewModelProps) {
   const { t } = useTranslation()
 
   const [name, setName] = useState<string>("")
@@ -53,7 +59,8 @@ export default function CollectionViewModel() {
   }
 
   function createCollection(newCollection: CollectionDto) {
-    CollectionApi.create(newCollection)
+    collectionApi
+      .create(newCollection)
       .then((response) => {
         console.log(response)
 

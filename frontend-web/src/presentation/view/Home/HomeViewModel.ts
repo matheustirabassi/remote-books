@@ -4,15 +4,11 @@ import { ViewState } from "data/types/ViewState"
 import { State } from "enums/ViewStateEnum"
 import { useEffect, useState } from "react"
 
-export interface HomeViewModel {
-  page: BookPage
-}
-
 interface HomeViewModelProps {
-  bookApi: BookApi
+  BookApi: ReturnType<typeof BookApi>
 }
 
-export default function HomeViewModelImpl({ bookApi }: HomeViewModelProps) {
+export default function HomeViewModel({ BookApi: bookApi }: HomeViewModelProps) {
   const [viewState] = useState<ViewState>(new ViewState())
 
   const [pageNumber, setPageNumber] = useState(0)

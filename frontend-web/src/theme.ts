@@ -4,7 +4,7 @@ import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
 
-const remoteBooksTheme =  createTheme({
+const remoteBooksTheme = createTheme({
   palette: {
     primary: {
       main: "#C83E4D",
@@ -55,7 +55,6 @@ const remoteBooksTheme =  createTheme({
       fontWeight: 400,
       fontSize: "13px",
     },
-    
 
     fontWeightRegular: 400,
   },
@@ -75,20 +74,20 @@ const remoteBooksTheme =  createTheme({
         root: {
           textTransform: "none",
           color: "#4A5859",
-					fontSize: "40px",
-					fontWeight: 600,
+          fontSize: "40px",
+          fontWeight: 600,
           marginTop: 3,
           marginBottom: 3,
         },
       },
     },
     MuiMenu: {
-			styleOverrides: {
-				list: {
-					backgroundColor: "#F4B860",
-				},
-			},
-		},
+      styleOverrides: {
+        list: {
+          backgroundColor: "#F4B860",
+        },
+      },
+    },
   },
 })
 

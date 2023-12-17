@@ -7,7 +7,11 @@ import { State } from "enums/ViewStateEnum"
 import { ChangeEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-export default function AuthorViewModel() {
+interface AuthorViewModelProps {
+  AuthorApi: ReturnType<typeof AuthorApi>
+}
+
+export default function AuthorViewModel({ AuthorApi: authorApi }: AuthorViewModelProps) {
   const { t } = useTranslation()
 
   const [name, setName] = useState<string>("")
@@ -78,7 +82,8 @@ export default function AuthorViewModel() {
   }
 
   function createAuthor(newAuthor: AuthorDto) {
-    AuthorApi.create(newAuthor)
+    authorApi
+      .create(newAuthor)
       .then((response) => {
         console.log(response)
 

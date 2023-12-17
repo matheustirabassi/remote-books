@@ -22,9 +22,9 @@ export const LanguageConstants = {
   SELECT: "SELECT",
   ACCESS_LINK: "ACCESS_LINK",
   IMAGE_LINK: "IMAGE_LINK",
-  BOOK_ACCESS_LINK_REQUIRED: "BOOK_ACCESS_LINK_REQUIRED"
+  BOOK_ACCESS_LINK_REQUIRED: "BOOK_ACCESS_LINK_REQUIRED",
 }
 
 export const RegexConstants = {
-  NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+  NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
 }

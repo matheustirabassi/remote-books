@@ -1,5 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material"
 import Typography from "@mui/material/Typography"
+import { ROUTES } from "Routes"
 import { LanguageConstants } from "enums/Constants"
 import { enqueueSnackbar } from "notistack"
 import { BasicDatePicker } from "presentation/components/BasicDatePicker"
@@ -7,13 +8,14 @@ import { LoadingState } from "presentation/components/States/LoadingState"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { ROUTES } from "Routes"
 import AuthorViewModel from "./AuthorViewModel"
 
-export default function CategoryView() {
-  const { t } = useTranslation()
+interface AuthorViewProps {
+  viewModel: ReturnType<typeof AuthorViewModel>
+}
 
-  const viewModel = AuthorViewModel()
+export default function AuthorView({ viewModel }: AuthorViewProps) {
+  const { t } = useTranslation()
 
   const navigate = useNavigate()
 

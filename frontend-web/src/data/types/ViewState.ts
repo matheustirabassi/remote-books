@@ -16,7 +16,7 @@ export class ViewState {
 
   /**
    * Muda o estado da tela.
-   * 
+   *
    * @param newState O novo estado da tela
    */
   setViewState(newState: State) {
@@ -38,7 +38,6 @@ export class ViewState {
       return
     }
 
-    view.style.display =
-      this.state === state ? this.VIEW_VISIBLE : this.VIEW_INVISIBLE
+    view.style.display = this.state === state ? this.VIEW_VISIBLE : this.VIEW_INVISIBLE
   }
 }

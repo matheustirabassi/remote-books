@@ -3,9 +3,9 @@ export class AuthorDto {
   name: string
   dateOfBirth?: Date
 
-  constructor(name: string, dateOfBirth?: Date, id?: number){
-      this.id = id
-      this.name = name
-      this.dateOfBirth = dateOfBirth
+  constructor(name: string, dateOfBirth?: Date, id?: number) {
+    this.id = id
+    this.name = name
+    this.dateOfBirth = dateOfBirth
   }
 }
