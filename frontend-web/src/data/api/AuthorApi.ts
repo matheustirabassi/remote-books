@@ -1,13 +1,13 @@
 import { AuthorDto } from "data/dto/AuthorDto"
-import Api from "./config/AxiosConfig"
+import BaseApi from "./config/AxiosConfig"
 import { AxiosInstance } from "axios"
 
 const AUTHOR_ENDPOINT = "/author"
 interface AuthorApiProps {
-  Api: AxiosInstance
+  BaseApi: AxiosInstance
 }
 
-export function AuthorApi({ Api: api }: AuthorApiProps) {
+export function AuthorApi({ BaseApi: api }: AuthorApiProps) {
   const create = async (author: AuthorDto) => {
     return api.post(AUTHOR_ENDPOINT, author)
   }

@@ -4,10 +4,10 @@ import { BookDto } from "data/dto/BookDto"
 const BOOK_ENDPOINT = "/book"
 
 interface BookApiProps {
-  Api: AxiosInstance
+  BaseApi: AxiosInstance
 }
 
-export function BookApi({ Api: api }: BookApiProps) {
+export function BookApi({ BaseApi: api }: BookApiProps) {
   return {
     create(book: BookDto) {
       return api.post(BOOK_ENDPOINT, book)
