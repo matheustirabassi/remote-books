@@ -143,7 +143,7 @@ export default function BookViewModel({
       })
   }
 
-  function create() {
+  function save() {
     viewState.setViewState(State.LoadingState)
 
     bookApi
@@ -179,10 +179,6 @@ export default function BookViewModel({
       .finally(() => {
         viewState.setViewState(State.ContentState)
       })
-  }
-
-  function save() {
-    create()
   }
 
   useEffect(() => {

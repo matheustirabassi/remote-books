@@ -1,9 +1,13 @@
 import { CollectionDto } from "data/dto/CollectionDto"
-import { Api } from "./config/AxiosConfig"
+import Api from "./config/AxiosConfig"
+import { AxiosInstance } from "axios"
 
 const COLLECTION_ENDPOINT = "/collection"
+interface CollectionApiProps {
+  Api: AxiosInstance
+}
 
-export function CollectionApi() {
+export function CollectionApi({ Api: api }: CollectionApiProps) {
   const create = async (collection: CollectionDto) => {
     return Api.post(COLLECTION_ENDPOINT, collection)
   }

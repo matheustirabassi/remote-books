@@ -1,15 +1,19 @@
 import { CategoryDto } from "data/dto/CategoryDto"
-import { Api } from "./config/AxiosConfig"
+import Api from "./config/AxiosConfig"
+import { AxiosInstance } from "axios"
 
 const CATEGORY_ENDPOINT = "/category"
+interface CategoryApiProps {
+  Api: AxiosInstance
+}
 
-export function CategoryApi() {
+export function CategoryApi({ Api: api }: CategoryApiProps) {
   const create = async (category: CategoryDto) => {
-    return Api.post(CATEGORY_ENDPOINT, category)
+    return api.post(CATEGORY_ENDPOINT, category)
   }
 
   const getAll = async () => {
-    return Api.get(CATEGORY_ENDPOINT)
+    return api.get(CATEGORY_ENDPOINT)
   }
 
   return {

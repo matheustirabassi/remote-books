@@ -1,16 +1,20 @@
+import { AxiosInstance } from "axios"
 import { BookDto } from "data/dto/BookDto"
-import { Api } from "./config/AxiosConfig"
 
 const BOOK_ENDPOINT = "/book"
 
-export function BookApi() {
+interface BookApiProps {
+  Api: AxiosInstance
+}
+
+export function BookApi({ Api: api }: BookApiProps) {
   return {
     create(book: BookDto) {
-      return Api.post(BOOK_ENDPOINT, book)
+      return api.post(BOOK_ENDPOINT, book)
     },
 
     findAll() {
-      return Api.get(BOOK_ENDPOINT)
+      return api.get(BOOK_ENDPOINT)
     },
   }
 }
