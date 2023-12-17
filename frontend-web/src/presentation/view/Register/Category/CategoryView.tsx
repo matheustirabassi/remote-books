@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom"
 import { ROUTES } from "Routes"
 import CategoryViewModel from "./CategoryViewModel"
 
-export default function CategoryView() {
+interface CategoryViewProps {
+  viewModel: ReturnType<typeof CategoryViewModel>
+}
+
+export default function CategoryView({ viewModel }: CategoryViewProps) {
   const { t } = useTranslation()
 
-  const viewModel = CategoryViewModel()
   const navigate = useNavigate()
 
   useEffect(() => {

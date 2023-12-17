@@ -1,18 +1,20 @@
 import { Button, Grid, TextField } from "@mui/material"
 import Typography from "@mui/material/Typography"
+import { ROUTES } from "Routes"
 import { LanguageConstants } from "enums/Constants"
 import { enqueueSnackbar } from "notistack"
 import { LoadingState } from "presentation/components/States/LoadingState"
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { ROUTES } from "Routes"
 import CollectionViewModel from "./CollectionViewModel"
 
-export default function CategoryView() {
-  const { t } = useTranslation()
+interface CollectionViewProps {
+  viewModel: ReturnType<typeof CollectionViewModel>
+}
 
-  const viewModel = CollectionViewModel()
+export default function CollectionView({ viewModel }: CollectionViewProps) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   useEffect(() => {

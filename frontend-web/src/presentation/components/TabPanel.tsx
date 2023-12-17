@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material"
 
 /** As propriedades do painel */
 interface TabPanelProps {
@@ -23,15 +23,15 @@ interface TabPanelProps {
  */
 export const TabPanel: React.FC<TabPanelProps> = ({ index, value, dir, children }) => {
   return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`action-tabpanel-${index}`}
-        aria-labelledby={`action-tab-${index}`}
-        dir={dir}
-      >
-        {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
-      </Typography>
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`action-tabpanel-${index}`}
+      aria-labelledby={`action-tab-${index}`}
+      dir={dir}
+    >
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
+    </Typography>
   )
 }

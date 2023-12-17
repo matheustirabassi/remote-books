@@ -2,10 +2,10 @@ import { Grid } from "@mui/material"
 import { BookCard } from "presentation/components/BookCard"
 import { Header } from "presentation/components/Header"
 import { LoadingState } from "presentation/components/States/LoadingState"
-import { HomeViewModel } from "./HomeViewModel"
+import HomeViewModel from "./HomeViewModel"
 
 interface HomeViewProps {
-  viewModel: HomeViewModel
+  viewModel: ReturnType<typeof HomeViewModel>
 }
 
 /** A tela principal do site */
@@ -32,7 +32,12 @@ export default function HomeView({ viewModel }: HomeViewProps) {
       >
         {viewModel.page.content.map((book) => (
           <Grid item md={3} key={book.id}>
-            <BookCard title={book.title} author={book.authorName!!} imageLink={book.imageLink} accessLink={book.accessLink} />
+            <BookCard
+              title={book.title}
+              author={book.authorName!!}
+              imageLink={book.imageLink}
+              accessLink={book.accessLink}
+            />
           </Grid>
         ))}
       </Grid>

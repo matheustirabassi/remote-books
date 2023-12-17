@@ -81,15 +81,15 @@ export default function RegisterView() {
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_AUTHOR_TAB}>
-          <AuthorView />
+          <AuthorView viewModel={DI.resolve("AuthorViewModel")} />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_COLLECTION_TAB}>
-          <CollectionView />
+          <CollectionView viewModel={DI.resolve("CollectionViewModel")} />
         </TabPanel>
 
         <TabPanel value={tabPosition} index={INDEX_CATEGORY_TAB}>
-          <CategoryView />
+          <CategoryView viewModel={DI.resolve("CategoryViewModel")} />
         </TabPanel>
       </SwipeableViews>
     </>

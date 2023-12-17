@@ -13,58 +13,50 @@ import { ViewState } from "data/types/ViewState"
 import { LanguageConstants } from "enums/Constants"
 import { State } from "enums/ViewStateEnum"
 import { enqueueSnackbar } from "notistack"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 interface BookViewModelProps {
-  bookApi: BookApi
+  BookApi: ReturnType<typeof BookApi>
+  CategoryApi: ReturnType<typeof CategoryApi>
+  CollectionApi: ReturnType<typeof CollectionApi>
+  AuthorApi: ReturnType<typeof AuthorApi>
 }
 
-export interface BookViewModel {
-  viewState: ViewState
-  authors: AuthorDto[]
-
-  authorSelected: number | undefined
-  setAuthorSelected: Dispatch<SetStateAction<number | undefined>>
-
-  errors: ErrorFieldMessage[]
-  bookWasSaved: boolean
-
-  title: string
-  setTitle: Dispatch<SetStateAction<string>>
-
-  sinopse: string
-  setSinopse: Dispatch<SetStateAction<string>>
-
-  releaseDate: Date
-  setReleaseDate: Dispatch<SetStateAction<Date>>
-
-  accessLink: string
-  setAccessLink: Dispatch<SetStateAction<string>>
-
-  imageLink: string
-  setImageLink: Dispatch<SetStateAction<string>>
-
-  categories: CategoryDto[]
-  setCategories: Dispatch<SetStateAction<CategoryDto[]>>
-  categorySelected: number | undefined
-  setCategorySelected: Dispatch<SetStateAction<number | undefined>>
-
-  collections: CollectionDto[]
-  setCollections: Dispatch<SetStateAction<CollectionDto[]>>
-  collectionSelected: number | undefined
-  setCollectionSelected: Dispatch<SetStateAction<number | undefined>>
-
-  save: () => void
-}
-
-export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
+export default function BookViewModel({
+  BookApi: bookApi,
+  CategoryApi: categoryApi,
+  CollectionApi: collectionApi,
+  AuthorApi: authorApi,
+}: BookViewModelProps) {
   const navigate = useNavigate()
 
   const { t } = useTranslation()
 
   const [viewState] = useState<ViewState>(new ViewState())
+
+  const [title, setTitle] = useState<string>("")
+  const [titleErrorMessage, setTitleErrorMessage] = useState<string>("")
+  const [invalidTitle, setInvalidTitle] = useState<boolean>(false)
+
+  const [sinopse, setSinopse] = useState<string>("")
+  const [sinopseErrorMessage, setSinopseErrorMessage] = useState<string>("")
+  const [invalidSinopse, setInvalidSinopse] = useState<boolean>(false)
+
+  const [releaseDate, setReleaseDate] = useState<Date>(new Date())
+
+  const [accessLink, setAccessLink] = useState<string>("")
+  const [accessLinkErrorMessage, setAccessLinkErrorMessage] = useState<string>("")
+  const [invalidAccessLink, setInvalidAccessLink] = useState<boolean>(false)
+
+  const [imageLink, setImageLink] = useState<string>("")
+  const [imageLinkErrorMessage, setImageLinkErrorMessage] = useState<string>("")
+  const [invalidImageLink, setInvalidImageLink] = useState<boolean>(false)
+
+  const [bookWasSaved, setBookWasSaved] = useState<boolean>(false)
+
+  const [errors, setErrors] = useState<ErrorFieldMessage[]>([])
 
   const [authors, setAuthors] = useState<AuthorDto[]>([])
 
@@ -77,20 +69,6 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
   const [collections, setCollections] = useState<CollectionDto[]>([])
 
   const [collectionSelected, setCollectionSelected] = useState<number>()
-
-  const [title, setTitle] = useState<string>("")
-
-  const [sinopse, setSinopse] = useState<string>("")
-
-  const [releaseDate, setReleaseDate] = useState<Date>(new Date())
-
-  const [accessLink, setAccessLink] = useState<string>("")
-
-  const [imageLink, setImageLink] = useState<string>("")
-
-  const [bookWasSaved, setBookWasSaved] = useState<boolean>(false)
-
-  const [errors, setErrors] = useState<ErrorFieldMessage[]>([])
 
   useEffect(() => {
     if (errors.length === 0) {
@@ -126,7 +104,8 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
   function getAllAuthors() {
     viewState.setViewState(State.LoadingState)
 
-    AuthorApi.getAll()
+    authorApi
+      .getAll()
       .then((response) => {
         setAuthors(response.data)
       })
@@ -139,7 +118,8 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
   function getAllCategories() {
     viewState.setViewState(State.LoadingState)
 
-    CategoryApi.getAll()
+    categoryApi
+      .getAll()
       .then((response) => {
         setCategories(response.data)
       })
@@ -152,7 +132,8 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
   function getAllCollections() {
     viewState.setViewState(State.LoadingState)
 
-    CollectionApi.getAll()
+    collectionApi
+      .getAll()
       .then((response) => {
         setCollections(response.data)
       })
@@ -204,6 +185,66 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
     create()
   }
 
+  useEffect(() => {
+    if (title === "") {
+      clearTitleError()
+
+      return
+    } else if (!title.isName()) {
+      setInvalidTitle(true)
+      setTitleErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
+
+      return
+    }
+
+    clearTitleError()
+  }, [title])
+
+  useEffect(() => {
+    if (sinopse === "") {
+      clearSinopseError()
+
+      return
+    } else if (!sinopse.isName()) {
+      setInvalidSinopse(true)
+      setSinopseErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
+
+      return
+    }
+
+    clearSinopseError()
+  }, [sinopse])
+
+  useEffect(() => {
+    if (imageLink === "") {
+      clearImageLinkError()
+
+      return
+    } else if (!imageLink.isName()) {
+      setInvalidImageLink(true)
+      setImageLinkErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
+
+      return
+    }
+
+    clearImageLinkError()
+  }, [imageLink])
+
+  useEffect(() => {
+    if (accessLink === "") {
+      clearAccessLinkError()
+
+      return
+    } else if (!accessLink.isName()) {
+      setInvalidAccessLink(true)
+      setAccessLinkErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
+
+      return
+    }
+
+    clearAccessLinkError()
+  }, [accessLink])
+
   return {
     authors,
     viewState,
@@ -220,15 +261,47 @@ export default function BookViewModelImpl({ bookApi }: BookViewModelProps) {
     save,
     title,
     setTitle,
+    invalidTitle,
+    titleErrorMessage,
+    setTitleErrorMessage,
     sinopse,
     setSinopse,
+    sinopseErrorMessage,
+    setSinopseErrorMessage,
+    invalidSinopse,
     imageLink,
     setImageLink,
+    imageLinkErrorMessage,
+    setImageLinkErrorMessage,
+    invalidImageLink,
     releaseDate,
     setReleaseDate,
     bookWasSaved,
     errors,
     accessLink,
-    setAccessLink
+    setAccessLink,
+    accessLinkErrorMessage,
+    setAccessLinkErrorMessage,
+    invalidAccessLink,
+  }
+
+  function clearTitleError() {
+    setInvalidTitle(false)
+    setTitleErrorMessage("")
+  }
+
+  function clearSinopseError() {
+    setInvalidSinopse(false)
+    setSinopseErrorMessage("")
+  }
+
+  function clearImageLinkError() {
+    setInvalidImageLink(false)
+    setImageLinkErrorMessage("")
+  }
+
+  function clearAccessLinkError() {
+    setInvalidAccessLink(false)
+    setAccessLinkErrorMessage("")
   }
 }

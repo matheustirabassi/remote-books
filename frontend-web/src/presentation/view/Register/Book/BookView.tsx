@@ -4,9 +4,10 @@ import { LanguageConstants } from "enums/Constants"
 import { BasicDatePicker } from "presentation/components/BasicDatePicker"
 import { LoadingState } from "presentation/components/States/LoadingState"
 import { useTranslation } from "react-i18next"
-import { BookViewModel } from "./BookViewModel"
+import BookViewModel from "./BookViewModel"
+
 interface BookViewProps {
-  viewModel: BookViewModel
+  viewModel: ReturnType<typeof BookViewModel>
 }
 
 export default function BookView({ viewModel }: BookViewProps) {
@@ -37,6 +38,8 @@ export default function BookView({ viewModel }: BookViewProps) {
                 onChange={(event) => {
                   viewModel.setTitle(event.target.value)
                 }}
+                error={viewModel.invalidTitle}
+                helperText={viewModel.titleErrorMessage}
               />
             </Grid>
 
@@ -48,6 +51,8 @@ export default function BookView({ viewModel }: BookViewProps) {
                 onChange={(event) => {
                   viewModel.setSinopse(event.target.value)
                 }}
+                error={viewModel.invalidSinopse!}
+                helperText={viewModel.sinopseErrorMessage}
               />
             </Grid>
 
@@ -59,6 +64,8 @@ export default function BookView({ viewModel }: BookViewProps) {
                 onChange={(event) => {
                   viewModel.setAccessLink(event.target.value)
                 }}
+                error={viewModel.invalidAccessLink}
+                helperText={viewModel.accessLinkErrorMessage}
               />
             </Grid>
 
@@ -70,6 +77,8 @@ export default function BookView({ viewModel }: BookViewProps) {
                 onChange={(event) => {
                   viewModel.setImageLink(event.target.value)
                 }}
+                error={viewModel.invalidImageLink}
+                helperText={viewModel.imageLinkErrorMessage}
               />
             </Grid>
 

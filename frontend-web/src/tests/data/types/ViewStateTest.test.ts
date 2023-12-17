@@ -26,7 +26,7 @@ test("Dado que o estado da tela mudou para carregando, muda o estado", () => {
 
 test("Dado que o estado da tela mudou para conteúdo, muda o estado", () => {
   viewState.setViewState(State.ContentState)
-  
+
   expect(viewState.getState()).toEqual(State.ContentState)
 })
 

@@ -3,9 +3,9 @@ export class StandardError {
   message: string
   timestamp: number
 
-  constructor(statusCode: number, message: string, timestamp: number){
-      this.statusCode = statusCode
-      this.message = message
-      this.timestamp = timestamp
+  constructor(statusCode: number, message: string, timestamp: number) {
+    this.statusCode = statusCode
+    this.message = message
+    this.timestamp = timestamp
   }
 }

@@ -14,7 +14,7 @@ interface HeaderProps {
  * O cabeçalho do site
  * @returns Os elementos do cabeçalho
  */
-export const Header: React.FC<HeaderProps> = ({isRegister = false}) => {
+export const Header: React.FC<HeaderProps> = ({ isRegister = false }) => {
   return (
     <>
       <Stack direction="row" justifyContent="space-around" alignItems="center">
@@ -23,10 +23,9 @@ export const Header: React.FC<HeaderProps> = ({isRegister = false}) => {
             <IconBook />
           </Button>
         </Link>
-        
-        {showIfIsRegister()}
 
-        </Stack>
+        {showIfIsRegister()}
+      </Stack>
 
       <Line />
     </>
@@ -39,10 +38,10 @@ export const Header: React.FC<HeaderProps> = ({isRegister = false}) => {
 
     return (
       <Link to={ROUTES.REGISTER}>
-      <Button>
-        <IconAddBook />
-      </Button>
-    </Link>
+        <Button>
+          <IconAddBook />
+        </Button>
+      </Link>
     )
   }
 }

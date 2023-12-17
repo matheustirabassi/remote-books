@@ -3,15 +3,17 @@ import { Api } from "./config/AxiosConfig"
 
 const AUTHOR_ENDPOINT = "/author"
 
-const create = async (author: AuthorDto) => {
-  return Api.post(AUTHOR_ENDPOINT, author)
-}
+export function AuthorApi() {
+  const create = async (author: AuthorDto) => {
+    return Api.post(AUTHOR_ENDPOINT, author)
+  }
 
-const getAll = async() => {
-  return Api.get(AUTHOR_ENDPOINT)
-}
+  const getAll = async () => {
+    return Api.get(AUTHOR_ENDPOINT)
+  }
 
-export const AuthorApi = {
-  create,
-  getAll
+  return {
+    create,
+    getAll,
+  }
 }
