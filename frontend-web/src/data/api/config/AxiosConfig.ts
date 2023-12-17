@@ -1,8 +1,8 @@
-import axios from "axios"
 import { BASE_URL } from "requests"
+import axios from "axios"
 
-const Api = axios.create({
+const BaseApi = axios.create({
   baseURL: BASE_URL,
 })
 
-export { Api }
+export default BaseApi
