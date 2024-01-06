@@ -11,7 +11,9 @@ import br.com.tirabassi.remotebooks.repositories.BookRepository
 import br.com.tirabassi.remotebooks.services.exceptions.ServiceException
 import br.com.tirabassi.remotebooks.utils.ErrorMessages
 import br.com.tirabassi.remotebooks.utils.extensions.parseToDate
+import jakarta.persistence.EntityNotFoundException
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -23,6 +25,8 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
+import org.springframework.http.HttpStatus
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import java.util.Date
 
 class BookServiceTest : BaseUnitTest() {
@@ -134,6 +138,80 @@ class BookServiceTest : BaseUnitTest() {
         `when`(bookRepository.findAll(any(Pageable::class.java))).thenReturn(PageImpl(listOf(book)))
 
         assertEquals(BookDto(book), service.findAllBooks(Pageable.unpaged()).first())
+    }
+
+    // endregion
+
+    // region findBookById tests
+
+    @Test
+    @DisplayName(
+        "Dado que a busca retorna um livro nulo, quando realiza a busca, então lança exceção de serviço" +
+            " informando que não encontrou"
+    )
+    fun findBookByIdTest_BookReturnedIsNull_ThrowExceptionWithNotFoundMessage() {
+        val exception = assertThrows<ServiceException> {
+            service.findBookById(0)
+        }
+
+        assertEquals(ErrorMessages.NOT_FOUND, exception.message)
+        assertEquals(HttpStatus.NOT_FOUND.value(), exception.httpStatusCode)
+    }
+
+    @Test
+    @DisplayName(
+        "Dado que busca lança JpaObjectRetrievalFailureException, quando realiza a busca, então lança " +
+            "exceção de serviço informando que não encontrou"
+    )
+    fun findBookByIdTest_ThrowJpaObjectRetrievalFailureException_ThrowExceptionWithNotFoundMessage() {
+        `when`(bookRepository.getReferenceById(anyLong())).thenThrow(
+            JpaObjectRetrievalFailureException(
+                EntityNotFoundException()
+            )
+        )
+
+        val exception = assertThrows<ServiceException> {
+            service.findBookById(0)
+        }
+
+        assertEquals(ErrorMessages.NOT_FOUND, exception.message)
+        assertEquals(HttpStatus.NOT_FOUND.value(), exception.httpStatusCode)
+    }
+
+    @Test
+    @DisplayName("Dado a busca retorna um livro, quando realiza a busca, então retorna um BookDto")
+    fun findBookByIdTest_FindReturnABook_ReturnABookDto() {
+        `when`(bookRepository.getReferenceById(anyLong())).thenReturn(
+            Book(
+                id = 1,
+                title = "liber",
+                sinopse = "sinopse",
+                imageLink = "inciderint",
+                registrationDate = "2024-06-01".parseToDate()!!,
+                releaseDate = "2024-05-01".parseToDate()!!,
+                accessLink = "brute",
+                author = Author(
+                    id = 2,
+                    name = "Bernie Ashley",
+                    dateOfBirth = "2000-06-01".parseToDate()!!,
+                    books = listOf()
+                ),
+                category = null,
+                collection = null
+            )
+        )
+
+        val dto = service.findBookById(0)
+
+        assertEquals(1, dto.id)
+        assertEquals("sinopse", dto.sinopse)
+        assertEquals("brute", dto.accessLink)
+        assertEquals("liber", dto.title)
+        assertEquals("inciderint", dto.imageLink)
+        assertEquals(2, dto.authorId)
+        assertEquals("Bernie Ashley", dto.authorName)
+        assertNull(dto.categoryId)
+        assertNull(dto.collectionId)
     }
 
     // endregion

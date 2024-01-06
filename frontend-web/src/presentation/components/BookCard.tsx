@@ -5,6 +5,9 @@ import { Link } from "react-router-dom"
 
 /** As propriedades do componente */
 interface BookCardProps {
+  /** O identificador do livro */
+  id: number
+
   /** O título do livro */
   title: string
 
@@ -22,6 +25,7 @@ interface BookCardProps {
 }
 
 export const BookCard: React.FC<BookCardProps> = ({
+  id,
   title,
   author,
   imageLink,
@@ -33,7 +37,7 @@ export const BookCard: React.FC<BookCardProps> = ({
   return (
     <Card sx={sx}>
       <CardActionArea>
-        <Link to={accessLink}>
+        <Link to={`${ROUTES.BOOK}/${id.toString()}`}>
           <CardMedia component="img" image={imageLink} />
           <CardContent>
             <Typography gutterBottom variant="h5">

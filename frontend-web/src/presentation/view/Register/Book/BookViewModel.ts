@@ -216,7 +216,7 @@ export default function BookViewModel({
       clearImageLinkError()
 
       return
-    } else if (!imageLink.isName()) {
+    } else if (!imageLink.isImageLink()) {
       setInvalidImageLink(true)
       setImageLinkErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
 
@@ -231,7 +231,7 @@ export default function BookViewModel({
       clearAccessLinkError()
 
       return
-    } else if (!accessLink.isName()) {
+    } else if (!accessLink.isLink()) {
       setInvalidAccessLink(true)
       setAccessLinkErrorMessage(t(LanguageConstants.INVALID_FIELD)!!)
 

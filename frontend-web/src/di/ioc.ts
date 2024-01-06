@@ -4,6 +4,8 @@ import { BookApi } from "data/api/BookApi"
 import { CategoryApi } from "data/api/CategoryApi"
 import { CollectionApi } from "data/api/CollectionApi"
 import BaseApi from "data/api/config/AxiosConfig"
+import FormBookView from "presentation/view/Book/Form/FormBookView"
+import FormBookViewModel from "presentation/view/Book/Form/FormBookViewModel"
 import HomeViewModel from "presentation/view/Home/HomeViewModel"
 import AuthorViewModel from "presentation/view/Register/Author/AuthorViewModel"
 import BookViewModel from "presentation/view/Register/Book/BookViewModel"
@@ -18,6 +20,7 @@ container.register({
   CategoryViewModel: asFunction(CategoryViewModel),
   AuthorViewModel: asFunction(AuthorViewModel),
   CollectionViewModel: asFunction(CollectionViewModel),
+  FormBookViewModel: asFunction(FormBookViewModel),
 
   BaseApi: asValue(BaseApi),
   BookApi: asFunction(BookApi),

@@ -39,6 +39,13 @@ class MultiHttpSecurityConfig {
             "/collection",
             "/author"
         )
+
+        /**
+         * Os endpoints públicos que usam o método GET
+         */
+        private val PUBLIC_MATCHERS_GET = arrayOf(
+            "/book/*"
+        )
     }
 
     @Autowired
@@ -60,6 +67,7 @@ class MultiHttpSecurityConfig {
 
         http.authorizeHttpRequests()
             .requestMatchers(* PUBLIC_MATCHERS).permitAll()
+            .requestMatchers(HttpMethod.GET, * PUBLIC_MATCHERS_GET).permitAll()
             .requestMatchers(HttpMethod.POST, * PUBLIC_MATCHERS_POST).permitAll()
             .requestMatchers(HttpMethod.OPTIONS).permitAll()
             .anyRequest().authenticated()

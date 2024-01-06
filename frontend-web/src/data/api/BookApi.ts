@@ -13,8 +13,11 @@ export function BookApi({ BaseApi: api }: BookApiProps) {
       return api.post(BOOK_ENDPOINT, book)
     },
 
-    findAll() {
-      return api.get(BOOK_ENDPOINT)
+    findAll(page: number) {
+      return api.get(`${BOOK_ENDPOINT}?page=${page}`)
     },
+    findById(id: number) {
+      return api.get(`${BOOK_ENDPOINT}/${id}`)
+    }
   }
 }
