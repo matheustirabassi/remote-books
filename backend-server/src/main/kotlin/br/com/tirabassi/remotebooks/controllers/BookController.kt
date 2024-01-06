@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.net.URI
-import java.util.Date
 
 /**
  * Controlador para endpoint de categorias.
@@ -54,6 +53,6 @@ class BookController {
 
     @GetMapping(value = ["/{id}"])
     fun findBookById(@PathVariable id: Long): ResponseEntity<BookDto> {
-        return ResponseEntity.ok(BookDto("", "Abacaxi", "http://localhost:8080/imagem.png", "", Date(), 1L))
+        return ResponseEntity.ok(bookService.findBookById(id))
     }
 }

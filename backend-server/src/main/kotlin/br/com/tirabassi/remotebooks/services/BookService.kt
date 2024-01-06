@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.http.HttpStatus
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.stereotype.Service
 import java.util.Date
 
@@ -80,5 +82,24 @@ class BookService {
     /** Busca os livros de forma paginada e mapeia para BookDto */
     fun findAllBooks(pageable: Pageable): Page<BookDto> {
         return bookRepository.findAll(pageable).map { BookDto(it) }
+    }
+
+    /**
+     * Busca um livro pelo identificador informado
+     */
+    fun findBookById(id: Long): BookDto {
+        lateinit var book: Book
+
+        try {
+            book = bookRepository.getReferenceById(id)
+        } catch (exception: Exception) {
+            when (exception) {
+                is JpaObjectRetrievalFailureException, is NullPointerException -> {
+                    throw ServiceException(ErrorMessages.NOT_FOUND, HttpStatus.NOT_FOUND.value())
+                }
+            }
+        }
+
+        return BookDto(book)
     }
 }

@@ -25,7 +25,7 @@ class ResourceExceptionHandler {
      * Manipula as exceções lançadas pelo Hibernate Validation à requisição com o erro.
      */
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handlerValidationException(
+    fun handleValidationException(
         exception: MethodArgumentNotValidException,
         request: HttpServletRequest?
     ): ResponseEntity<StandardError> {
@@ -53,13 +53,15 @@ class ResourceExceptionHandler {
         }
 
     @ExceptionHandler(ServiceException::class)
-    fun handlerServiceException(
+    fun handleServiceException(
         serviceException: ServiceException,
         request: HttpServletRequest?
     ): ResponseEntity<StandardError> {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+        val httpStatus = HttpStatus.valueOf(serviceException.httpStatusCode ?: HttpStatus.BAD_REQUEST.value())
+
+        return ResponseEntity.status(httpStatus).body(
             StandardError(
-                HttpStatus.BAD_REQUEST.value(),
+                httpStatus.value(),
                 serviceException.message!!,
                 System.currentTimeMillis()
             )
