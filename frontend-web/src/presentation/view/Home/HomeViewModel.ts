@@ -11,7 +11,7 @@ interface HomeViewModelProps {
 export default function HomeViewModel({ BookApi: bookApi }: HomeViewModelProps) {
   const [viewState] = useState<ViewState>(new ViewState())
 
-  const [pageNumber, setPageNumber] = useState(0)
+  const [pageNumber, setPageNumber] = useState<number>()
 
   const [page, setPage] = useState<BookPage>({
     content: [],
@@ -28,11 +28,16 @@ export default function HomeViewModel({ BookApi: bookApi }: HomeViewModelProps) 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
   useEffect(() => {
+    if(pageNumber === undefined) {
+      return
+    }
+
     viewState.setViewState(State.LoadingState)
 
     bookApi
-      .findAll()
+      .findAll(pageNumber)
       .then((response) => {
+        
         setPage(response.data)
       })
       .catch((error) => {})
@@ -41,5 +46,5 @@ export default function HomeViewModel({ BookApi: bookApi }: HomeViewModelProps) 
       })
   }, [pageNumber])
 
-  return { page }
+  return { page, setPageNumber }
 }

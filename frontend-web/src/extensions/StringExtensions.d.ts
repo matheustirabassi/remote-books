@@ -17,6 +17,10 @@ declare global {
     isName: () => boolean
 
     limitChars: (maxLength: number) => string
+
+    isImageLink: () => boolean
+
+    isLink:() => boolean
   }
 }
 
@@ -41,4 +45,14 @@ String.prototype.limitChars = function (this: string, maxLength: number): boolea
   }
 
   return this.substring(0, maxLength).concat("...")
+}
+
+// eslint-disable-next-line no-extend-native
+String.prototype.isImageLink = function (this: string): boolean {
+  return this.match(RegexConstants.IMAGE_LINK_REGEX) !== null
+}
+
+// eslint-disable-next-line no-extend-native
+String.prototype.isLink = function (this: string): boolean {
+  return this.match(RegexConstants.LINK_REGEX) !== null
 }

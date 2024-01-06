@@ -27,4 +27,6 @@ export const LanguageConstants = {
 
 export const RegexConstants = {
   NAME_REGEX: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+  IMAGE_LINK_REGEX: /(https?:\/\/.*\.(?:png|jpg))/i,
+  LINK_REGEX: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
 }
